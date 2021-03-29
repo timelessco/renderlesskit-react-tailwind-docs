@@ -96,23 +96,24 @@ const CodeBlock = ({ children, className, live, render, ...props }) => {
           language={language}
           code={children.trim()}
           transformCode={(rawCode) => {
-            const code = rawCode
-              // remove imports
-              .replace(/((^|)import[^;]+[; ]+)+/gi, "")
-              // replace `export default => {*};` with `render(() => {*});`
-              .replace(
-                /export default \(\) => {((.|\n)*)};/,
-                "render(() => {$1});"
-              )
-              // replace `export default => (*);` with `render(*);`
-              .replace(/export default \(\) => \(((.|\n)*)\);/, "render($1);")
-              // replace `export default => *;` with `render(*);`
-              .replace(/export default \(\) => ((.|\n)*);/, "render($1);");
+            const code = rawCode;
+            // // remove imports
+            // .replace(/((^|)import[^;]+[; ]+)+/gi, "")
+            // // replace `export default => {*};` with `render(() => {*});`
+            // .replace(
+            //   /export default \(\) => {((.|\n)*)};/,
+            //   "render(() => {$1});"
+            // )
+            // // replace `export default => (*);` with `render(*);`
+            // .replace(/export default \(\) => \(((.|\n)*)\);/, "render($1);")
+            // // replace `export default => *;` with `render(*);`
+            // .replace(/export default \(\) => ((.|\n)*);/, "render($1);");
 
             return language === "jsx" ? `<>${code}</>` : code;
           }}
           scope={{
             React,
+            ...(typeof window !== "undefined" ? window.__COMPONENTS : {}),
           }}
         >
           <LivePreview className="p-2 mx-2 rounded-md" />

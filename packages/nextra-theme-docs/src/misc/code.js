@@ -85,7 +85,7 @@ const StaticCode = ({ children, className, highlight, ...props }) => {
   );
 };
 
-const CodeBlock = ({ children, className, live, ...props }) => {
+const CodeBlock = ({ children, className, live, render, ...props }) => {
   const language = className?.replace(/language-/, "");
 
   if (live) {
@@ -94,7 +94,7 @@ const CodeBlock = ({ children, className, live, ...props }) => {
         <LiveProvider
           theme={prismTheme}
           language={language}
-          code={children}
+          code={children.trim()}
           transformCode={(rawCode) => {
             const code = rawCode
               // remove imports
@@ -109,7 +109,7 @@ const CodeBlock = ({ children, className, live, ...props }) => {
               // replace `export default => *;` with `render(*);`
               .replace(/export default \(\) => ((.|\n)*);/, "render($1);");
 
-            return `<>${code}</>`;
+            return language === "jsx" ? `<>${code}</>` : code;
           }}
           scope={{
             React,
@@ -123,7 +123,19 @@ const CodeBlock = ({ children, className, live, ...props }) => {
     );
   }
 
-  return <StaticCode children={children} className={className} {...props} />;
+  if (render) {
+    return (
+      <div>
+        <LiveProvider code={children.trim()}>
+          <LivePreview />
+        </LiveProvider>
+      </div>
+    );
+  }
+
+  return (
+    <StaticCode children={children.trim()} className={className} {...props} />
+  );
 };
 
 export default CodeBlock;

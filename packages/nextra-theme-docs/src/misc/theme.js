@@ -3,56 +3,13 @@ import Slugger from "github-slugger";
 import Link from "next/link";
 import React from "react";
 import innerText from "react-innertext";
-import Highlight, { defaultProps } from "prism-react-renderer";
 import "intersection-observer";
 import Observer from "@researchgate/react-intersection-observer";
 
-import { useActiveAnchorSet } from "./active-anchor";
 import CodeBlock from "./code";
-
-const THEME = {
-  plain: {
-    backgroundColor: "transparent",
-  },
-  styles: [
-    {
-      types: ["keyword", "builtin"],
-      style: {
-        color: "#ff0078",
-        fontWeight: "bold",
-      },
-    },
-    {
-      types: ["comment"],
-      style: {
-        color: "#999",
-        fontStyle: "italic",
-      },
-    },
-    {
-      types: ["variable", "language-javascript"],
-      style: {
-        color: "#0076ff",
-      },
-    },
-    {
-      types: ["attr-name"],
-      style: {
-        color: "#d9931e",
-        fontStyle: "normal",
-      },
-    },
-    {
-      types: ["boolean", "regex"],
-      style: {
-        color: "#d9931e",
-      },
-    },
-  ],
-};
+import { useActiveAnchorSet } from "./active-anchor";
 
 // Anchor links
-
 const HeaderLink = ({
   tag: Tag,
   children,
@@ -148,47 +105,6 @@ const A = ({ children, ...props }) => {
     <Link href={props.href}>
       <a {...props}>{children}</a>
     </Link>
-  );
-};
-
-const StaticCode = ({ children, className, highlight, ...props }) => {
-  if (!className) return <code {...props}>{children}</code>;
-
-  const highlightedLines = highlight ? highlight.split(",").map(Number) : [];
-
-  // https://mdxjs.com/guides/syntax-highlighting#all-together
-  const language = className.replace(/language-/, "");
-  return (
-    <Highlight
-      {...defaultProps}
-      code={children.trim()}
-      language={language}
-      theme={THEME}
-    >
-      {({ className, style, tokens, getLineProps, getTokenProps }) => (
-        <code className={className} style={{ ...style }}>
-          {tokens.map((line, i) => (
-            <div
-              key={i}
-              {...getLineProps({ line, key: i })}
-              style={
-                highlightedLines.includes(i + 1)
-                  ? {
-                      background: "var(--c-highlight)",
-                      margin: "0 -1rem",
-                      padding: "0 1rem",
-                    }
-                  : null
-              }
-            >
-              {line.map((token, key) => (
-                <span key={key} {...getTokenProps({ token, key })} />
-              ))}
-            </div>
-          ))}
-        </code>
-      )}
-    </Highlight>
   );
 };
 

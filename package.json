@@ -1,0 +1,17 @@
+{
+  "name": "renderlesskit-react-tailwind-docs",
+  "workspaces": [
+    "packages/website",
+    "packages/nextra-theme-docs"
+  ],
+  "scripts": {
+    "build:theme": "yarn workspace nextra-theme-docs run build"
+  },
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "nextra": "^0.4.4"
+  }
+}

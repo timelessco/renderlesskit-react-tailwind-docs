@@ -8,6 +8,7 @@ import "intersection-observer";
 import Observer from "@researchgate/react-intersection-observer";
 
 import { useActiveAnchorSet } from "./active-anchor";
+import CodeBlock from "./code";
 
 const THEME = {
   plain: {
@@ -150,7 +151,7 @@ const A = ({ children, ...props }) => {
   );
 };
 
-const Code = ({ children, className, highlight, ...props }) => {
+const StaticCode = ({ children, className, highlight, ...props }) => {
   if (!className) return <code {...props}>{children}</code>;
 
   const highlightedLines = highlight ? highlight.split(",").map(Number) : [];
@@ -206,7 +207,7 @@ const getComponents = (args) => ({
   h5: H5(args),
   h6: H6(args),
   a: A,
-  code: Code,
+  code: CodeBlock,
   table: Table,
 });
 

@@ -5,7 +5,8 @@
     "packages/nextra-theme-docs"
   ],
   "scripts": {
-    "build:theme": "yarn workspace nextra-theme-docs run build"
+    "build:theme": "yarn workspace nextra-theme-docs run build",
+    "dev:site": "yarn workspace website run dev"
   },
   "version": "1.0.0",
   "main": "index.js",

@@ -5,7 +5,7 @@ import { LiveProvider, LiveEditor, LiveError, LivePreview } from "react-live";
 const CodeBlock = ({ children, className }) => {
   const language = className?.replace(/language-/, "");
   return (
-    <div style={{ marginTop: "40px" }}>
+    <div>
       <LiveProvider
         theme={dracula}
         language={language}

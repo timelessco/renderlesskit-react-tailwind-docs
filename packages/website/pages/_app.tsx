@@ -1,11 +1,16 @@
+import "tailwindcss/tailwind.css";
 import "nextra-theme-docs/style.css";
 import React from "react";
-import CustomComponent from "../components/CustomComponent";
+import * as RenderlesskitComponents from "@renderlesskit/react-tailwind";
 
 ((typeof window !== "undefined" ? window : {}) as any).__COMPONENTS = {
-  CustomComponent,
+  ...RenderlesskitComponents,
 };
 
 export default function Nextra({ Component, pageProps }) {
-  return <Component {...pageProps} />;
+  return (
+    <RenderlesskitComponents.RenderlesskitProvider>
+      <Component {...pageProps} />
+    </RenderlesskitComponents.RenderlesskitProvider>
+  );
 }

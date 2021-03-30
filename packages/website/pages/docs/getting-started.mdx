@@ -46,34 +46,3 @@ function App() {
   );
 }
 ```
-
-## Extending the theme
-
-If you need to customize the default styling for any components, you can do so by extending the `defaultTheme`
-
-Our `RenderlesskitProvider` accepts a theme prop which can be used to extend the theme.
-
-```js
-import * as React from "react";
-import { RenderlesskitProvider } from "@renderlesskit/react-tailwind";
-
-const customTheme = {
-  extend: {
-    buttton: {
-      base: "bg-red-300",
-    },
-  },
-};
-
-function App() {
-  return (
-    <RenderlesskitProvider theme={customTheme}>
-      <App />
-    </RenderlesskitProvider>
-  );
-}
-```
-
-> If you are wondering about which keys of theme you can extend you can look at the source code for each specific [theme file](https://github.com/timelessco/renderlesskit-react-tailwind/tree/main/src/theme/defaultTheme)
-
-> Or if you have setup typescript you can also get autocompletion of those theme keys. checkout [TypeScript Guide](/guides/typescript-guide)

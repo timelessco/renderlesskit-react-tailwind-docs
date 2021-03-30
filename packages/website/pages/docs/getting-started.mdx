@@ -1,11 +1,79 @@
 # Getting Started
 
-Some content
+Renderlesskit uses tailwind to provide better styling so you'll need to install the neccesary dependencies and setup a tailwind.
 
-```jsx live=true
-<p>Hello world</p>
+## Installation
+
+```bash
+npm i @renderlesskit/react-tailwind
 ```
 
-```jsx render=true
-<p>Hello world</p>
+```bash
+yarn add @renderlesskit/react-tailwind
 ```
+
+## Tailwind setup
+
+After setting up tailwind in your project, all you need to do inside your `tailwind.config.js` is import our `preset` function and use it.
+
+```js
+const { preset } = require("@renderlesskit/react-tailwind/preset");
+
+module.exports = preset({
+  /* your normal tailwind config */
+});
+```
+
+> Checkout our integration [guides for CRA & Next.js](/guides/usage-with-cra)
+
+## Setting up provider
+
+Renderlesskit needs a theme provider which passes down all the neccesary styling for the components at the root of your app.
+
+Go to your root of the application and add this:
+
+```js
+import * as React from "react";
+// 1. import `RenderlesskitProvider` component
+import { RenderlesskitProvider } from "@renderlesskit/react-tailwind";
+
+function App() {
+  // 2. Use at the root of your app
+  return (
+    <RenderlesskitProvider>
+      <App />
+    </RenderlesskitProvider>
+  );
+}
+```
+
+## Extending the theme
+
+If you need to customize the default styling for any components, you can do so by extending the `defaultTheme`
+
+Our `RenderlesskitProvider` accepts a theme prop which can be used to extend the theme.
+
+```js
+import * as React from "react";
+import { RenderlesskitProvider } from "@renderlesskit/react-tailwind";
+
+const customTheme = {
+  extend: {
+    buttton: {
+      base: "bg-red-300",
+    },
+  },
+};
+
+function App() {
+  return (
+    <RenderlesskitProvider theme={customTheme}>
+      <App />
+    </RenderlesskitProvider>
+  );
+}
+```
+
+> If you are wondering about which keys of theme you can extend you can look at the source code for each specific [theme file](https://github.com/timelessco/renderlesskit-react-tailwind/tree/main/src/theme/defaultTheme)
+
+> Or if you have setup typescript you can also get autocompletion of those theme keys. checkout [TypeScript Guide](/guides/typescript-guide)

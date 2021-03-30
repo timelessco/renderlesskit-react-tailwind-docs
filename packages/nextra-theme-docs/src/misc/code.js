@@ -1,5 +1,5 @@
 import React from "react";
-import prismTheme from "prism-react-renderer/themes/github";
+import prismTheme from "prism-react-renderer/themes/shadesOfPurple";
 import Highlight, { defaultProps } from "prism-react-renderer";
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from "react-live";
 
@@ -90,37 +90,36 @@ const CodeBlock = ({ children, className, live, render, ...props }) => {
 
   if (live) {
     return (
-      <div>
-        <LiveProvider
-          theme={prismTheme}
-          language={language}
-          code={children.trim()}
-          transformCode={(rawCode) => {
-            const code = rawCode;
-            // // remove imports
-            // .replace(/((^|)import[^;]+[; ]+)+/gi, "")
-            // // replace `export default => {*};` with `render(() => {*});`
-            // .replace(
-            //   /export default \(\) => {((.|\n)*)};/,
-            //   "render(() => {$1});"
-            // )
-            // // replace `export default => (*);` with `render(*);`
-            // .replace(/export default \(\) => \(((.|\n)*)\);/, "render($1);")
-            // // replace `export default => *;` with `render(*);`
-            // .replace(/export default \(\) => ((.|\n)*);/, "render($1);");
+      <LiveProvider
+        className="rounded-md p-1 border border-gray-300"
+        theme={prismTheme}
+        language={language}
+        code={children.trim()}
+        transformCode={(rawCode) => {
+          const code = rawCode;
+          // // remove imports
+          // .replace(/((^|)import[^;]+[; ]+)+/gi, "")
+          // // replace `export default => {*};` with `render(() => {*});`
+          // .replace(
+          //   /export default \(\) => {((.|\n)*)};/,
+          //   "render(() => {$1});"
+          // )
+          // // replace `export default => (*);` with `render(*);`
+          // .replace(/export default \(\) => \(((.|\n)*)\);/, "render($1);")
+          // // replace `export default => *;` with `render(*);`
+          // .replace(/export default \(\) => ((.|\n)*);/, "render($1);");
 
-            return language === "jsx" ? `<>${code}</>` : code;
-          }}
-          scope={{
-            React,
-            ...(typeof window !== "undefined" ? window.__COMPONENTS : {}),
-          }}
-        >
-          <LivePreview className="p-2 mx-2 rounded-md" />
-          <LiveEditor className="p-2 mx-2 rounded-md" />
-          <LiveError className="p-2 mx-2 rounded-md text-xs bg-red-100 text-red-500" />
-        </LiveProvider>
-      </div>
+          return language === "jsx" ? `<>${code}</>` : code;
+        }}
+        scope={{
+          React,
+          ...(typeof window !== "undefined" ? window.__COMPONENTS : {}),
+        }}
+      >
+        <LivePreview className="p-6 rounded-md bg-white rounded-b-none" />
+        <LiveEditor className="rounded-md rounded-t-none" />
+        <LiveError className="rounded-md rounded-t-none mt-0 text-xs bg-red-100 text-red-500" />
+      </LiveProvider>
     );
   }
 

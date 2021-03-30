@@ -1,4 +1,6 @@
-module.exports = {
+const preset = require("@renderlesskit/react-tailwind/preset");
+
+module.exports = preset({
   purge: [],
   darkMode: false, // or 'media' or 'class'
   theme: {
@@ -8,4 +10,4 @@ module.exports = {
     extend: {},
   },
   plugins: [],
-};
+});

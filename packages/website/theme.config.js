@@ -3,16 +3,22 @@ export default {
   repository: "https://github.com/timelessco/renderlesskit-react-tailwind", // project repo
   docsRepository: "https://github.com/timelessco/renderlesskit-react-tailwind", // docs repo
   path: "/", // path of docs
-  titleSuffix: " – Renderlesskit",
+  titleSuffix: " – Timeless",
+  search: true,
+  darkMode: true,
   nextLinks: true,
   prevLinks: true,
-  search: true,
-  footerEditOnGitHubLink: true, // will link to the docs repo
+  footer: true,
+  footerEditOnGitHubLink: true,
+  logo: <span className='hidden mr-2 font-extrabold md:inline'>RenderlessKit React Tailwind</span>,
   head: (
     <>
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <meta name="description" content="Renderlesskit React Tailwind" />
-      <meta name="og:title" content="Renderlesskit React Tailwind" />
+      <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+      <meta httpEquiv='Content-Language' content='en' />
+      <meta name='og:title' content='Renderlesskit React Tailwind' />
+      <meta name='description' content='Renderlesskit React Tailwind' />
+      <meta name='og:description' content='Renderlesskit React Tailwind' />
     </>
   ),
+  footerText: <>MIT {new Date().getFullYear()} © Timeless.</>,
 };

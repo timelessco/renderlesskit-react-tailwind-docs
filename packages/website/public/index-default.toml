@@ -33,3 +33,6 @@ title = "Usage With Next.js"
 url = "/guides/usage-with-nextjs"
 contents = "Setting up Next.js with Renderlesskit\nFirst let's create a new Nextjs project.\nSetup TailwindCSS\nTo get started with renderlesskit first step is to setup Tailwind CSS in your CRA project.\nRefer to tailwind documentation for Setting up Tailwind CSS in a Next.js project\nAfter setting up tailwind in your project, all you need to do inside your tailwind.config.js is import our preset function and use it.\nRenderlesskit Setup\nAfter following all the steps and correctly setting up tailwind, now let's add the RenderlesskitProvider\nFollow Setting Up Provider\nTypeScript Setup\nFollow TypeScript Guide\n"
 filetype = "PlainText"
+[output]
+filename = "/Users/timeless/Documents/GitHub/renderlesskit-react-tailwind-docs/packages/website/public/index-default.st"
+excerpts_per_result = 1

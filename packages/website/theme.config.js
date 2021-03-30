@@ -5,6 +5,7 @@ export default {
   path: "/", // path of docs
   titleSuffix: " – Timeless",
   search: true,
+  UNSTABLE_stork: true,
   darkMode: true,
   nextLinks: true,
   prevLinks: true,

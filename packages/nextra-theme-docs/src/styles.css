@@ -394,5 +394,5 @@ pre .prism-code .token.tag:not(.script) {
 }
 
 [data-reach-skip-link]:focus {
-  @apply fixed top-0 z-50 px-6 py-2 mt-2 ml-6 text-lg bg-white outline-none not-sr-only focus:ring;
+  @apply fixed top-0 z-50 px-6 py-2 mt-2 ml-6 text-lg bg-white outline-none not-sr-only ring;
 }

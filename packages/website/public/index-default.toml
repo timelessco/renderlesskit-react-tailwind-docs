@@ -1,0 +1,38 @@
+[input]
+minimum_indexed_substring_length = 2
+title_boost = "Ridiculous"
+stemming = "None"
+
+[[input.files]]
+title = "Home"
+url = "/"
+contents = "Renderlesskit React Tailwind\nReact UI built with @renderleskit/react & tailwind\n"
+filetype = "PlainText"
+[[input.files]]
+title = "theming"
+url = "/docs/theming"
+contents = "Customize theme\nIf you need to customize the default styling for any components, you can do so by extending the DefaultTheme\nExtending theme tokens\nOur RenderlesskitProvider accepts a theme prop which can be used to extend the theme.\nTo extend or override a token in the default theme simply add a new theme object (we called it customTheme) and inside of that create a new extend property and assign all your overrides to it.\nFor example, if you want to add a new red variant to the button you can do this:\nIf you are wondering about which keys of theme you can extend you can look at the source code for each specific theme file\nOr if you have setup typescript you can also get autocompletion of those theme keys, checkout TypeScript Guide.\n"
+filetype = "PlainText"
+[[input.files]]
+title = "Getting Started"
+url = "/docs/getting-started"
+contents = "Getting Started\nRenderlesskit uses tailwind to provide better styling so you'll need to install the neccesary dependencies and setup a tailwind.\nInstallation\nTailwind setup\nAfter setting up tailwind in your project, all you need to do inside your tailwind.config.js is import our preset function and use it.\nCheckout our integration guides for CRA & Next.js\nSetting up provider\nRenderlesskit needs a theme provider which passes down all the neccesary styling for the components at the root of your app.\nGo to your root of the application and add this:\n"
+filetype = "PlainText"
+[[input.files]]
+title = "TypeScript Guide"
+url = "/guides/typescript-guide"
+contents = "TypeScript Support\nRenderlesskit provides a full typesafe theming system which can be help you get better intellisense and DX overall.\nIn this guide we are going to see how to setup TypeScript,\nand see how we can add extra typesafe variants to component themes.\nFirst, we need to extract our custom theme object into it's own file so that we can infer it's types.\nCreating theme file\nCreating declaration file\nTypeScript definitions for the Renderlesskit's theme can be extended by using declaration merging.\nSo the first step is creating a declarations file. Let's name it global.d.ts for example.\nFor CRA projects you can put this content inside react-app-env.d.ts\nThats It!\nNow if you create a new Button you'll see that there is a new variant called red\n\n"
+filetype = "PlainText"
+[[input.files]]
+title = "Usage With CRA"
+url = "/guides/usage-with-cra"
+contents = "Setting up CRA with Renderlesskit\nFirst let's create a new CRA project.\nSetup TailwindCSS\nTo get started with renderlesskit first step is to setup Tailwind CSS in your CRA project.\nRefer to tailwind documentation for Setting up Tailwind CSS in a Create React App project\nAfter setting up tailwind in your project, all you need to do inside your tailwind.config.js is import our preset function and use it.\npreset() merges your taiwind config with renderlesskit's internal tailwind configs and enables certain plugins\nRenderlesskit Setup\nAfter following all the steps and correctly setting up tailwind, now let's add the RenderlesskitProvider\nFollow Setting Up Provider\nTypeScript Setup\nFollow TypeScript Guide\n"
+filetype = "PlainText"
+[[input.files]]
+title = "Usage With Next.js"
+url = "/guides/usage-with-nextjs"
+contents = "Setting up Next.js with Renderlesskit\nFirst let's create a new Nextjs project.\nSetup TailwindCSS\nTo get started with renderlesskit first step is to setup Tailwind CSS in your CRA project.\nRefer to tailwind documentation for Setting up Tailwind CSS in a Next.js project\nAfter setting up tailwind in your project, all you need to do inside your tailwind.config.js is import our preset function and use it.\npreset() merges your taiwind config with renderlesskit's internal tailwind configs and enables certain plugins\nRenderlesskit Setup\nAfter following all the steps and correctly setting up tailwind, now let's add the RenderlesskitProvider\nFollow Setting Up Provider\nTypeScript Setup\nFollow TypeScript Guide\n"
+filetype = "PlainText"
+[output]
+filename = "/Users/timeless/Documents/GitHub/renderlesskit-react-tailwind-docs/packages/website/public/index-default.st"
+excerpts_per_result = 1

@@ -85,21 +85,9 @@ function File({ item, anchors }) {
   const slugger = new Slugger();
   const activeAnchor = useActiveAnchor();
 
-  const LI = ({ title }) => (
-    <li className={active ? "active" : ""}>
-      <Link href={item.route}>
-        <a onClick={() => setMenu(false)}>{title}</a>
-      </Link>
-    </li>
-  );
-
   let title = item.title;
-  if (item.title.startsWith("> ")) {
-    title = title.substr(2);
-    return <LI title={title} />;
-  }
-
-  if (anchors && anchors.length) {
+  const shouldPreventChildAnchors = item.title.startsWith("> ");
+  if (anchors && anchors.length && !shouldPreventChildAnchors) {
     if (active) {
       let activeIndex = 0;
       const anchorInfo = anchors.map((anchor, i) => {
@@ -142,7 +130,17 @@ function File({ item, anchors }) {
     }
   }
 
-  return <LI title={title} />;
+  if (shouldPreventChildAnchors) {
+    title = title.substr(2);
+  }
+
+  return (
+    <li className={active ? "active" : ""}>
+      <Link href={item.route}>
+        <a onClick={() => setMenu(false)}>{title}</a>
+      </Link>
+    </li>
+  );
 }
 
 function Menu({ dir, anchors }) {

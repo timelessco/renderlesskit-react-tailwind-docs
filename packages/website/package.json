@@ -10,17 +10,16 @@
   "dependencies": {
     "@renderlesskit/react-tailwind": "^0.0.1-alpha.2",
     "@types/react": "^17.0.3",
-    "nextra": "^0.4.4",
-    "nextra-theme-docs": "^1.1.6",
     "next": "10.1.2",
+    "nextra": "^0.4.4",
     "react": "17.0.2",
     "react-dom": "17.0.2"
   },
   "devDependencies": {
+    "@tailwindcss/jit": "0.1.17",
     "autoprefixer": "^10.2.5",
-    "postcss": "^8.2.8",
     "deepmerge": "^4.2.2",
-    "tailwindcss": "2.0.4",
-    "@tailwindcss/jit": "0.1.17"
+    "postcss": "^8.2.8",
+    "tailwindcss": "2.0.4"
   }
 }

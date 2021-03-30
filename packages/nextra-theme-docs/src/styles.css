@@ -99,7 +99,7 @@ a code {
 }
 .sidebar button,
 .sidebar a {
-  @apply block w-full p-2 mt-1 text-base text-left text-gray-600 no-underline rounded outline-none select-none;
+  @apply block w-full p-2 mt-1 text-sm text-left text-gray-600 no-underline rounded outline-none select-none;
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
 }

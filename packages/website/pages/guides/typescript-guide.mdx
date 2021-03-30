@@ -1,1 +1,66 @@
+import Image from "next/image";
+
 # TypeScript Support
+
+Renderlesskit provides a full typesafe theming system which can be help you get better intellisense and DX overall.
+
+In this guide we are going to see how to setup TypeScript,
+and see how we can add extra typesafe variants to component themes.
+
+First, we need to extract our custom `theme` object into it's own file so that we can infer it's types.
+
+## Creating theme file
+
+```ts
+// my-theme.ts
+
+const customTheme = {
+  extend: {
+    buttton: {
+      variants: {
+        red: "bg-red-300 text-white",
+      },
+    },
+  },
+};
+
+export default customTheme;
+```
+
+## Creating declaration file
+
+TypeScript definitions for the Renderlesskit's theme can be extended by using [declaration merging](https://www.typescriptlang.org/docs/handbook/declaration-merging.html).
+So the first step is creating a declarations file. Let's name it `global.d.ts` for example.
+
+```ts
+// global.d.ts
+import { DefaultTheme } from "@renderlesskit/react-tailwind";
+import theme from "./my-theme";
+
+type UserTheme = typeof theme.extend;
+
+declare global {
+  namespace Renderlesskit {
+    interface Theme {
+      components: MergeTheme<DefaultTheme, UserTheme>;
+    }
+  }
+}
+```
+
+For CRA projects you can put this content inside `react-app-env.d.ts`
+
+Thats It!
+
+Now if you create a new Button you'll see that there is a new variant called `red`
+
+>
+
+<Image
+  alt="TypeScript intellisense showing a Button with a new red variant"
+  width="600"
+  height="300"
+  layout="intrinsic"
+  src="/ts-renderlesskit-variant.png"
+  quality={100}
+/>

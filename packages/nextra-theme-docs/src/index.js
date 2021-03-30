@@ -99,7 +99,6 @@ function File({ item, anchors }) {
     return <LI title={title} />;
   }
 
-  // console.log({ anchors, title, item });
   if (anchors && anchors.length) {
     if (active) {
       let activeIndex = 0;
@@ -178,7 +177,6 @@ function Sidebar({ show, directories, anchors }) {
 }
 
 const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
-  console.log(filename, _config, pageMap, meta);
   const [menu, setMenu] = useState(false);
   const router = useRouter();
   const { route, asPath, locale, defaultLocale } = router;

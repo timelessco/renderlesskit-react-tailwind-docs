@@ -5,6 +5,7 @@
     "packages/nextra-theme-docs"
   ],
   "scripts": {
+    "dev:theme": "yarn workspace nextra-theme-docs run dev",
     "build:theme": "yarn workspace nextra-theme-docs run build",
     "dev:site": "yarn workspace website run dev",
     "build:site": "yarn workspace website run build",
@@ -14,7 +15,5 @@
   "main": "index.js",
   "license": "MIT",
   "private": true,
-  "dependencies": {
-    "nextra": "^0.4.4"
-  }
+  "dependencies": {}
 }

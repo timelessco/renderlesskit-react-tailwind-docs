@@ -1282,14 +1282,14 @@
   resolved "https://registry.yarnpkg.com/@react-types/shared/-/shared-3.5.0.tgz#dbc90e8fe711967e66d6f3ce0e17d34b24bd6283"
   integrity sha512-997Me7AegwJOI10ye/Q5ds6fT+VBc6XcsXYzPqOD+HIbyL1kUQNDF/VoO37ib7KEH8jXH9aceoX9blz3Q1QcpA==
 
-"@renderlesskit/react-tailwind@^0.0.1-alpha.2":
-  version "0.0.1-alpha.2"
-  resolved "https://registry.yarnpkg.com/@renderlesskit/react-tailwind/-/react-tailwind-0.0.1-alpha.2.tgz#0b857b2f615c577285ea8df044f75c97c1e04ec9"
-  integrity sha512-egbA36uiv3jOqXUsRxcerMBd/7FCCAveJro/z4JdacKbpkx78JWN0xA/QV1ePs6SuOjEwAK6s2w6kTC5ciZ3yQ==
+"@renderlesskit/react-tailwind@^0.0.1-alpha.3":
+  version "0.0.1-alpha.3"
+  resolved "https://registry.yarnpkg.com/@renderlesskit/react-tailwind/-/react-tailwind-0.0.1-alpha.3.tgz#aaf5afe1387194d1b1206409144f3064ce6b7c7d"
+  integrity sha512-ujh67caPsksGAI4Pbml+9uinJzzorqNVA9IJvEzDTTxHsdcy4uKvJRN45PXpKk6CW+kOb4kNAvM4FoLufgd3mQ==
   dependencies:
     "@renderlesskit/react" "^0.2.0"
     lodash "^4.17.21"
-    reakit "^1.3.5"
+    reakit "^1.3.6"
 
 "@renderlesskit/react@^0.2.0":
   version "0.2.0"
@@ -5870,7 +5870,7 @@ reakit-warning@^0.6.0, reakit-warning@^0.6.1:
   dependencies:
     reakit-utils "^0.15.1"
 
-reakit@^1.3.5:
+reakit@^1.3.6:
   version "1.3.6"
   resolved "https://registry.yarnpkg.com/reakit/-/reakit-1.3.6.tgz#0a58a1b5ba839b24cf722a5816efe72dc2240e7f"
   integrity sha512-/I7XNPEUuRjCVwDkriy7HKuSKTtCmojZrrClGIg1gexB7Ij5vjpEbyUZzwHMmvIEoMqUZDC0Q6cDWfLpqaY9vA==

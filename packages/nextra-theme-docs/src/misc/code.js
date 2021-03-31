@@ -115,7 +115,10 @@ const CodeBlock = ({ children, className, live, render, ...props }) => {
           ...(typeof window !== "undefined" ? window.__COMPONENTS : {}),
         }}
       >
-        <LivePreview className="p-6 rounded-md bg-white rounded-b-none" />
+        <LivePreview
+          className="p-6 rounded-md bg-white rounded-b-none"
+          style={{ fontFamily: "'Inter', sans-serif" }}
+        />
         <LiveEditor
           style={{ fontFamily: "SF Mono, Menlo, monospace" }}
           className="rounded-md rounded-t-none text-sm"

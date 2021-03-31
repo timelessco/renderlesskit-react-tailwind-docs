@@ -1,4 +1,4 @@
-const preset = require("@renderlesskit/react-tailwind/preset");
+const { preset } = require("@renderlesskit/react-tailwind/preset");
 
 module.exports = preset({
   purge: [

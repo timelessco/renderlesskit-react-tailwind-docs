@@ -8,7 +8,7 @@
     "vercel-build": "yarn workspace nextra-theme-docs run build && STORK_PATH=$(pwd)/bin/stork.bin  yarn build"
   },
   "dependencies": {
-    "@renderlesskit/react-tailwind": "^0.0.1-alpha.2",
+    "@renderlesskit/react-tailwind": "^0.0.1-alpha.3",
     "@types/react": "^17.0.3",
     "next": "10.1.2",
     "nextra": "^0.4.4",

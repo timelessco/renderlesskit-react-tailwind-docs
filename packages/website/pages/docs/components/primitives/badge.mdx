@@ -1,0 +1,47 @@
+# Badge
+
+## Imports
+
+```js
+import { Badge } from "@renderlesskit/react-tailwind";
+```
+
+## Usage
+
+```jsx live
+<Badge>primary</Badge>
+```
+
+## Badge Variants
+
+```jsx live
+<div className="space-x-2">
+  <Badge variant="primary">primary</Badge>
+  <Badge variant="secondary">secondary</Badge>
+  <Badge variant="outline">outline</Badge>
+  <Badge variant="ghost">ghost</Badge>
+</div>
+```
+
+## Badge Sizes
+
+```jsx live
+<div className="space-x-2">
+  <Badge size="sm">Small</Badge>
+  <Badge size="md">Medium</Badge>
+  <Badge size="lg">Large</Badge>
+</div>
+```
+
+## Floating Badge
+
+In some scenarioes where you want to add a floating badge on an element's corners you can set the `Badge` component to be `floating`
+
+```jsx live
+<Button variant="outline">
+  Hello world
+  <Badge size="sm" position="top-right" floating>
+    20
+  </Badge>
+</Button>
+```

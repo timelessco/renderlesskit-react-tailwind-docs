@@ -1,4 +1,11 @@
+import Callout from "@components/Callout";
+import ComponentLinks from "@components/ComponentLinks";
+
 # Badge
+
+Display an indicator that requires attention.
+
+<ComponentLinks github="badge" theme="badge" story="primitives-badge" />
 
 ## Imports
 
@@ -14,6 +21,8 @@ import { Badge } from "@renderlesskit/react-tailwind";
 
 ## Badge Variants
 
+Badge has 4 variants `primary` `secondary` `outline` `ghost`
+
 ```jsx live
 <div className="space-x-2">
   <Badge variant="primary">primary</Badge>
@@ -23,7 +32,14 @@ import { Badge } from "@renderlesskit/react-tailwind";
 </div>
 ```
 
+<Callout>
+  You can add extra variants & sizes via the theme file. Checkout [theming
+  guide](/docs/theming).
+</Callout>
+
 ## Badge Sizes
+
+Badge comes with 3 sizes `sm` `md` `lg`
 
 ```jsx live
 <div className="space-x-2">

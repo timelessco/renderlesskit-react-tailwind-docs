@@ -5,6 +5,7 @@
     "packages/nextra-theme-docs"
   ],
   "scripts": {
+    "theme": "yarn workspace nextra-theme-docs",
     "dev:theme": "yarn workspace nextra-theme-docs run dev",
     "build:theme": "yarn workspace nextra-theme-docs run build",
     "dev:site": "yarn workspace website run dev",

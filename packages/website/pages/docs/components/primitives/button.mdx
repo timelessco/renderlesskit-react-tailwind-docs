@@ -1,0 +1,98 @@
+import Callout from "@components/Callout";
+import ComponentLinks from "@components/ComponentLinks";
+
+# Button
+
+The Button component can be used to trigger various kinds of user events such as such as submitting a form, opening a dialog, canceling an action, or performing a delete operation.
+
+<ComponentLinks github="button" theme="button" story="primitives-button" />
+
+## Imports
+
+```jsx
+import { Button, ButtonGroup } from "@renderlesskit/react-tailwind";
+```
+
+- **Button:** The button which has prefix/suffix icons support, variants & size.
+- **ButtonGroup:** Used to group related buttons together in a horizontal stack, can also be set as `attached`
+
+## Usage
+
+Default Button
+
+```jsx live
+<Button>Click Me</Button>
+```
+
+## Button sizes
+
+```jsx live
+<div className="space-x-2">
+  <Button size="sm">Small</Button>
+  <Button size="md">Medium</Button>
+  <Button size="lg">Large</Button>
+  <Button size="xl">Extra Large</Button>
+</div>
+```
+
+## Button variants
+
+```jsx live
+<div className="space-x-2">
+  <Button variant="primary">Primary</Button>
+  <Button variant="secondary">secondary</Button>
+  <Button variant="outline">Outline</Button>
+  <Button variant="ghost">Ghost</Button>
+</div>
+```
+
+<Callout>
+  You can add extra variants & sizes via the theme file. Checkout [theming
+  guide](/docs/theming).
+</Callout>
+
+## Button prefix/suffix
+
+You can pass prefix and suffix props to the button to append or prepend any content inside of button.
+
+```jsx live
+<div className="space-x-2">
+  <Button prefix={<SearchIcon />} suffix={<CaretDownIcon />}>
+    Search
+  </Button>
+  <Button variant="outline" prefix={<CheckIcon />}>
+    Valid
+  </Button>
+</div>
+```
+
+## Button spinner
+
+You can pass `loading` prop to indicate that the button is loading.
+
+```jsx live
+<div className="space-x-2">
+  <Button loading prefix={<SearchIcon />} suffix={<CaretDownIcon />}>
+    Loading
+  </Button>
+</div>
+```
+
+You can also add custom loading spinner by passing a `spinner` prop
+
+```jsx live
+<div className="space-x-2">
+  <Button
+    loading
+    spinner={
+      <div className="flex space-x-3">
+        <span>Loading</span>
+        <div className="animate-spin">.</div>
+      </div>
+    }
+    suffix={<SearchIcon />}
+  >
+    Click me
+  </Button>
+</div>
+```

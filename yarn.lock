@@ -1264,10 +1264,10 @@
   resolved "https://registry.yarnpkg.com/@react-types/shared/-/shared-3.5.0.tgz#dbc90e8fe711967e66d6f3ce0e17d34b24bd6283"
   integrity sha512-997Me7AegwJOI10ye/Q5ds6fT+VBc6XcsXYzPqOD+HIbyL1kUQNDF/VoO37ib7KEH8jXH9aceoX9blz3Q1QcpA==
 
-"@renderlesskit/react-tailwind@^0.0.1-alpha.3":
-  version "0.0.1-alpha.6"
-  resolved "https://registry.yarnpkg.com/@renderlesskit/react-tailwind/-/react-tailwind-0.0.1-alpha.6.tgz#b361e1b50ebd9c3ead9f501c2c3e33473d594760"
-  integrity sha512-3lVsEGH3I27FFPyqS17lGVvoNmIrfGso4ePYkLijWY7nxaBCwxgodu5x9hoQJWwt9BcSZEMEdbgwi5Yh4aNlpg==
+"@renderlesskit/react-tailwind@^0.0.1-alpha.6":
+  version "0.0.1-alpha.7"
+  resolved "https://registry.yarnpkg.com/@renderlesskit/react-tailwind/-/react-tailwind-0.0.1-alpha.7.tgz#cf2ec35b38d7d7c6d06e956017fa0a48b3df85b8"
+  integrity sha512-JDU7nZmEGHxtleVPUNWnzApxJdzxJ+9FcWN2kvYY4cjseJ3BxhDHrvXm3aN+ADh6UKY4wt/iYo66sBdTDwvB7Q==
   dependencies:
     "@renderlesskit/react" "^0.3.0"
     lodash "^4.17.21"

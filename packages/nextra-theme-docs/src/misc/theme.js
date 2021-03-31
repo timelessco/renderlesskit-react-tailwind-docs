@@ -123,6 +123,14 @@ const getComponents = (args) => ({
   h5: H5(args),
   h6: H6(args),
   a: A,
+  pre: (props) => {
+    if (props?.children?.props?.live === true) {
+      return (
+        <pre style={{ background: "transparent", padding: 1 }} {...props} />
+      );
+    }
+    return <pre {...props} />;
+  },
   code: CodeBlock,
   table: Table,
 });

@@ -1,95 +1,102 @@
-import React, { useMemo, useCallback, useRef, useState, useEffect } from 'react'
-import matchSorter from 'match-sorter'
-import cn from 'classnames'
-import { useRouter } from 'next/router'
-import Link from 'next/link'
+import React, {
+  useMemo,
+  useCallback,
+  useRef,
+  useState,
+  useEffect,
+} from "react";
+import matchSorter from "match-sorter";
+import cn from "classnames";
+import { useRouter } from "next/router";
+import Link from "next/link";
 
 const Item = ({ title, active, href, onMouseOver, search }) => {
-  const highlight = title.toLowerCase().indexOf(search.toLowerCase())
+  const _title = title.startsWith("> ") ? title.substr(2) : title;
+  const highlight = _title.toLowerCase().indexOf(search.toLowerCase());
 
   return (
     <Link href={href}>
       <a className="block no-underline" onMouseOver={onMouseOver}>
-        <li className={cn('p-2', { active })}>
-          {title.substring(0, highlight)}
+        <li className={cn("p-2", { active })}>
+          {_title.substring(0, highlight)}
           <span className="highlight">
-            {title.substring(highlight, highlight + search.length)}
+            {_title.substring(highlight, highlight + search.length)}
           </span>
-          {title.substring(highlight + search.length)}
+          {_title.substring(highlight + search.length)}
         </li>
       </a>
     </Link>
-  )
-}
+  );
+};
 
 const Search = ({ directories }) => {
-  const router = useRouter()
-  const [show, setShow] = useState(false)
-  const [search, setSearch] = useState('')
-  const [active, setActive] = useState(0)
-  const input = useRef(null)
+  const router = useRouter();
+  const [show, setShow] = useState(false);
+  const [search, setSearch] = useState("");
+  const [active, setActive] = useState(0);
+  const input = useRef(null);
 
   const results = useMemo(() => {
-    if (!search) return []
+    if (!search) return [];
 
     // Will need to scrape all the headers from each page and search through them here
     // (similar to what we already do to render the hash links in sidebar)
     // We could also try to search the entire string text from each page
-    return matchSorter(directories, search, { keys: ['title'] })
-  }, [search])
+    return matchSorter(directories, search, { keys: ["title"] });
+  }, [search]);
 
   const handleKeyDown = useCallback(
-    e => {
+    (e) => {
       switch (e.key) {
-        case 'ArrowDown': {
-          e.preventDefault()
+        case "ArrowDown": {
+          e.preventDefault();
           if (active + 1 < results.length) {
-            setActive(active + 1)
+            setActive(active + 1);
           }
-          break
+          break;
         }
-        case 'ArrowUp': {
-          e.preventDefault()
+        case "ArrowUp": {
+          e.preventDefault();
           if (active - 1 >= 0) {
-            setActive(active - 1)
+            setActive(active - 1);
           }
-          break
+          break;
         }
-        case 'Enter': {
-          router.push(results[active].route)
-          break
+        case "Enter": {
+          router.push(results[active].route);
+          break;
         }
       }
     },
     [active, results, router]
-  )
+  );
 
   useEffect(() => {
-    setActive(0)
-  }, [search])
+    setActive(0);
+  }, [search]);
 
   useEffect(() => {
-    const inputs = ['input', 'select', 'button', 'textarea']
+    const inputs = ["input", "select", "button", "textarea"];
 
-    const down = e => {
+    const down = (e) => {
       if (
         document.activeElement &&
         inputs.indexOf(document.activeElement.tagName.toLowerCase()) === -1
       ) {
-        if (e.key === '/') {
-          e.preventDefault()
-          input.current.focus()
-        } else if (e.key === 'Escape') {
-          setShow(false)
+        if (e.key === "/") {
+          e.preventDefault();
+          input.current.focus();
+        } else if (e.key === "Escape") {
+          setShow(false);
         }
       }
-    }
+    };
 
-    window.addEventListener('keydown', down)
-    return () => window.removeEventListener('keydown', down)
-  }, [])
+    window.addEventListener("keydown", down);
+    return () => window.removeEventListener("keydown", down);
+  }, []);
 
-  const renderList = show && results.length > 0
+  const renderList = show && results.length > 0;
 
   return (
     <div className="nextra-search relative w-full md:w-64">
@@ -97,9 +104,9 @@ const Search = ({ directories }) => {
         <div className="search-overlay z-1" onClick={() => setShow(false)} />
       )}
       <input
-        onChange={e => {
-          setSearch(e.target.value)
-          setShow(true)
+        onChange={(e) => {
+          setSearch(e.target.value);
+          setShow(true);
         }}
         className="appearance-none border rounded py-2 px-3 leading-tight focus:outline-none focus:ring w-full"
         type="search"
@@ -120,12 +127,12 @@ const Search = ({ directories }) => {
                 search={search}
                 onMouseOver={() => setActive(i)}
               />
-            )
+            );
           })}
         </ul>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default Search
+export default Search;

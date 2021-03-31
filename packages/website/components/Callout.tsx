@@ -1,6 +1,8 @@
 import { Alert, AlertProps } from "@renderlesskit/react-tailwind";
 
-const Callout = ({ children, ...props }: Omit<AlertProps, "title"> & { children: string }) => {
+type CalloutProps = Omit<AlertProps, "title"> & { children: string };
+
+const Callout = ({ children, ...props }: CalloutProps) => {
   return <Alert title={children} {...props} />;
 };
 

@@ -2,7 +2,7 @@
   "name": "website",
   "version": "0.1.0",
   "scripts": {
-    "dev": "DEBUG=true next dev",
+    "dev": "cross-env DEBUG=true next dev",
     "build": "next build",
     "start": "next start",
     "vercel-build": "yarn workspace nextra-theme-docs run build && STORK_PATH=$(pwd)/bin/stork.bin  yarn build"

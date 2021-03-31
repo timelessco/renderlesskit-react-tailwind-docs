@@ -71,28 +71,24 @@ You can pass prefix and suffix props to the button to append or prepend any cont
 You can pass `loading` prop to indicate that the button is loading.
 
 ```jsx live
-<div className="space-x-2">
-  <Button loading prefix={<SearchIcon />} suffix={<CaretDownIcon />}>
-    Loading
-  </Button>
-</div>
+<Button loading prefix={<SearchIcon />} suffix={<CaretDownIcon />}>
+  Loading
+</Button>
 ```
 
 You can also add custom loading spinner by passing a `spinner` prop
 
 ```jsx live
-<div className="space-x-2">
-  <Button
-    loading
-    spinner={
-      <div className="flex space-x-3">
-        <span>Loading</span>
-        <div className="animate-spin">.</div>
-      </div>
-    }
-    suffix={<SearchIcon />}
-  >
-    Click me
-  </Button>
-</div>
+<Button
+  loading
+  spinner={
+    <div className="flex space-x-3">
+      <span>Loading</span>
+      <div className="animate-spin">.</div>
+    </div>
+  }
+  suffix={<SearchIcon />}
+>
+  Click me
+</Button>
 ```

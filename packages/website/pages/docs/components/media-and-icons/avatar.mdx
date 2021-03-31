@@ -1,0 +1,114 @@
+# Avatar
+
+`Avatar` component is used to display user's profile picture, initials or icons.
+
+## Imports
+
+```js
+import {
+  Avatar,
+  Avatarbadge,
+  AvatarGroup,
+  AvatarContents,
+} from "@renderlesskit/react-tailwind";
+```
+
+## Usage
+
+```jsx live
+<div className="flex space-x-2">
+  <Avatar size="xl" src="https://bit.ly/dan-abramov" name="Dan Abramov" />
+  <Avatar size="xl" src="https://bit.ly/kent-c-dodds" name="Kent Dodds" />
+  <Avatar size="xl" src="https://bit.ly/code-beast" name="Code Beast" />
+</div>
+```
+
+## Avatar sizes
+
+Avatar has 5 sizes `xs` `sm` `md` `lg` `xl`
+
+```jsx live
+<div className="flex space-x-2">
+  <Avatar size="xs" src="https://bit.ly/code-beast" name="Code Beast" />
+  <Avatar size="sm" src="https://bit.ly/ryan-florence" name="Rayan Florence" />
+  <Avatar size="md" src="https://bit.ly/kent-c-dodds" name="Kent Dodds" />
+  <Avatar size="lg" src="https://bit.ly/dan-abramov" name="Dan Abramov" />
+  <Avatar size="xl" src="https://bit.ly/31ycy7V" name="Timelessco" />
+</div>
+```
+
+## Avatar with badge
+
+By using `AvatarBadge` component you can show status icons at the right corner of the Avatar.
+
+```jsx live
+<div className="flex space-x-2">
+  <Avatar
+    status="online"
+    size="xl"
+    name="Code Beast"
+    src="https://bit.ly/code-beast"
+  />
+  <Avatar
+    status="sleep"
+    size="xl"
+    src="https://bit.ly/31ycy7V"
+    name="Timelessco"
+  />
+  <Avatar
+    status="typing"
+    size="xl"
+    src="https://bit.ly/dan-abramov"
+    name="Dan Abramov"
+  />
+</div>
+```
+
+### Custom badge
+
+You can also customize the badge, by providing `<Avatar />` with children & using AvatarContens, AvatarBadge components.
+
+```jsx live
+<Avatar size="xl" src="https://bit.ly/ryan-florence" name="Rayan Florence">
+  <AvatarContents />
+  <AvatarBadge>
+    <SearchIcon />
+  </AvatarBadge>
+</Avatar>
+```
+
+## Avatar fallbacks
+
+If there is an error loading the src of the avatar, there are 2 fallbacks:
+
+- If there's a name prop, we use it to generate the initials.
+- If there's no name prop, we use a default avatar.
+
+If both name and src are not provided you can pass a `fallback` prop to show any content,
+`fallback` has the lowest priority thus if name or src is provided fallback will be ignored.
+
+```jsx live
+<div className="flex space-x-2">
+  <Avatar size="xl" name="Navin Moorthy" src="https://bit.ly/broken-link" />
+  <Avatar size="xl" name="Anurag Hazra" src="https://bit.ly/broken-link" />
+  <Avatar size="xl" src="https://bit.ly/broken-link" />
+  <Avatar size="xl" fallback={<InfoCircleIcon />} />
+</div>
+```
+
+## AvatarGroup
+
+`AvatarGroup` renders its children as a stack, and you can:
+
+- `limit` the total number of amount rendered and truncating the excess ones.
+- adjust size of all the avatars inside the AvatarGroup equally via the `size` prop.
+
+```jsx live
+<AvatarGroup size="xl" limit={2}>
+  <Avatar name="Ryan Florence" src="https://bit.ly/ryan-florence" />
+  <Avatar name="Timelessco" src="https://bit.ly/31ycy7V" />
+  <Avatar name="Kent Dodds" src="https://bit.ly/kent-c-dodds" />
+  <Avatar name="Wes bos" src="https://bit.ly/wes-bos" />
+  <Avatar name="Christian Nwamba" src="https://bit.ly/code-beast" />
+</AvatarGroup>
+```

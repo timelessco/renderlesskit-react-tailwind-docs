@@ -1,5 +1,5 @@
 import React from "react";
-import prismTheme from "prism-react-renderer/themes/shadesOfPurple";
+import prismTheme from "prism-react-renderer/themes/palenight";
 import Highlight, { defaultProps } from "prism-react-renderer";
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from "react-live";
 
@@ -91,7 +91,6 @@ const CodeBlock = ({ children, className, live, render, ...props }) => {
   if (live) {
     return (
       <LiveProvider
-        className="rounded-md p-1 border border-gray-300"
         theme={prismTheme}
         language={language}
         code={children.trim()}
@@ -117,7 +116,10 @@ const CodeBlock = ({ children, className, live, render, ...props }) => {
         }}
       >
         <LivePreview className="p-6 rounded-md bg-white rounded-b-none" />
-        <LiveEditor className="rounded-md rounded-t-none" />
+        <LiveEditor
+          style={{ fontFamily: "SF Mono, Menlo, monospace" }}
+          className="rounded-md rounded-t-none text-sm"
+        />
         <LiveError className="rounded-md rounded-t-none mt-0 text-xs bg-red-100 text-red-500" />
       </LiveProvider>
     );

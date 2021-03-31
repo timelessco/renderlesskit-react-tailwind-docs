@@ -1,0 +1,52 @@
+import ComponentLinks from "@components/ComponentLinks";
+
+# Box
+
+`Box` is the most abstract component on top of which all other Renderlesskit components are built.  
+It uses reakit's [Role](https://reakit.io/docs/role/) component internally.
+
+<ComponentLinks github="box" story="primitives-box" />
+
+## Usage
+
+```jsx live
+<Box>This is a box</Box>
+```
+
+## `As` prop
+
+By using the `as` prop you can control which element should be rendered, if you are using typescript Box is fully typesafe too.
+
+You can either pass string elements or pass ReactNodes to the as prop.
+
+```jsx live
+<Box className="space-x-4">
+  <Box as="a" href="#">
+    Link
+  </Box>
+  <Box as={Button}>Renderlesskit Button</Box>
+</Box>
+```
+
+## Card example
+
+```jsx live
+<Box as="dl" class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2">
+  <Box class="px-4 py-5 bg-white shadow rounded-lg overflow-hidden sm:p-6">
+    <Box as="dt" class="text-sm font-medium text-gray-500 truncate">
+      Total Subscribers
+    </Box>
+    <Box as="dd" class="mt-1 text-3xl font-semibold text-gray-900">
+      71,897
+    </Box>
+  </Box>
+  <Box class="px-4 py-5 bg-white shadow rounded-lg overflow-hidden sm:p-6">
+    <Box as="dt" class="text-sm font-medium text-gray-500 truncate">
+      Avg. Open Rate
+    </Box>
+    <Box as="dd" class="mt-1 text-3xl font-semibold text-gray-900">
+      58.16%
+    </Box>
+  </Box>
+</Box>
+```

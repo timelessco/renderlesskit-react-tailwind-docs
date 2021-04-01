@@ -1,8 +1,11 @@
 export default {
-  repository: "https://github.com/timelessco/renderlesskit-react-tailwind", // project repo
+  // Project Repo
+  repository: "https://github.com/timelessco/renderlesskit-react-tailwind",
+  // Docs Repo
   docsRepository:
-    "https://github.com/timelessco/renderlesskit-react-tailwind-docs/packages/webiste", // docs repo
-  path: "/", // path of docs
+    "https://github.com/timelessco/renderlesskit-react-tailwind-docs/",
+  // Docs Path in the above repo
+  path: "packages/website/",
   titleSuffix: " – Timeless",
   search: true,
   UNSTABLE_stork: true,

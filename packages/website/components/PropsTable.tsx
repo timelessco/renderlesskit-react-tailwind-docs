@@ -1,15 +1,19 @@
 import React from "react";
-import { Box, IconButton, useTheme } from "@renderlesskit/react-tailwind";
-import { InfoCircleIcon } from "@renderlesskit/react-tailwind";
-import { RegionTable } from "./RegionTable";
 import get from "lodash.get";
-
 import {
-  usePopoverState,
-  Popover as ReakitPopover,
-  PopoverDisclosure,
   PopoverArrow,
+  usePopoverState,
+  PopoverDisclosure,
+  Popover as ReakitPopover,
 } from "reakit/Popover";
+import {
+  Box,
+  IconButton,
+  useTheme,
+  InfoCircleIcon,
+} from "@renderlesskit/react-tailwind";
+
+import { RegionTable } from "./RegionTable";
 
 type PropDef = {
   name: string;
@@ -26,7 +30,7 @@ type PopoverTypes = {
   content: React.ReactNode;
   label?: string;
 };
-function Popover({ children, content, label }: PopoverTypes) {
+const Popover: React.FC<PopoverTypes> = ({ children, content, label }) => {
   const popover = usePopoverState({ placement: "top" });
   return (
     <>
@@ -43,7 +47,7 @@ function Popover({ children, content, label }: PopoverTypes) {
       </ReakitPopover>
     </>
   );
-}
+};
 
 type PropsTableProps = {
   data: PropDef[];
@@ -51,13 +55,17 @@ type PropsTableProps = {
   "aria-labelledby"?: string;
 };
 
-export function PropsTable({
+const PropsTable: React.FC<PropsTableProps> = ({
   data,
   "aria-label": ariaLabel,
   "aria-labelledby": ariaLabelledBy,
-}: PropsTableProps) {
+}) => {
   const theme = useTheme();
   const hasAriaLabel = !!(ariaLabel || ariaLabelledBy);
+
+  const tdStyles = "border-0 border-b-0 border-gray-500";
+  const thStyles = `px-2 py-2 text-gray-800 ${tdStyles}`;
+  const typeStyles = "bg-blue-100 text-blue-800 px-2 py-1";
 
   return (
     <RegionTable
@@ -67,23 +75,14 @@ export function PropsTable({
     >
       <thead>
         <tr className="bg-transparent">
-          <Box
-            as="th"
-            className="px-2 py-2 border-0 border-b-0 border-gray-500"
-          >
-            <p className="text-gray-800">Prop</p>
+          <Box as="th" className={thStyles}>
+            <p>Prop</p>
           </Box>
-          <Box
-            as="th"
-            className="px-2 py-2 border-0 border-b-0 border-gray-500"
-          >
-            <p className="text-gray-800">Type</p>
+          <Box as="th" className={thStyles}>
+            <p>Type</p>
           </Box>
-          <Box
-            as="th"
-            className="px-2 py-2 border-0 border-b-0 border-gray-500"
-          >
-            <p className="text-gray-800">Default</p>
+          <Box as="th" className={thStyles}>
+            <p>Default</p>
           </Box>
         </tr>
       </thead>
@@ -102,7 +101,7 @@ export function PropsTable({
             i
           ) => (
             <tr className="bg-transparent" key={`${name}-${i}`}>
-              <Box as="td" className="border-0 border-b-0 border-gray-500">
+              <Box as="td" className={tdStyles}>
                 <code>
                   {name}
                   {required ? "*" : null}
@@ -119,32 +118,17 @@ export function PropsTable({
                   </Popover>
                 )}
               </Box>
-              <Box as="td" className="border-0 border-b-0 border-gray-500">
+              <Box as="td" className={tdStyles}>
                 <code className="text-gray-800">
                   {themeKey ? "union" : Boolean(typeSimple) ? typeSimple : type}
                 </code>
-                {!!typeSimple && (
+                {!!(typeSimple || themeKey) && (
                   <Popover
                     content={
-                      <code className="bg-blue-100 text-blue-800 px-2 py-1">
-                        {type}
-                      </code>
-                    }
-                  >
-                    <IconButton
-                      size="sm"
-                      variant="secondary"
-                      aria-label="See full type"
-                    >
-                      <InfoCircleIcon />
-                    </IconButton>
-                  </Popover>
-                )}
-                {!!themeKey && (
-                  <Popover
-                    content={
-                      <code className="bg-blue-100 text-blue-800 px-2 py-1">
-                        {Object.keys(get(theme, themeKey)).join(" | ")}
+                      <code className={typeStyles}>
+                        {themeKey
+                          ? Object.keys(get(theme, themeKey)).join(" | ")
+                          : type}
                       </code>
                     }
                   >
@@ -158,7 +142,7 @@ export function PropsTable({
                   </Popover>
                 )}
               </Box>
-              <Box as="td" className="border-0 border-b-0 border-gray-500">
+              <Box as="td" className={tdStyles}>
                 {!!defaultValue ? (
                   <code className="text-gray-800">{defaultValue}</code>
                 ) : (
@@ -171,4 +155,6 @@ export function PropsTable({
       </tbody>
     </RegionTable>
   );
-}
+};
+
+export default PropsTable;

@@ -1,48 +1,54 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with
-[`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Renderlesskit React Tailwind Docs
 
 ## Getting Started
 
-First, run the development server:
+Renderlesskit uses tailwind to provide better styling so you'll need to install
+the neccesary dependencies and setup a tailwind.
+
+### Installation
 
 ```bash
-npm run dev
-# or
-yarn dev
+npm i @renderlesskit/react-tailwind
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the
-result.
+```bash
+yarn add @renderlesskit/react-tailwind
+```
 
-You can start editing the page by modifying `pages/index.js`. The page
-auto-updates as you edit the file.
+## Tailwind setup
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on
-[http://localhost:3000/api/hello](http://localhost:3000/api/hello). This
-endpoint can be edited in `pages/api/hello.js`.
+After setting up tailwind in your project, all you need to do inside your
+`tailwind.config.js` is import our `preset` function and use it.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are
-treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead
-of React pages.
+```js
+const { preset } = require("@renderlesskit/react-tailwind/preset");
 
-## Learn More
+module.exports = preset({
+  purge: [
+    // Make sure to add this purge
+    "./node_modules/\\@renderlesskit/react-tailwind/dist/esm/theme/defaultTheme/*.js",
+  ],
+});
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Setting up provider
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js
-  features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Renderlesskit needs a theme provider which passes down all the neccesary styling
+for the components at the root of your app.
 
-You can check out
-[the Next.js GitHub repository](https://github.com/vercel/next.js/) - your
-feedback and contributions are welcome!
+Go to your root of the application and add this:
 
-## Deploy on Vercel
+```js
+import * as React from "react";
+// 1. import `RenderlesskitProvider` component
+import { RenderlesskitProvider } from "@renderlesskit/react-tailwind";
 
-The easiest way to deploy your Next.js app is to use the
-[Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme)
-from the creators of Next.js.
-
-Check out our
-[Next.js deployment documentation](https://nextjs.org/docs/deployment) for more
-details.
+function App() {
+  // 2. Use at the root of your app
+  return (
+    <RenderlesskitProvider>
+      <App />
+    </RenderlesskitProvider>
+  );
+}
+```

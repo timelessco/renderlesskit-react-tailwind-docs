@@ -1,3 +1,16 @@
+diff --git a/node_modules/nextra/dist/loader.js b/node_modules/nextra/dist/loader.js
+index ed96dab..648170e 100644
+--- a/node_modules/nextra/dist/loader.js
++++ b/node_modules/nextra/dist/loader.js
+@@ -283,7 +283,7 @@ async function analyzeLocalizedEntries(currentResourcePath, defaultLocale) {
+ 
+ async function loader (source) {
+   const callback = this.async();
+-  this.cacheable();
++  // this.cacheable();
+   const options = loaderUtils.getOptions(this);
+   const {
+     theme,
 diff --git a/node_modules/nextra/dist/nextra.js b/node_modules/nextra/dist/nextra.js
 index 3a4c085..53ae743 100644
 --- a/node_modules/nextra/dist/nextra.js

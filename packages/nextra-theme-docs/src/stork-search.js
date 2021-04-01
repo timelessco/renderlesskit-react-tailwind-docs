@@ -23,12 +23,12 @@ const TextWithHighlights = React.memo(({ content, ranges }) => {
     res.push(
       <Fragment key={id++}>
         {splittedText.splice(0, range.beginning - index).join("")}
-      </Fragment>
+      </Fragment>,
     );
     res.push(
       <span className="highlight" key={id++}>
         {splittedText.splice(0, range.end - range.beginning).join("")}
-      </span>
+      </span>,
     );
     index = range.end;
   }
@@ -81,7 +81,7 @@ export default function Search() {
       const obj = JSON.parse(json);
 
       if (!obj.results) return [];
-      return obj.results.slice(0, 20).map((result) => {
+      return obj.results.slice(0, 20).map(result => {
         return {
           title: result.entry.title,
           route: result.entry.url,
@@ -95,14 +95,14 @@ export default function Search() {
   }, [search]);
 
   const handleKeyDown = useCallback(
-    (e) => {
+    e => {
       switch (e.key) {
         case "ArrowDown": {
           e.preventDefault();
           if (active + 1 < results.length) {
             setActive(active + 1);
             const activeElement = document.querySelector(
-              `.nextra-stork ul > :nth-child(${active + 2})`
+              `.nextra-stork ul > :nth-child(${active + 2})`,
             );
             if (activeElement && activeElement.scrollIntoViewIfNeeded) {
               activeElement.scrollIntoViewIfNeeded();
@@ -115,7 +115,7 @@ export default function Search() {
           if (active - 1 >= 0) {
             setActive(active - 1);
             const activeElement = document.querySelector(
-              `.nextra-stork ul > :nth-child(${active})`
+              `.nextra-stork ul > :nth-child(${active})`,
             );
             if (activeElement && activeElement.scrollIntoViewIfNeeded) {
               activeElement.scrollIntoViewIfNeeded();
@@ -127,9 +127,12 @@ export default function Search() {
           router.push(results[active].route);
           break;
         }
+        default: {
+          break;
+        }
       }
     },
-    [active, results, router]
+    [active, results, router],
   );
 
   const load = async () => {
@@ -144,7 +147,7 @@ export default function Search() {
       await init;
       stork[localeCode].wasm_register_index(
         `index-${localeCode}`,
-        new Uint8Array(buf)
+        new Uint8Array(buf),
       );
     }
   };
@@ -156,7 +159,7 @@ export default function Search() {
   useEffect(() => {
     const inputs = ["input", "select", "button", "textarea"];
 
-    const down = (e) => {
+    const down = e => {
       if (
         document.activeElement &&
         inputs.indexOf(document.activeElement.tagName.toLowerCase()) === -1
@@ -177,16 +180,16 @@ export default function Search() {
   const renderList = show && results.length > 0;
 
   return (
-    <div className="nextra-search nextra-stork relative w-full md:w-64">
+    <div className="relative w-full nextra-search nextra-stork md:w-64">
       {renderList && (
         <div className="search-overlay z-1" onClick={() => setShow(false)} />
       )}
       <input
-        onChange={(e) => {
+        onChange={e => {
           setSearch(e.target.value);
           setShow(true);
         }}
-        className="appearance-none border rounded py-2 px-3 leading-tight focus:outline-none focus:ring w-full"
+        className="w-full px-3 py-2 leading-tight border rounded appearance-none focus:outline-none focus:ring"
         type="search"
         placeholder='Search ("/" to focus)'
         onKeyDown={handleKeyDown}
@@ -198,7 +201,7 @@ export default function Search() {
         spellCheck={false}
       />
       {renderList && (
-        <ul className="p-0 m-0 mt-1 top-full absolute divide-y z-2">
+        <ul className="absolute p-0 m-0 mt-1 divide-y top-full z-2">
           {results.map((res, i) => {
             return (
               <Item

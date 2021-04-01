@@ -23,13 +23,13 @@ const HeaderLink = ({
   const anchor = <span className="subheading-anchor" id={slug} />;
   const anchorWithObserver = withObserver ? (
     <Observer
-      onChange={(e) => {
+      onChange={e => {
         // if the element is above the 70% of height of the viewport
         // we don't use e.isIntersecting
         const isAboveViewport =
           e.boundingClientRect.y + e.boundingClientRect.height <=
           e.rootBounds.y + e.rootBounds.height;
-        setActiveAnchor((f) => ({ ...f, [slug]: isAboveViewport }));
+        setActiveAnchor(f => ({ ...f, [slug]: isAboveViewport }));
       }}
       rootMargin="1000% 0% -70%"
       threshold={[0, 1]}
@@ -116,14 +116,14 @@ const Table = ({ children }) => {
   );
 };
 
-const getComponents = (args) => ({
+const getComponents = args => ({
   h2: H2(args),
   h3: H3(args),
   h4: H4(args),
   h5: H5(args),
   h6: H6(args),
   a: A,
-  pre: (props) => {
+  pre: props => {
     if (props?.children?.props?.live === true) {
       return (
         <pre style={{ background: "transparent", padding: 1 }} {...props} />

@@ -1,0 +1,12 @@
+.cache
+build
+node_modules
+dist
+coverage
+.next
+package.json
+package-lock.json
+yarn.lock
+storybook-static
+
+packages/nextra-theme-docs/style.css

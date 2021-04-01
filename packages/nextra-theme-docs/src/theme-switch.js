@@ -1,27 +1,28 @@
-import React from 'react'
-import { useTheme } from 'next-themes'
+import React from "react";
+import { useTheme } from "next-themes";
 
-import useMounted from './utils/use-mounted'
+import useMounted from "./utils/use-mounted";
 
 export default function ThemeSwitch() {
-  const { theme, setTheme } = useTheme()
-  const mounted = useMounted()
+  const { theme, setTheme } = useTheme();
+  const mounted = useMounted();
 
   // @TODO: system theme
   const toggleTheme = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark')
-  }
+    setTheme(theme === "dark" ? "light" : "dark");
+  };
 
   return (
+    // eslint-disable-next-line jsx-a11y/anchor-is-valid
     <a
-      className="text-current p-2 cursor-pointer"
+      className="p-2 text-current cursor-pointer"
       tabIndex="0"
       onClick={toggleTheme}
       onKeyDown={e => {
-        if (e.key === 'Enter') toggleTheme()
+        if (e.key === "Enter") toggleTheme();
       }}
     >
-      {mounted && theme === 'dark' ? (
+      {mounted && theme === "dark" ? (
         <svg
           fill="none"
           viewBox="0 0 24 24"
@@ -36,7 +37,7 @@ export default function ThemeSwitch() {
             d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
           />
         </svg>
-      ) : mounted && theme === 'light' ? (
+      ) : mounted && theme === "light" ? (
         <svg
           fill="none"
           viewBox="0 0 24 24"
@@ -66,5 +67,5 @@ export default function ThemeSwitch() {
         ></svg>
       )}
     </a>
-  )
+  );
 }

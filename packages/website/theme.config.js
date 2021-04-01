@@ -1,7 +1,7 @@
-// theme.config.js
 export default {
   repository: "https://github.com/timelessco/renderlesskit-react-tailwind", // project repo
-  docsRepository: "https://github.com/timelessco/renderlesskit-react-tailwind", // docs repo
+  docsRepository:
+    "https://github.com/timelessco/renderlesskit-react-tailwind-docs", // docs repo
   path: "/", // path of docs
   titleSuffix: " – Timeless",
   search: true,

@@ -43,7 +43,8 @@ Avatar has 5 sizes `xs` `sm` `md` `lg` `xl`
 
 ## Avatar with badge
 
-By using `AvatarBadge` component you can show status icons at the right corner of the Avatar.
+By using `AvatarBadge` component you can show status icons at the right corner
+of the Avatar.
 
 ```jsx live
 <div className="flex space-x-2">
@@ -70,7 +71,8 @@ By using `AvatarBadge` component you can show status icons at the right corner o
 
 ### Custom badge
 
-You can also customize the badge, by providing `<Avatar />` with children & using AvatarContens, AvatarBadge components.
+You can also customize the badge, by providing `<Avatar />` with children &
+using AvatarContens, AvatarBadge components.
 
 ```jsx live
 <Avatar size="xl" src="https://bit.ly/ryan-florence" name="Rayan Florence">
@@ -88,8 +90,9 @@ If there is an error loading the src of the avatar, there are 2 fallbacks:
 - If there's a name prop, we use it to generate the initials.
 - If there's no name prop, we use a default avatar.
 
-If both name and src are not provided you can pass a `fallback` prop to show any content,
-`fallback` has the lowest priority thus if name or src is provided fallback will be ignored.
+If both name and src are not provided you can pass a `fallback` prop to show any
+content, `fallback` has the lowest priority thus if name or src is provided
+fallback will be ignored.
 
 ```jsx live
 <div className="flex space-x-2">
@@ -105,7 +108,8 @@ If both name and src are not provided you can pass a `fallback` prop to show any
 `AvatarGroup` renders its children as a stack, and you can:
 
 - `limit` the total number of amount rendered and truncating the excess ones.
-- adjust size of all the avatars inside the AvatarGroup equally via the `size` prop.
+- adjust size of all the avatars inside the AvatarGroup equally via the `size`
+  prop.
 
 ```jsx live
 <AvatarGroup size="xl" limit={2}>

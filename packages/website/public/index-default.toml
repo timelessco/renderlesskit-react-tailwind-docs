@@ -4,6 +4,46 @@ title_boost = "Ridiculous"
 stemming = "None"
 
 [[input.files]]
+title = "> Avatar"
+url = "/docs/components/primitives/avatar"
+contents = "Avatar\nAvatar component is used to display user's profile picture, initials or icons.\nImports\nUsage\nAvatar sizes\nAvatar has 5 sizes xs sm md lg xl\nAvatar with badge\nBy using AvatarBadge component you can show status icons at the right corner\nof the Avatar.\nCustom badge\nYou can also customize the badge, by providing <Avatar /> with children &\nusing AvatarContens, AvatarBadge components.\nAvatar fallbacks\nIf there is an error loading the src of the avatar, there are 2 fallbacks:\nIf there's a name prop, we use it to generate the initials.\nIf there's no name prop, we use a default avatar.\nIf both name and src are not provided you can pass a fallback prop to show any\ncontent, fallback has the lowest priority thus if name or src is provided\nfallback will be ignored.\nAvatarGroup\nAvatarGroup renders its children as a stack, and you can:\nlimit the total number of amount rendered and truncating the excess ones.\nadjust size of all the avatars inside the AvatarGroup equally via the size\nprop.\n"
+filetype = "PlainText"
+[[input.files]]
+title = "> Badge"
+url = "/docs/components/primitives/badge"
+contents = "Badge\nDisplay an indicator that requires attention.\nImports\nUsage\nBadge Variants\nBadge has 4 variants primary secondary outline ghost\nBadge Sizes\nBadge comes with 3 sizes sm md lg\nFloating Badge\nIn some scenarioes where you want to add a floating badge on an element's\ncorners you can set the Badge component to be floating\n"
+filetype = "PlainText"
+[[input.files]]
+title = "> Box"
+url = "/docs/components/primitives/box"
+contents = "Box\nBox is the most abstract component on top of which all other Renderlesskit\ncomponents are built.\nIt uses reakit's Role component internally.\nUsage\nAs prop\nBy using the as prop you can control which element should be rendered, if you\nare using typescript Box is fully typesafe too.\nYou can either pass string elements or pass ReactNodes to the as prop.\nCard example\n"
+filetype = "PlainText"
+[[input.files]]
+title = "> Button"
+url = "/docs/components/primitives/button"
+contents = "Button\nThe Button component can be used to trigger various kinds of user events such as\nsuch as submitting a form, opening a dialog, canceling an action, or performing\na delete operation.\nImports\nButton: The button which has prefix/suffix icons support, variants & size.\nButtonGroup: Used to group related buttons together in a horizontal stack,\ncan also be set as attached\nIconButton: Accessible button to show an icon\nUsage\nDefault Button\nButton sizes\nButton variants\nButton prefix & suffix\nYou can pass prefix and suffix props to the button to append or prepend any\ncontent inside of button.\nButton spinner\nYou can pass loading prop to indicate that the button is loading.\nYou can also add custom loading spinner by passing a spinner prop\nIconButton\nIcon button provides an accessible way to render an icon within a button. It\nsets it's children's role to img & sets aria-hidden to true.\nButtonGroup\nButtonGroup can be used to group together multiple buttons & also collapse their\nborder radius & gap via the attached prop\nButton group accepts size & variant prop which is passed down to all the\nchild buttons automatically.\nAttached button group, when set to true it collapses border radius of the\nbuttons.\nYou can also put IconButton inside IconButton\n"
+filetype = "PlainText"
+[[input.files]]
+title = "> Theming"
+url = "/docs/theming"
+contents = "Customize theme\nIf you need to customize the default styling for any components, you can do so\nby extending the DefaultTheme\nExtending theme tokens\nOur RenderlesskitProvider accepts a theme prop which can be used to extend the\ntheme.\nTo extend or override a token in the default theme simply add a new theme object\n(we called it customTheme) and inside of that create a new extend property\nand assign all your overrides to it.\nFor example, if you want to add a new red variant to the button you can do\nthis:\nIf you are wondering about which keys of theme you can extend you can look at\nthe source code for each specific\ntheme file\nOr if you have setup typescript you can also get autocompletion of those theme\nkeys, checkout TypeScript Guide.\n"
+filetype = "PlainText"
+[[input.files]]
+title = "TypeScript Guide"
+url = "/guides/typescript-guide"
+contents = "TypeScript Support\nRenderlesskit provides a full typesafe theming system which can be help you get\nbetter intellisense and DX overall.\nIn this guide we are going to see how to setup TypeScript, and see how we can\nadd extra typesafe variants to component themes.\nFirst, we need to extract our custom theme object into it's own file so that\nwe can infer it's types.\nCreating theme file\nCreating declaration file\nTypeScript definitions for the Renderlesskit's theme can be extended by using\ndeclaration merging.\nSo the first step is creating a declarations file. Let's name it global.d.ts\nfor example.\nFor CRA projects you can put this content inside react-app-env.d.ts\nThats It!\nNow if you create a new Button you'll see that there is a new variant called\nred\n\n"
+filetype = "PlainText"
+[[input.files]]
+title = "Usage With CRA"
+url = "/guides/usage-with-cra"
+contents = "Setting up CRA with Renderlesskit\nFirst let's create a new CRA project.\nSetup TailwindCSS\nTo get started with renderlesskit first step is to setup Tailwind CSS in your\nCRA project. Refer to tailwind documentation for\nSetting up Tailwind CSS in a Create React App project\nAfter setting up tailwind in your project, all you need to do inside your\ntailwind.config.js is import our preset function and use it.\nRenderlesskit Setup\nAfter following all the steps and correctly setting up tailwind, now let's add\nthe RenderlesskitProvider\nFollow Setting Up Provider\nTypeScript Setup\nFollow TypeScript Guide\n"
+filetype = "PlainText"
+[[input.files]]
+title = "Usage With Next.js"
+url = "/guides/usage-with-nextjs"
+contents = "Setting up Next.js with Renderlesskit\nFirst let's create a new Nextjs project.\nSetup TailwindCSS\nTo get started with renderlesskit first step is to setup Tailwind CSS in your\nCRA project. Refer to tailwind documentation for\nSetting up Tailwind CSS in a Next.js project\nAfter setting up tailwind in your project, all you need to do inside your\ntailwind.config.js is import our preset function and use it.\nRenderlesskit Setup\nAfter following all the steps and correctly setting up tailwind, now let's add\nthe RenderlesskitProvider\nFollow Setting Up Provider\nTypeScript Setup\nFollow TypeScript Guide\n"
+filetype = "PlainText"
+[[input.files]]
 title = "Home"
 url = "/"
 contents = "Renderlesskit React Tailwind\nReact UI built with @renderleskit/react & tailwind\n"
@@ -11,57 +51,10 @@ filetype = "PlainText"
 [[input.files]]
 title = "Getting Started"
 url = "/docs/getting-started"
-contents = "Getting Started\nRenderlesskit uses tailwind to provide better styling so you'll need to install the neccesary dependencies and setup a tailwind.\nInstallation\nTailwind setup\nAfter setting up tailwind in your project, all you need to do inside your tailwind.config.js is import our preset function and use it.\nSetting up provider\nRenderlesskit needs a theme provider which passes down all the neccesary styling for the components at the root of your app.\nGo to your root of the application and add this:\n"
+contents = "Getting Started\nRenderlesskit uses tailwind to provide better styling so you'll need to install\nthe neccesary dependencies and setup a tailwind.\nInstallation\nTailwind setup\nAfter setting up tailwind in your project, all you need to do inside your\ntailwind.config.js is import our preset function and use it.\nSetting up provider\nRenderlesskit needs a theme provider which passes down all the neccesary styling\nfor the components at the root of your app.\nGo to your root of the application and add this:\n"
 filetype = "PlainText"
-
 [[input.files]]
-title = "> Theming"
-url = "/docs/theming"
-contents = "Customize theme\nIf you need to customize the default styling for any components, you can do so by extending the DefaultTheme\nExtending theme tokens\nOur RenderlesskitProvider accepts a theme prop which can be used to extend the theme.\nTo extend or override a token in the default theme simply add a new theme object (we called it customTheme) and inside of that create a new extend property and assign all your overrides to it.\nFor example, if you want to add a new red variant to the button you can do this:\nIf you are wondering about which keys of theme you can extend you can look at the source code for each specific theme file\nOr if you have setup typescript you can also get autocompletion of those theme keys, checkout TypeScript Guide.\n"
+title = "alert"
+url = "/docs/components/primitives/alert"
+contents = "Alert\nAlerts are used to communicate a state that affects a system, feature or page.\nImports\nUsage\nStatus\nChange the status of the alerts by passing the status prop.\nThis affects the color scheme and icon used.\nAlert supports error, success, warning, and info statuses.\nClosable Alert\nYou can pass closable prop to make the alert closable and use onClose to listen to the click listener.\nAction Button\nYou can pass actionButtonLabel which would render a action button with the provided text.\nComposition & Customization\nAlert is meant to be used with the single component API by passing props, like title, description,\nbut if you want to have more control over it's rendering you can pass JSX children elements with Alert specific components.\nAlertIcon\nAlertBody\nAlertTitle\nAlertDescription\nAlertActions\nAlertActionButton\nAlertCloseButton\nYou can also access the internal state/values via the render props pattern.\nYou'll get access to the passed down status prop & the internal theme styles.\n"
 filetype = "PlainText"
-
-[[input.files]]
-title = "TypeScript Guide"
-url = "/guides/typescript-guide"
-contents = "TypeScript Support\nRenderlesskit provides a full typesafe theming system which can be help you get better intellisense and DX overall.\nIn this guide we are going to see how to setup TypeScript,\nand see how we can add extra typesafe variants to component themes.\nFirst, we need to extract our custom theme object into it's own file so that we can infer it's types.\nCreating theme file\nCreating declaration file\nTypeScript definitions for the Renderlesskit's theme can be extended by using declaration merging.\nSo the first step is creating a declarations file. Let's name it global.d.ts for example.\nFor CRA projects you can put this content inside react-app-env.d.ts\nThats It!\nNow if you create a new Button you'll see that there is a new variant called red\n\n"
-filetype = "PlainText"
-
-[[input.files]]
-title = "Usage With Next.js"
-url = "/guides/usage-with-nextjs"
-contents = "Setting up Next.js with Renderlesskit\nFirst let's create a new Nextjs project.\nSetup TailwindCSS\nTo get started with renderlesskit first step is to setup Tailwind CSS in your CRA project.\nRefer to tailwind documentation for Setting up Tailwind CSS in a Next.js project\nAfter setting up tailwind in your project, all you need to do inside your tailwind.config.js is import our preset function and use it.\nRenderlesskit Setup\nAfter following all the steps and correctly setting up tailwind, now let's add the RenderlesskitProvider\nFollow Setting Up Provider\nTypeScript Setup\nFollow TypeScript Guide\n"
-filetype = "PlainText"
-
-[[input.files]]
-title = "> Avatar"
-url = "/docs/components/primitives/avatar"
-contents = "Avatar\nAvatar component is used to display user's profile picture, initials or icons.\nImports\nUsage\nAvatar sizes\nAvatar has 5 sizes xs sm md lg xl\nAvatar with badge\nBy using AvatarBadge component you can show status icons at the right corner of the Avatar.\nCustom badge\nYou can also customize the badge, by providing <Avatar /> with children & using AvatarContens, AvatarBadge components.\nAvatar fallbacks\nIf there is an error loading the src of the avatar, there are 2 fallbacks:\nIf there's a name prop, we use it to generate the initials.\nIf there's no name prop, we use a default avatar.\nIf both name and src are not provided you can pass a fallback prop to show any content,\nfallback has the lowest priority thus if name or src is provided fallback will be ignored.\nAvatarGroup\nAvatarGroup renders its children as a stack, and you can:\nlimit the total number of amount rendered and truncating the excess ones.\nadjust size of all the avatars inside the AvatarGroup equally via the size prop.\n"
-filetype = "PlainText"
-
-[[input.files]]
-title = "> Badge"
-url = "/docs/components/primitives/badge"
-contents = "Badge\nDisplay an indicator that requires attention.\nImports\nUsage\nBadge Variants\nBadge has 4 variants primary secondary outline ghost\nBadge Sizes\nBadge comes with 3 sizes sm md lg\nFloating Badge\nIn some scenarioes where you want to add a floating badge on an element's corners you can set the Badge component to be floating\n"
-filetype = "PlainText"
-
-[[input.files]]
-title = "> Box"
-url = "/docs/components/primitives/box"
-contents = "Box\nBox is the most abstract component on top of which all other Renderlesskit components are built.\nIt uses reakit's Role component internally.\nUsage\nAs prop\nBy using the as prop you can control which element should be rendered, if you are using typescript Box is fully typesafe too.\nYou can either pass string elements or pass ReactNodes to the as prop.\nCard example\n"
-filetype = "PlainText"
-
-[[input.files]]
-title = "Usage With CRA"
-url = "/guides/usage-with-cra"
-contents = "Setting up CRA with Renderlesskit\nFirst let's create a new CRA project.\nSetup TailwindCSS\nTo get started with renderlesskit first step is to setup Tailwind CSS in your CRA project.\nRefer to tailwind documentation for Setting up Tailwind CSS in a Create React App project\nAfter setting up tailwind in your project, all you need to do inside your tailwind.config.js is import our preset function and use it.\nRenderlesskit Setup\nAfter following all the steps and correctly setting up tailwind, now let's add the RenderlesskitProvider\nFollow Setting Up Provider\nTypeScript Setup\nFollow TypeScript Guide\n"
-filetype = "PlainText"
-
-[[input.files]]
-title = "> Button"
-url = "/docs/components/primitives/button"
-contents = "Button\nThe Button component can be used to trigger various kinds of user events such as such as submitting a form, opening a dialog, canceling an action, or performing a delete operation.\nImports\nButton: The button which has prefix/suffix icons support, variants & size.\nButtonGroup: Used to group related buttons together in a horizontal stack, can also be set as attached\nIconButton: Accessible button to show an icon\nUsage\nDefault Button\nButton sizes\nButton variants\nButton prefix & suffix\nYou can pass prefix and suffix props to the button to append or prepend any content inside of button.\nButton spinner\nYou can pass loading prop to indicate that the button is loading.\nYou can also add custom loading spinner by passing a spinner prop\nIconButton\nIcon button provides an accessible way to render an icon within a button.\nIt sets it's children's role to img & sets aria-hidden to true.\nButtonGroup\nButtonGroup can be used to group together multiple buttons & also collapse their border radius & gap via the attached prop\nButton group accepts size & variant prop which is passed down to all the child buttons automatically.\nAttached button group, when set to true it collapses border radius of the buttons.\nYou can also put IconButton inside IconButton\n"
-filetype = "PlainText"
-
-[output]
-filename = "/Users/anuraghazra/Documents/timelessco/projects/renderlesskit-react-tailwind-docs/packages/website/public/index-default.st"
-excerpts_per_result = 1

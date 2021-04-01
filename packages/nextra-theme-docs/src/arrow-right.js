@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 export default ({ height = 24, ...props }) => {
   return (
@@ -16,5 +16,5 @@ export default ({ height = 24, ...props }) => {
         d="M9 5l7 7-7 7"
       />
     </svg>
-  )
-}
+  );
+};

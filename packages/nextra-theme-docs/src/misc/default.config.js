@@ -1,23 +1,23 @@
-import React from 'react'
+import React from "react";
 
 export default {
-  repository: 'https://github.com/shuding/nextra',
-  docsRepository: 'https://github.com/shuding/nextra',
-  branch: 'master',
-  path: '/',
-  titleSuffix: ' – Nextra',
+  repository: "https://github.com/shuding/nextra",
+  docsRepository: "https://github.com/shuding/nextra",
+  branch: "master",
+  path: "/",
+  titleSuffix: " – Nextra",
   nextLinks: true,
   prevLinks: true,
   search: true,
   darkMode: true,
   font: true,
   footer: true,
-  footerText: 'MIT 2020 © Nextra.',
+  footerText: "MIT 2020 © Nextra.",
   footerEditOnGitHubLink: true,
   logo: (
     <React.Fragment>
-      <span className="mr-2 font-extrabold hidden md:inline">Nextra</span>
-      <span className="text-gray-600 font-normal hidden md:inline">
+      <span className="hidden mr-2 font-extrabold md:inline">Nextra</span>
+      <span className="hidden font-normal text-gray-600 md:inline">
         The Next Docs Builder
       </span>
     </React.Fragment>
@@ -38,4 +38,4 @@ export default {
   ),
   // direction: 'ltr',
   // i18n: [{ locale: 'en-US', text: 'English', direction: 'ltr' }],
-}
+};

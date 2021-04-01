@@ -9,9 +9,10 @@ import matchSorter from "match-sorter";
 import cn from "classnames";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import normalizeTitle from "./utils/normalize-title";
 
 const Item = ({ title, active, href, onMouseOver, search }) => {
-  const _title = title.startsWith("> ") ? title.substr(2) : title;
+  const _title = normalizeTitle(title);
   const highlight = _title.toLowerCase().indexOf(search.toLowerCase());
 
   return (
@@ -43,10 +44,11 @@ const Search = ({ directories }) => {
     // (similar to what we already do to render the hash links in sidebar)
     // We could also try to search the entire string text from each page
     return matchSorter(directories, search, { keys: ["title"] });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search]);
 
   const handleKeyDown = useCallback(
-    (e) => {
+    e => {
       switch (e.key) {
         case "ArrowDown": {
           e.preventDefault();
@@ -66,9 +68,12 @@ const Search = ({ directories }) => {
           router.push(results[active].route);
           break;
         }
+        default: {
+          break;
+        }
       }
     },
-    [active, results, router]
+    [active, results, router],
   );
 
   useEffect(() => {
@@ -78,7 +83,7 @@ const Search = ({ directories }) => {
   useEffect(() => {
     const inputs = ["input", "select", "button", "textarea"];
 
-    const down = (e) => {
+    const down = e => {
       if (
         document.activeElement &&
         inputs.indexOf(document.activeElement.tagName.toLowerCase()) === -1
@@ -99,16 +104,16 @@ const Search = ({ directories }) => {
   const renderList = show && results.length > 0;
 
   return (
-    <div className="nextra-search relative w-full md:w-64">
+    <div className="relative w-full nextra-search md:w-64">
       {renderList && (
         <div className="search-overlay z-1" onClick={() => setShow(false)} />
       )}
       <input
-        onChange={(e) => {
+        onChange={e => {
           setSearch(e.target.value);
           setShow(true);
         }}
-        className="appearance-none border rounded py-2 px-3 leading-tight focus:outline-none focus:ring w-full"
+        className="w-full px-3 py-2 leading-tight border rounded appearance-none focus:outline-none focus:ring"
         type="search"
         placeholder='Search ("/" to focus)'
         onKeyDown={handleKeyDown}
@@ -116,7 +121,7 @@ const Search = ({ directories }) => {
         ref={input}
       />
       {renderList && (
-        <ul className="shadow-md list-none p-0 m-0 absolute left-0 md:right-0 rounded mt-1 border top-100 divide-y z-2">
+        <ul className="absolute left-0 p-0 m-0 mt-1 list-none border divide-y rounded shadow-md md:right-0 top-100 z-2">
           {results.map((res, i) => {
             return (
               <Item

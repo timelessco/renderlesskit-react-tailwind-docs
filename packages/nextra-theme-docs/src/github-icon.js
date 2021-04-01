@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 export default ({ height = 40 }) => {
   return (
@@ -10,5 +10,5 @@ export default ({ height = 40 }) => {
         fill="currentColor"
       />
     </svg>
-  )
-}
+  );
+};

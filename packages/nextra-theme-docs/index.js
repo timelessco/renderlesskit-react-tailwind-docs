@@ -1,1 +1,1 @@
-module.exports = require('./dist/nextra-theme-docs')
+module.exports = require("./dist/nextra-theme-docs");

@@ -10,11 +10,12 @@ The Button component can be used to trigger various kinds of user events such as
 ## Imports
 
 ```jsx
-import { Button, ButtonGroup } from "@renderlesskit/react-tailwind";
+import { Button, ButtonGroup, IconButton } from "@renderlesskit/react-tailwind";
 ```
 
 - **Button:** The button which has prefix/suffix icons support, variants & size.
 - **ButtonGroup:** Used to group related buttons together in a horizontal stack, can also be set as `attached`
+- **IconButton:** Accessible button to show an icon
 
 ## Usage
 
@@ -51,7 +52,7 @@ Default Button
   guide](/docs/theming).
 </Callout>
 
-## Button prefix/suffix
+## Button prefix & suffix
 
 You can pass prefix and suffix props to the button to append or prepend any content inside of button.
 
@@ -91,4 +92,53 @@ You can also add custom loading spinner by passing a `spinner` prop
 >
   Click me
 </Button>
+```
+
+## IconButton
+
+Icon button provides an accessible way to render an icon within a button.
+It sets it's children's role to `img` & sets `aria-hidden` to true.
+
+```jsx live
+<IconButton>
+  <SearchIcon />
+</IconButton>
+```
+
+## ButtonGroup
+
+ButtonGroup can be used to group together multiple buttons & also collapse their border radius & gap via the `attached` prop
+
+Button group accepts `size` & `variant` prop which is passed down to all the child buttons automatically.
+
+```jsx live
+<ButtonGroup size="xl" variant="outline">
+  <Button>Reply</Button>
+  <Button>Ignore</Button>
+</ButtonGroup>
+```
+
+Attached button group, when set to `true` it collapses border radius of the buttons.
+
+```jsx live
+<ButtonGroup attached size="xl" variant="outline">
+  <Button>Reply</Button>
+  <Button>Ignore</Button>
+</ButtonGroup>
+```
+
+You can also put IconButton inside IconButton
+
+```jsx live
+<ButtonGroup>
+  <IconButton aria-label="search">
+    <SearchIcon />
+  </IconButton>
+  <IconButton aria-label="info">
+    <InfoCircleIcon />
+  </IconButton>
+  <IconButton aria-label="settings">
+    <WheelIcon />
+  </IconButton>
+</ButtonGroup>
 ```

@@ -10,17 +10,11 @@
     "build:theme": "yarn workspace nextra-theme-docs run build",
     "dev:site": "yarn workspace website run dev",
     "build:site": "yarn workspace website run build",
-    "start:site": "yarn workspace website run start"
+    "start:site": "yarn workspace website run start",
+    "postinstall": "patch-package"
   },
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
-  "private": true,
-  "dependencies": {
-    "autoprefixer": "^10.2.5",
-    "postcss": "^8.2.8",
-    "deepmerge": "^4.2.2",
-    "tailwindcss": "2.0.4",
-    "@tailwindcss/jit": "0.1.17"
-  }
+  "private": true
 }

@@ -9,9 +9,10 @@ import matchSorter from "match-sorter";
 import cn from "classnames";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import normalizeTitle from "./utils/normalize-title";
 
 const Item = ({ title, active, href, onMouseOver, search }) => {
-  const _title = title.startsWith("> ") ? title.substr(2) : title;
+  const _title = normalizeTitle(title);
   const highlight = _title.toLowerCase().indexOf(search.toLowerCase());
 
   return (

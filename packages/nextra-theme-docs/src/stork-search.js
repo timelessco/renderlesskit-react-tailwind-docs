@@ -10,6 +10,7 @@ import Router, { useRouter } from "next/router";
 import cn from "classnames";
 import Link from "next/link";
 import GraphemeSplitter from "grapheme-splitter";
+import normalizeTitle from "./utils/normalize-title";
 
 const splitter = new GraphemeSplitter();
 
@@ -38,7 +39,7 @@ const TextWithHighlights = React.memo(({ content, ranges }) => {
 });
 
 const Item = ({ title, active, href, onMouseOver, excerpt }) => {
-  const _title = title.startsWith("> ") ? title.substr(2) : title;
+  const _title = normalizeTitle(title);
 
   return (
     <Link href={href}>

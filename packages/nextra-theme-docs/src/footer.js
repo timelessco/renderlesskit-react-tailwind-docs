@@ -3,10 +3,12 @@ import ArrowRight from "./arrow-right";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import cn from "classnames";
+import normalizeTitle from "./utils/normalize-title";
 
 import renderComponent from "./utils/render-component";
 
 const NextLink = ({ route, title, isRTL }) => {
+  const _title = normalizeTitle(title);
   return (
     <Link href={route}>
       <a
@@ -14,9 +16,9 @@ const NextLink = ({ route, title, isRTL }) => {
           "text-lg font-medium p-4 -m-4 no-underline text-gray-600 hover:text-blue-600 flex items-center",
           { "ml-2": !isRTL, "mr-2": isRTL },
         )}
-        title={title}
+        title={_title}
       >
-        {title}
+        {_title}
         <ArrowRight
           className={cn("transform inline flex-shrink-0", {
             "rotate-180 mr-1": isRTL,
@@ -29,6 +31,7 @@ const NextLink = ({ route, title, isRTL }) => {
 };
 
 const PrevLink = ({ route, title, isRTL }) => {
+  const _title = normalizeTitle(title);
   return (
     <Link href={route}>
       <a
@@ -36,7 +39,7 @@ const PrevLink = ({ route, title, isRTL }) => {
           "text-lg font-medium p-4 -m-4 no-underline text-gray-600 hover:text-blue-600 flex items-center",
           { "mr-2": !isRTL, "ml-2": isRTL },
         )}
-        title={title}
+        title={_title}
       >
         <ArrowRight
           className={cn("transform inline flex-shrink-0", {
@@ -44,7 +47,7 @@ const PrevLink = ({ route, title, isRTL }) => {
             "ml-1": isRTL,
           })}
         />
-        {title}
+        {_title}
       </a>
     </Link>
   );

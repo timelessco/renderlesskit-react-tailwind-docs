@@ -1,0 +1,12 @@
+diff --git a/node_modules/@renderlesskit/react-tailwind/dist/esm/button/CloseButton.js b/node_modules/@renderlesskit/react-tailwind/dist/esm/button/CloseButton.js
+index 0fa6b94..d02881f 100644
+--- a/node_modules/@renderlesskit/react-tailwind/dist/esm/button/CloseButton.js
++++ b/node_modules/@renderlesskit/react-tailwind/dist/esm/button/CloseButton.js
+@@ -2,6 +2,7 @@ function _extends() { _extends = Object.assign || function (target) { for (var i
+ 
+ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+ 
++import * as React from "react";
+ import { CloseIcon } from "../icons";
+ import { forwardRefWithAs } from "../utils/types";
+ import { IconButton } from "./IconButton";

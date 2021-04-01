@@ -33,5 +33,5 @@ yarn-error.log*
 # vercel
 .vercel
 
-# public/*.st
-# public/*.toml
+public/*.st
+public/*.toml

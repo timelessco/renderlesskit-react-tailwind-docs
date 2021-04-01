@@ -38,7 +38,7 @@ const getFSRoute = (asPath, locale) => {
   if (!locale) return asPath.replace(new RegExp("/index(/|$)"), "$1");
 
   return asPath
-    .replace(new RegExp(`\.${locale}(\/|$)`), "$1")
+    .replace(new RegExp(`\\.${locale}(\\/|$)`), "$1")
     .replace(new RegExp("/index(/|$)"), "$1");
 };
 
@@ -47,12 +47,14 @@ function Folder({ item, anchors }) {
   const route = getFSRoute(asPath, locale) + "/";
   const active = route === item.route + "/";
   const open = TreeState[item.route] ?? true;
+  // eslint-disable-next-line no-unused-vars
   const [_, render] = useState(false);
 
   useEffect(() => {
     if (active) {
       TreeState[item.route] = true;
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [active]);
 
   return (
@@ -61,7 +63,7 @@ function Folder({ item, anchors }) {
         onClick={() => {
           if (active) return;
           TreeState[item.route] = !open;
-          render((x) => !x);
+          render(x => !x);
         }}
       >
         {item.title}
@@ -146,7 +148,7 @@ function File({ item, anchors }) {
 function Menu({ dir, anchors }) {
   return (
     <ul>
-      {dir.map((item) => {
+      {dir.map(item => {
         if (item.children) {
           return <Folder key={item.name} item={item} anchors={anchors} />;
         }
@@ -182,22 +184,22 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
 
   const directories = useMemo(
     () => cleanupAndReorder(pageMap, locale, defaultLocale),
-    [pageMap, locale, defaultLocale]
+    [pageMap, locale, defaultLocale],
   );
   const flatDirectories = useMemo(() => flatten([directories]), [directories]);
   const config = Object.assign({}, defaultConfig, _config);
 
   const filepath = route.slice(0, route.lastIndexOf("/") + 1);
   const filepathWithName = filepath + filename;
-  const titles = React.Children.toArray(children).filter((child) =>
-    titleType.includes(child.props.mdxType)
+  const titles = React.Children.toArray(children).filter(child =>
+    titleType.includes(child.props.mdxType),
   );
-  const titleEl = titles.find((child) => child.props.mdxType === "h1");
+  const titleEl = titles.find(child => child.props.mdxType === "h1");
   const title =
     meta.title || (titleEl ? innerText(titleEl.props.children) : "Untitled");
   const anchors = titles
-    .filter((child) => child.props.mdxType === "h2")
-    .map((child) => child.props.children);
+    .filter(child => child.props.mdxType === "h2")
+    .map(child => child.props.children);
 
   useEffect(() => {
     if (menu) {
@@ -208,14 +210,15 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
   }, [menu]);
 
   const currentIndex = useMemo(
-    () => flatDirectories.findIndex((dir) => dir.route === fsPath),
-    [flatDirectories, fsPath]
+    () => flatDirectories.findIndex(dir => dir.route === fsPath),
+    [flatDirectories, fsPath],
   );
 
   const isRTL = useMemo(() => {
     if (!config.i18n) return config.direction === "rtl" || null;
-    const localeConfig = config.i18n.find((l) => l.locale === locale);
+    const localeConfig = config.i18n.find(l => l.locale === locale);
     return localeConfig && localeConfig.direction === "rtl";
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [config.i18n, locale]);
 
   return (
@@ -274,6 +277,7 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
               className="p-2 text-current"
               href={config.repository}
               target="_blank"
+              rel="noreferrer"
             >
               <GitHubIcon height={24} />
             </a>
@@ -336,7 +340,7 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
   );
 };
 
-export default (opts, config) => (props) => {
+export default (opts, config) => props => {
   return (
     <ThemeProvider attribute="class">
       <Layout config={config} {...opts} {...props} />

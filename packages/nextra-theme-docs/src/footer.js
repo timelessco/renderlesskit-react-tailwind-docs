@@ -1,79 +1,104 @@
-import React from 'react'
-import ArrowRight from './arrow-right'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
-import cn from 'classnames'
+import React from "react";
+import ArrowRight from "./arrow-right";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import cn from "classnames";
+import normalizeTitle from "./utils/normalize-title";
 
-import renderComponent from './utils/render-component'
+import renderComponent from "./utils/render-component";
 
 const NextLink = ({ route, title, isRTL }) => {
+  const _title = normalizeTitle(title);
   return (
     <Link href={route}>
-      <a className={cn('text-lg font-medium p-4 -m-4 no-underline text-gray-600 hover:text-blue-600 flex items-center', { 'ml-2': !isRTL, 'mr-2': isRTL })} title={title}>
-        {title}
-        <ArrowRight className={cn('transform inline flex-shrink-0', { 'rotate-180 mr-1': isRTL, 'ml-1': !isRTL })} />
+      <a
+        className={cn(
+          "text-lg font-medium p-4 -m-4 no-underline text-gray-600 hover:text-blue-600 flex items-center",
+          { "ml-2": !isRTL, "mr-2": isRTL },
+        )}
+        title={_title}
+      >
+        {_title}
+        <ArrowRight
+          className={cn("transform inline flex-shrink-0", {
+            "rotate-180 mr-1": isRTL,
+            "ml-1": !isRTL,
+          })}
+        />
       </a>
     </Link>
-  )
-}
+  );
+};
 
 const PrevLink = ({ route, title, isRTL }) => {
+  const _title = normalizeTitle(title);
   return (
     <Link href={route}>
-      <a className={cn('text-lg font-medium p-4 -m-4 no-underline text-gray-600 hover:text-blue-600 flex items-center', { 'mr-2': !isRTL, 'ml-2': isRTL })} title={title}>
-        <ArrowRight className={cn('transform inline flex-shrink-0', { 'rotate-180 mr-1': !isRTL, 'ml-1': isRTL })} />
-        {title}
+      <a
+        className={cn(
+          "text-lg font-medium p-4 -m-4 no-underline text-gray-600 hover:text-blue-600 flex items-center",
+          { "mr-2": !isRTL, "ml-2": isRTL },
+        )}
+        title={_title}
+      >
+        <ArrowRight
+          className={cn("transform inline flex-shrink-0", {
+            "rotate-180 mr-1": !isRTL,
+            "ml-1": isRTL,
+          })}
+        />
+        {_title}
       </a>
     </Link>
-  )
-}
+  );
+};
 
 // Make sure path is a valid url path,
 // adding / in front or in the back if missing
 const fixPath = path => {
-  const pathWithFrontSlash = path.startsWith('/') ? path : `/${path}`
-  const pathWithBackSlash = pathWithFrontSlash.endsWith('/')
+  const pathWithFrontSlash = path.startsWith("/") ? path : `/${path}`;
+  const pathWithBackSlash = pathWithFrontSlash.endsWith("/")
     ? pathWithFrontSlash
-    : `${pathWithFrontSlash}/`
+    : `${pathWithFrontSlash}/`;
 
-  return pathWithBackSlash
-}
+  return pathWithBackSlash;
+};
 
 const createEditUrl = (repository, branch, path, filepathWithName) => {
-  const normalizedPath = fixPath(path)
-  return `${repository}/tree/${branch}${normalizedPath}pages${filepathWithName}`
-}
+  const normalizedPath = fixPath(path);
+  return `${repository}/tree/${branch}${normalizedPath}pages${filepathWithName}`;
+};
 
 const EditOnGithubLink = ({
   repository,
   branch,
   path,
   footerEditOnGitHubText,
-  filepathWithName
+  filepathWithName,
 }) => {
-  const href = createEditUrl(repository, branch, path, filepathWithName)
-  const { locale } = useRouter()
+  const href = createEditUrl(repository, branch, path, filepathWithName);
+  const { locale } = useRouter();
   return (
-    <a className="text-sm" href={href} target="_blank">
+    <a className="text-sm" href={href} target="_blank" rel="noreferrer">
       {footerEditOnGitHubText
         ? renderComponent(footerEditOnGitHubText, {
-            locale
+            locale,
           })
-        : 'Edit this page on GitHub'}
+        : "Edit this page on GitHub"}
     </a>
-  )
-}
+  );
+};
 
 const Footer = ({
   config,
   flatDirectories,
   currentIndex,
   filepathWithName,
-  isRTL
+  isRTL,
 }) => {
-  let prev = flatDirectories[currentIndex - 1]
-  let next = flatDirectories[currentIndex + 1]
-  const { locale } = useRouter()
+  let prev = flatDirectories[currentIndex - 1];
+  let next = flatDirectories[currentIndex + 1];
+  const { locale } = useRouter();
 
   return (
     <footer className="mt-24">
@@ -93,7 +118,7 @@ const Footer = ({
       <hr />
 
       {config.footer ? (
-        <div className="mt-24 flex justify-between flex-col-reverse md:flex-row items-center md:items-end">
+        <div className="flex flex-col-reverse items-center justify-between mt-24 md:flex-row md:items-end">
           <span className="text-gray-600">
             {renderComponent(config.footerText, { locale })}
           </span>
@@ -110,7 +135,7 @@ const Footer = ({
         </div>
       ) : null}
     </footer>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;

@@ -1,18 +1,18 @@
-import React from 'react'
-import { useRouter } from 'next/router'
-import Link from 'next/link'
-import cn from 'classnames'
+import React from "react";
+import { useRouter } from "next/router";
+import Link from "next/link";
+import cn from "classnames";
 
-import useMounted from './utils/use-mounted'
+import useMounted from "./utils/use-mounted";
 
 export default function LocaleSwitch({ options, isRTL }) {
-  const { locale, asPath } = useRouter()
-  const mounted = useMounted()
+  const { locale, asPath } = useRouter();
+  const mounted = useMounted();
 
   return (
-    <details className="locale-switch relative">
+    <details className="relative locale-switch">
       <summary
-        className="text-current p-2 cursor-pointer outline-none"
+        className="p-2 text-current outline-none cursor-pointer"
         tabIndex="0"
       >
         <svg
@@ -30,31 +30,30 @@ export default function LocaleSwitch({ options, isRTL }) {
           />
         </svg>
       </summary>
-      {mounted ?
+      {mounted ? (
         <ul
           className={cn(
-            'locale-dropdown absolute block bg-white dark:bg-dark border dark:border-gray-700 py-1 rounded shadow-lg',
-            { 'right-0': !isRTL, 'left-0': isRTL }
+            "locale-dropdown absolute block bg-white dark:bg-dark border dark:border-gray-700 py-1 rounded shadow-lg",
+            { "right-0": !isRTL, "left-0": isRTL },
           )}
         >
           {options.map(l => (
             <Link key={l.locale} href={asPath} locale={l.locale}>
               <a
                 className={cn(
-                  'block no-underline text-current py-2 px-4 hover:bg-gray-200 dark:hover:bg-gray-800 whitespace-nowrap',
+                  "block no-underline text-current py-2 px-4 hover:bg-gray-200 dark:hover:bg-gray-800 whitespace-nowrap",
                   {
-                    'font-semibold': locale === l.locale,
-                    'bg-gray-100 dark:bg-gray-900': locale === l.locale
-                  }
+                    "font-semibold": locale === l.locale,
+                    "bg-gray-100 dark:bg-gray-900": locale === l.locale,
+                  },
                 )}
               >
                 {l.text}
               </a>
             </Link>
           ))}
-        </ul> :
-        null
-      }
+        </ul>
+      ) : null}
     </details>
-  )
+  );
 }

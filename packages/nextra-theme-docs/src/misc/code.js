@@ -123,7 +123,7 @@ const CodeBlock = ({ children, className, live, render, ...props }) => {
           theme={prismTheme}
           language={language}
           code={source}
-          transformCode={(rawCode) => {
+          transformCode={rawCode => {
             const code = rawCode;
             // // remove imports
             // .replace(/((^|)import[^;]+[; ]+)+/gi, "")

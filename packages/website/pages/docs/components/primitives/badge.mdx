@@ -1,4 +1,5 @@
 import Callout from "@components/Callout";
+import PropsTable from "@components/PropsTable";
 import ComponentLinks from "@components/ComponentLinks";
 
 # Badge
@@ -61,3 +62,34 @@ In some scenarioes where you want to add a floating badge on an element's corner
   </Badge>
 </Button>
 ```
+
+## API Reference
+
+<PropsTable
+  data={[
+    {
+      name: "size",
+      default: "md",
+      themeKey: "badge.size",
+      description: "Size of the badge",
+    },
+    {
+      name: "variant",
+      default: "primary",
+      themeKey: "badge.variant",
+      description: "Variant of the badge",
+    },
+    {
+      name: "floating",
+      default: "false",
+      type: "boolean",
+      description: "floats the badge on parent element's corners",
+    },
+    {
+      name: "position",
+      default: "top-right",
+      themeKey: "badge.position",
+      description: "floating position",
+    },
+  ]}
+/>

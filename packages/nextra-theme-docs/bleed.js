@@ -1,1 +1,1 @@
-module.exports = require('./dist/bleed')
+module.exports = require("./dist/bleed");

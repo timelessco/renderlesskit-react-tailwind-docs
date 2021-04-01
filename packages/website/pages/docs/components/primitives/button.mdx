@@ -4,7 +4,9 @@ import ComponentLinks from "@components/ComponentLinks";
 
 # Button
 
-The Button component can be used to trigger various kinds of user events such as such as submitting a form, opening a dialog, canceling an action, or performing a delete operation.
+The Button component can be used to trigger various kinds of user events such as
+such as submitting a form, opening a dialog, canceling an action, or performing
+a delete operation.
 
 <ComponentLinks github="button" theme="button" story="primitives-button" />
 
@@ -15,7 +17,8 @@ import { Button, ButtonGroup, IconButton } from "@renderlesskit/react-tailwind";
 ```
 
 - **Button:** The button which has prefix/suffix icons support, variants & size.
-- **ButtonGroup:** Used to group related buttons together in a horizontal stack, can also be set as `attached`
+- **ButtonGroup:** Used to group related buttons together in a horizontal stack,
+  can also be set as `attached`
 - **IconButton:** Accessible button to show an icon
 
 ## Usage
@@ -55,7 +58,8 @@ Default Button
 
 ## Button prefix & suffix
 
-You can pass prefix and suffix props to the button to append or prepend any content inside of button.
+You can pass prefix and suffix props to the button to append or prepend any
+content inside of button.
 
 ```jsx live
 <div className="space-x-2">
@@ -97,8 +101,8 @@ You can also add custom loading spinner by passing a `spinner` prop
 
 ## IconButton
 
-Icon button provides an accessible way to render an icon within a button.
-It sets it's children's role to `img` & sets `aria-hidden` to true.
+Icon button provides an accessible way to render an icon within a button. It
+sets it's children's role to `img` & sets `aria-hidden` to true.
 
 ```jsx live
 <IconButton>
@@ -108,9 +112,11 @@ It sets it's children's role to `img` & sets `aria-hidden` to true.
 
 ## ButtonGroup
 
-ButtonGroup can be used to group together multiple buttons & also collapse their border radius & gap via the `attached` prop
+ButtonGroup can be used to group together multiple buttons & also collapse their
+border radius & gap via the `attached` prop
 
-Button group accepts `size` & `variant` prop which is passed down to all the child buttons automatically.
+Button group accepts `size` & `variant` prop which is passed down to all the
+child buttons automatically.
 
 ```jsx live
 <ButtonGroup size="xl" variant="outline">
@@ -119,7 +125,8 @@ Button group accepts `size` & `variant` prop which is passed down to all the chi
 </ButtonGroup>
 ```
 
-Attached button group, when set to `true` it collapses border radius of the buttons.
+Attached button group, when set to `true` it collapses border radius of the
+buttons.
 
 ```jsx live
 <ButtonGroup attached size="xl" variant="outline">

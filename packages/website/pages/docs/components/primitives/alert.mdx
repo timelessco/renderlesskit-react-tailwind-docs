@@ -1,0 +1,140 @@
+import ComponentLinks from "@components/ComponentLinks";
+
+# Alert
+
+Alerts are used to communicate a state that affects a system, feature or page.
+
+<ComponentLinks github="alert" story="primitives-alert" theme="alert" />
+
+## Imports
+
+```js
+import { Alert } from "@renderlesskit/react-tailwind";
+```
+
+## Usage
+
+```jsx live
+<Alert title="Alert title" description="Description of alert" />
+```
+
+## Status
+
+Change the status of the alerts by passing the status prop. This affects the
+color scheme and icon used. Alert supports error, success, warning, and info
+statuses.
+
+```jsx live
+<div className="flex flex-col space-y-2">
+  <Alert status="info" title="Alert title" description="Description of alert" />
+  <Alert
+    status="neutral"
+    title="Alert title"
+    description="Description of alert"
+  />
+  <Alert
+    status="success"
+    title="Alert title"
+    description="Description of alert"
+  />
+  <Alert
+    status="warning"
+    title="Alert title"
+    description="Description of alert"
+  />
+  <Alert
+    status="error"
+    title="Alert title"
+    description="Description of alert"
+  />
+</div>
+```
+
+## Closable Alert
+
+You can pass `closable` prop to make the alert closable and use `onClose` to
+listen to the click listener.
+
+```jsx live
+<Alert
+  closable
+  onClose={() => alert("Closed")}
+  title="Alert title"
+  description="Description of alert"
+/>
+```
+
+## Action Button
+
+You can pass `actionButtonLabel` which would render a action button with the
+provided text.
+
+```jsx live
+<Alert
+  closable
+  onClose={() => alert("Closed")}
+  actionButtonLabel="Undo"
+  title="Alert title"
+  description="Description of alert"
+/>
+```
+
+## Composition & Customization
+
+Alert is meant to be used with the single component API by passing props, like
+`title`, `description`, but if you want to have more control over it's rendering
+you can pass JSX children elements with Alert specific components.
+
+- AlertIcon
+- AlertBody
+  - AlertTitle
+  - AlertDescription
+- AlertActions
+  - AlertActionButton
+  - AlertCloseButton
+
+```jsx live
+<Alert>
+  <AlertIcon>
+    <SearchIcon />
+  </AlertIcon>
+  <AlertBody>
+    <AlertTitle>Alert Title</AlertTitle>
+    <AlertDescription>Alert's description</AlertDescription>
+  </AlertBody>
+  <AlertActions>
+    <AlertActionButton onClick={() => alert("undo")}>undo</AlertActionButton>
+    <AlertCloseButton onClick={() => alert("closed")}>
+      <CloseIcon />
+    </AlertCloseButton>
+  </AlertActions>
+</Alert>
+```
+
+You can also access the internal state/values via the render props pattern.
+You'll get access to the passed down `status` prop & the internal theme
+`styles`.
+
+```jsx live
+<Alert status="warning">
+  {({ status, styles }) => (
+    <>
+      <AlertIcon>
+        <SearchIcon />
+      </AlertIcon>
+      <AlertBody>
+        <AlertTitle>Alert {status}</AlertTitle>
+        <AlertDescription>{styles.base}</AlertDescription>
+      </AlertBody>
+      <AlertActions>
+        <AlertActionButton onClick={() => alert("undo")}>
+          undo
+        </AlertActionButton>
+        <AlertCloseButton onClick={() => alert("closed")}>
+          <CloseIcon />
+        </AlertCloseButton>
+      </AlertActions>
+    </>
+  )}
+</Alert>
+```

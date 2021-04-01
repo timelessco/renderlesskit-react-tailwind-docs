@@ -86,30 +86,44 @@ const StaticCode = ({ children, className, highlight, ...props }) => {
   );
 };
 
-const CopyButton = ({ code }) => {
+const CopyButton = ({ code, top }) => {
   const [isCopied, setCopied] = useClipboard(code);
   return (
     <button
-      className="absolute top-2 right-2 transform translate-y-2 -translate-x-2 bg-gray-800 text-white rounded-md px-4 py-1 text-sm"
+      className="absolute right-2 transform translate-y-4 -translate-x-2 bg-white text-gray-800 rounded-md px-4 py-1 text-xs"
       onClick={setCopied}
+      style={{ top: `${top}px` }}
     >
       {isCopied ? "COPIED!" : "COPY"}
     </button>
   );
 };
 
+const useSafeLayoutEffect =
+  typeof window !== "undefined" ? React.useLayoutEffect : React.useEffect;
+
 const CodeBlock = ({ children, className, live, render, ...props }) => {
   const language = className?.replace(/language-/, "");
   const source = children.trim();
+  const divWrapper = React.useRef();
+  const [top, setTop] = React.useState(0);
+
+  useSafeLayoutEffect(() => {
+    if (divWrapper?.current) {
+      const live = divWrapper.current.children[0];
+      const liveBB = live.getBoundingClientRect();
+      setTop(liveBB.height <= 90 ? liveBB.height - 10 : liveBB.height);
+    }
+  }, [divWrapper]);
 
   if (live) {
     return (
-      <div className="relative">
+      <div className="relative" ref={divWrapper}>
         <LiveProvider
           theme={prismTheme}
           language={language}
           code={source}
-          transformCode={(rawCode) => {
+          transformCode={rawCode => {
             const code = rawCode;
             // // remove imports
             // .replace(/((^|)import[^;]+[; ]+)+/gi, "")
@@ -139,8 +153,8 @@ const CodeBlock = ({ children, className, live, render, ...props }) => {
             className="rounded-md rounded-t-none text-sm"
           />
           <LiveError className="rounded-md rounded-t-none mt-0 text-xs bg-red-100 text-red-500" />
+          <CopyButton code={source} top={top} />
         </LiveProvider>
-        <CopyButton code={source} />
       </div>
     );
   }

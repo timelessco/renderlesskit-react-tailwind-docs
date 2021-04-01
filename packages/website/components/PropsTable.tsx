@@ -40,7 +40,7 @@ const Popover: React.FC<PopoverTypes> = ({ children, content, label }) => {
       <ReakitPopover
         {...popover}
         aria-label={label || ""}
-        className="bg-white shadow-lg text-gray-800 rounded-md border-none outline-none text-sm px-2 py-2 max-w-sm"
+        className="bg-white shadow-xl text-gray-800 rounded-md border-none outline-none text-sm px-3 py-3 max-w-xs"
       >
         <PopoverArrow size="12px" style={{ fill: "white" }} {...popover} />
         {content}

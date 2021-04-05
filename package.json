@@ -3,7 +3,8 @@
   "private": true,
   "workspaces": [
     "packages/website",
-    "packages/nextra-theme-docs"
+    "packages/nextra-theme-docs",
+    "packages/codeblock"
   ],
   "scripts": {
     "build:site": "yarn website run build",

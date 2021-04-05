@@ -1,6 +1,7 @@
 import Callout from "@components/Callout";
 import PropsTable from "@components/PropsTable";
 import ComponentLinks from "@components/ComponentLinks";
+import InteractiveCodeblock from "@components/InteractiveCodeblock";
 
 # Tag
 
@@ -20,9 +21,13 @@ import { Tag, TagGroup } from "@renderlesskit/react-tailwind";
 
 ## Usage
 
-```jsx live
-<Tag>javascript</Tag>
-```
+<InteractiveCodeblock
+  templateFn={({ booleanProps, unionProps }) =>
+    `<Tag ${unionProps.join(" ")} ${booleanProps.join(" ")}>Hello world</Tag>`
+  }
+  booleanProps={["closable"]}
+  unionProps={{ size: "tag.size", variant: "tag.variant" }}
+/>
 
 ## Tag Variants
 

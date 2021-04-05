@@ -1,0 +1,75 @@
+import PropsTable from "@components/PropsTable";
+import ComponentLinks from "@components/ComponentLinks";
+import Callout from "@components/Callout";
+import InteractiveCodeblock from "@components/InteractiveCodeblock";
+
+# Input
+
+<ComponentLinks github="input" theme="input" story="forms-input" />
+
+## Imports
+
+```js
+import {
+  Input,
+  InputGroup,
+  InputPrefix,
+  InputSuffix,
+  InputGroupSuffix,
+  InputGroupPrefix,
+} from "@renderlesskit/react-tailwind";
+```
+
+- **Input** - main input component
+- **InputGroup** - input group is a wrapper to hold InputGroupPrefix/Suffix
+- **InputPrefix** - prefix of the input element
+- **InputSuffix** - suffix of the input element
+- **InputGroupSuffix** - prefix of the input group
+- **InputGroupPrefix** - suffix of the input group
+
+## Usage
+
+Basic usage
+
+<InteractiveCodeblock
+  templateFn={({ booleanProps, unionProps }) =>
+    `<Input placeholder="Enter email" ${booleanProps.join(" ")} />`
+  }
+  booleanProps={["isDisabled", "isReadOnly", "isInvalid"]}
+/>
+
+## Input Prefix/Suffix
+
+You can append or prepend any element inside input. By default we don't give
+spacing to the elements so you have to add spacing as needed.
+
+```jsx live
+<Input>
+  <InputPrefix className="pl-2">https://</InputPrefix>
+  <InputSuffix className="pr-2">.com</InputSuffix>
+</Input>
+```
+
+As you can see clicking on the input's prefix/suffix will focus the input, but
+that might not what you want in all scenarios if you want to render a button or
+something interactive. To disable this behaviour you can use
+`allowPointerEvents`
+
+For example if you want to add a select inside the suffix you can do so like
+this:
+
+```jsx live
+<Input>
+  <InputPrefix className="pl-2">https://</InputPrefix>
+  <InputSuffix as="select" allowPointerEvents className="pr-2">
+    <option value=".com">.com</option>
+    <option value=".org">.org</option>
+  </InputSuffix>
+</Input>
+```
+
+<Callout>
+  Note that we are using as="select" on `InputSuffix`, It is recomended to use
+  `as` prop instead of directly passing the whole select inside the
+  InputPrefix's children.
+</Callout>

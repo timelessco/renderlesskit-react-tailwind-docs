@@ -3,5 +3,6 @@
   "badge": "> Badge",
   "box": "> Box",
   "button": "> Button",
-  "tag": "> Tag"
+  "tag": "> Tag",
+  "icon": "> Icon"
 }

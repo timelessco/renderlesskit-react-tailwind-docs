@@ -1,0 +1,113 @@
+import PropsTable from "@components/PropsTable";
+import ComponentLinks from "@components/ComponentLinks";
+
+# Icon
+
+`Icon` is the base svg primitive for creating accssible icons.
+
+<ComponentLinks github="icon" story="primitives-icon" theme="icon" />
+
+## Usage
+
+Basic usage for Icon component.
+
+```jsx live
+<Icon viewBox="0 0 200 200" className="text-red-500">
+  <path
+    fill="currentColor"
+    d="M 100, 100 m -75, 0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0"
+  />
+</Icon>
+```
+
+If no children is provided Icon will render a fallback icon.
+
+```jsx live
+<Icon />
+```
+
+## Focusable Icon
+
+By passing `focusable` prop we can make the icon keyboard focusable.
+
+```jsx live
+<Icon focusable />
+```
+
+## `createIcon` utility
+
+To create icons more easily we provide a `createIcon` utility which takes few
+props and returns a React component;
+
+Basic usage:
+
+```js live noInline
+const CheckIcon = createIcon({
+  displayName: "CheckIcon",
+  viewBox: "0 0 12 12",
+  path: (
+    <path
+      fill="none"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="1.3"
+      d="M2.25 6.214l2.41 2.679L9.75 3"
+    />
+  ),
+});
+
+render(<CheckIcon />);
+```
+
+## API Reference
+
+### Icon
+
+<PropsTable
+  data={[
+    {
+      name: "as",
+      default: "svg",
+      typeSimple: "string | React.ElementType",
+      type: "type As<Props = any> = React.ElementType<Props>",
+      description:
+        "Polymorphic as prop, change the component to a different HTML tag or custom component.",
+    },
+
+]} />
+
+### createIcon
+
+<PropsTable
+  data={[
+    {
+      name: "viewBox",
+      default: "0 0 24 24",
+      type: "string",
+      description: "The icon's `svg` viewBox",
+    },
+    {
+      name: "path",
+      type: "React.ReactElement | React.ReactElement[]",
+      description: "The `svg` path or group element",
+    },
+    {
+      name: "d",
+      type: "string",
+      description:
+        "If the has a single path, simply copy the path's `d` attribute",
+    },
+    {
+      name: "displayName",
+      type: "string",
+      description: "displayName of the component",
+    },
+    {
+      name: "defaultProps",
+      type: 'PropsWithAs<IconProps, "svg">',
+      description:
+        "Default props automatically passed to the component; overwriteable",
+    },
+  ]}
+/>

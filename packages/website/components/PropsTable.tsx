@@ -98,7 +98,7 @@ const PropsTable: React.FC<PropsTableProps> = ({
               default: defaultValue,
               description,
             },
-            i
+            i,
           ) => (
             <tr className="bg-transparent" key={`${name}-${i}`}>
               <Box as="td" className={tdStyles}>
@@ -150,7 +150,7 @@ const PropsTable: React.FC<PropsTableProps> = ({
                 )}
               </Box>
             </tr>
-          )
+          ),
         )}
       </tbody>
     </RegionTable>

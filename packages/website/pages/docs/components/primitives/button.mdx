@@ -1,4 +1,5 @@
 import Callout from "@components/Callout";
+import PropsTable from "@components/PropsTable";
 import ComponentLinks from "@components/ComponentLinks";
 
 # Button
@@ -149,3 +150,91 @@ You can also put IconButton inside IconButton
   </IconButton>
 </ButtonGroup>
 ```
+
+## API Reference
+
+### Button
+
+<PropsTable
+  data={[
+    {
+      name: "size",
+      default: "md",
+      themeKey: "button.size",
+      description: "Size of the button",
+    },
+    {
+      name: "variant",
+      default: "primary",
+      themeKey: "button.variant",
+      description: "Variant of the button",
+    },
+    {
+      name: "prefix",
+      type: "React.ReactNode",
+      description:
+        "If added, the button will show an element before the button's label",
+    },
+    {
+      name: "suffix",
+      type: "React.ReactNode",
+      description:
+        "If added, the button will show an element after the button's label",
+    },
+    {
+      name: "loading",
+      type: "boolean",
+      description: "If `true`, the button will show a spinner",
+    },
+    {
+      name: "spinner",
+      type: "React.ReactElement",
+      description: "If added, the button will show this spinner components",
+    },
+  ]}
+/>
+
+### ButtonGroup
+
+<PropsTable
+  data={[
+    {
+      name: "size",
+      default: "md",
+      themeKey: "button.size",
+      description: "Size of the button",
+    },
+    {
+      name: "variant",
+      default: "primary",
+      themeKey: "button.variant",
+      description: "Variant of the button",
+    },
+    {
+      name: "attached",
+      default: "false",
+      type: "boolean",
+      description:
+        "If true, Buttons inside the group will be collapsed together.",
+    },
+  ]}
+/>
+
+### IconButton
+
+<PropsTable
+  data={[
+    {
+      name: "size",
+      default: "md",
+      themeKey: "button.size",
+      description: "Size of the button",
+    },
+    {
+      name: "variant",
+      default: "primary",
+      themeKey: "button.variant",
+      description: "Variant of the button",
+    },
+  ]}
+/>

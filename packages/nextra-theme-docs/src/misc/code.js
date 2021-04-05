@@ -143,6 +143,7 @@ const CodeBlock = ({ children, className, live, render, ...props }) => {
             React,
             ...(typeof window !== "undefined" ? window.__COMPONENTS : {}),
           }}
+          {...props}
         >
           <LivePreview
             className="p-6 rounded-md bg-white rounded-b-none border border-gray-600"
@@ -162,7 +163,7 @@ const CodeBlock = ({ children, className, live, render, ...props }) => {
   if (render) {
     return (
       <div>
-        <LiveProvider code={source}>
+        <LiveProvider {...props} code={source}>
           <LivePreview />
         </LiveProvider>
       </div>

@@ -1,3 +1,4 @@
+import PropsTable from "@components/PropsTable";
 import ComponentLinks from "@components/ComponentLinks";
 
 # Avatar
@@ -120,3 +121,104 @@ fallback will be ignored.
   <Avatar name="Christian Nwamba" src="https://bit.ly/code-beast" />
 </AvatarGroup>
 ```
+
+## API Reference
+
+### Avatar
+
+<PropsTable
+  data={[
+    { name: "src", type: "string", description: "URL for the avatar image" },
+    {
+      name: "name",
+      type: "string",
+      description: "Name prop used for `alt` & calculate placeholder initials.",
+    },
+    {
+      name: "loading",
+      typeSimple: "union",
+      type: "'eager' | 'lazy'",
+      description: "Defines loading strategy",
+    },
+    {
+      name: "fallback",
+      type: "React.ReactNode",
+      description:
+        "The default avatar used as fallback when `name`, and `src` is not specified.",
+    },
+    {
+      name: "showBorder",
+      type: "boolean",
+      description: "If `true`, the `Avatar` will show a `border` around it.",
+    },
+    {
+      name: "borderColor",
+      type: "string",
+      description: "Color of the `border` to match it's parent background.",
+    },
+    {
+      name: "getInitials",
+      typeSimple: "Function",
+      type: "(name?: string) => string | undefined",
+      description: "Function called when image failed to load",
+    },
+    {
+      name: "size",
+      themeKey: "avatar.size",
+      description: "Size of the avatar",
+      default: "md",
+    },
+    {
+      name: "status",
+      themeKey: "avatar.badge.statuses",
+      description: "Shows AvatarBadge with the given type",
+      default: "",
+    },
+    {
+      name: "position",
+      themeKey: "avatar.badge.position",
+      description: "Position for the AvatarBadge",
+      default: "top-right",
+    },
+  ]}
+/>
+
+### AvatarGroup
+
+<PropsTable
+  data={[
+    {
+      name: "limit",
+      type: "number",
+      description: "Max number of Avatars to render before truncating",
+    },
+    {
+      name: "showBorder",
+      type: "boolean",
+      description: "If `true`, the `Avatar` will show a `border` around it.",
+    },
+    {
+      name: "borderColor",
+      type: "string",
+      description: "Color of the `border` to match it's parent background.",
+    },
+    {
+      name: "size",
+      themeKey: "avatar.size",
+      description: "Size of the avatar",
+      default: "md",
+    },
+  ]}
+/>
+
+### AvatarBadge
+
+<PropsTable
+  data={[
+    {
+      name: "status",
+      themeKey: "avatar.badge.statuses",
+      description: "Shows AvatarBadge with the given type",
+    },
+  ]}
+/>

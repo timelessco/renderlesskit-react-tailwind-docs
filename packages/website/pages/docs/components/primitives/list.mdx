@@ -1,0 +1,85 @@
+import Callout from "@components/Callout";
+import PropsTable from "@components/PropsTable";
+import ComponentLinks from "@components/ComponentLinks";
+
+# List
+
+List can be used to display structured or nested data.
+
+<ComponentLinks github="list" theme="list" story="primitives-list" />
+
+## Imports
+
+```js
+import {
+  List,
+  ListItem,
+  ListIcon,
+  OrderedList,
+  UnorderedList,
+} from "@renderlesskit/react-tailwind";
+```
+
+- **List** unordered list, render `ul`
+- **ListItem** list item, render `li`
+  - **ListIcon** renders an icon inside li
+- **UnorderedList** - unordered list
+- **OrderedList** - ordered list
+
+## Usage
+
+```jsx live
+<List>
+  <ListItem>This is the 1st ListItem</ListItem>
+  <ListItem>This is the 2nd ListItem</ListItem>
+  <ListItem>This is the 3rd ListItem</ListItem>
+</List>
+```
+
+## List size
+
+List comes with 3 sizes `sm` `md` `lg` you can pass the size prop to the `List`
+component
+
+```jsx live
+<List size="lg">
+  <ListItem>This is the 1st ListItem</ListItem>
+  <ListItem>This is the 2nd ListItem</ListItem>
+  <ListItem>This is the 3rd ListItem</ListItem>
+</List>
+```
+
+## Ordered List
+
+```jsx live
+<OrderedList>
+  <ListItem>This is the 1st ListItem</ListItem>
+  <ListItem>This is the 2nd ListItem</ListItem>
+  <ListItem>This is the 3rd ListItem</ListItem>
+</OrderedList>
+```
+
+## List icons
+
+```jsx live
+<List className="list-none">
+  <ListItem>
+    <ListIcon children={<InfoCircleIcon />} />
+    This is the 1st ListItem
+  </ListItem>
+  <ListItem>
+    <ListIcon children={<InfoCircleIcon />} />
+    This is the 2nd ListItem
+  </ListItem>
+  <ListItem>
+    <ListIcon children={<InfoCircleIcon />} />
+    This is the 3rd ListItem
+  </ListItem>
+</List>
+```
+
+## API Reference
+
+### List, OrderedList, UnorderedList Props
+
+<PropsTable data={[{ name: "size", themeKey: "list.size", default: "md" }]} />

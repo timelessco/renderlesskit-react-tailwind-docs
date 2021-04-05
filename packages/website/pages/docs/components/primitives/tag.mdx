@@ -1,0 +1,164 @@
+import Callout from "@components/Callout";
+import PropsTable from "@components/PropsTable";
+import ComponentLinks from "@components/ComponentLinks";
+
+# Tag
+
+Tag is used when items need to be labelled, categorized, and organized using
+keywords that describe them.
+
+<ComponentLinks github="tag" theme="tag" story="primitives-tag" />
+
+## Imports
+
+```js
+import { Tag, TagGroup } from "@renderlesskit/react-tailwind";
+```
+
+- **Tag** Standalone tag component
+- **TagGroup** Used to group related tags together in a horizontal stack.
+
+## Usage
+
+```jsx live
+<Tag>javascript</Tag>
+```
+
+## Tag Variants
+
+Tag has 4 variants `primary` `secondary` `outline` `ghost`
+
+```jsx live
+<div className="space-x-2">
+  <Tag variant="primary">primary</Tag>
+  <Tag variant="secondary">secondary</Tag>
+  <Tag variant="outline">outline</Tag>
+  <Tag variant="ghost">ghost</Tag>
+</div>
+```
+
+<Callout>
+  You can add extra variants & sizes via the theme file. Checkout [theming
+  guide](/docs/theming).
+</Callout>
+
+## Tag Sizes
+
+Tag comes with 3 sizes `sm` `md` `lg`
+
+```jsx live
+<div className="space-x-2">
+  <Tag size="sm">Small</Tag>
+  <Tag size="md">Medium</Tag>
+  <Tag size="lg">Large</Tag>
+</div>
+```
+
+## Closable Tag
+
+Tags can be closable or removable. If `closable` prop is passed tag will show a
+close icon in the suffix.
+
+```jsx live
+<Tag closable onClose={() => alert("removed")}>
+  Removable
+</Tag>
+```
+
+## Tag Prefix/Suffix
+
+Same as buttons Tag also accepts prefix, suffix props which can be used to
+append or prepend content in the tag.
+
+```jsx live
+<div className="space-x-2">
+  <Tag prefix={<Avatar src="https://bit.ly/dan-abramov" />}>Dan abramov</Tag>
+  <Tag prefix={<BoltIcon />}>Charge</Tag>
+  <Tag prefix={<ClockIcon />} suffix={<SearchIcon />} closable>
+    Copy
+  </Tag>
+</div>
+```
+
+<Callout>Suffix will only be rendered if `closable` is set to `true`</Callout>
+
+## TagGroup
+
+TagGroup can be used to group multiple tags together & can pass down `size`,
+`variant` props.
+
+While using TagGroup, we will add roving index to the closable icons that means
+you can move the focus with the arrow keys.
+
+```jsx live
+<TagGroup size="sm" variant="outline" className="flex items-center gap-1">
+  <Tag closable>Tag 1</Tag>
+  <Tag closable>Tag 2</Tag>
+  <Tag closable>Tag 3</Tag>
+</TagGroup>
+```
+
+To disable roving index on the tag closable icons you can set
+`allowArrowNavigation=false`
+
+```jsx live
+<TagGroup allowArrowNavigation={false} className="flex items-center gap-1">
+  <Tag closable>Tag 1</Tag>
+  <Tag closable>Tag 2</Tag>
+  <Tag closable>Tag 3</Tag>
+</TagGroup>
+```
+
+## API Reference
+
+### Tag Props
+
+<PropsTable
+  data={[
+    { name: "id", type: "string", description: "Id for the tag" },
+    { name: "size", themeKey: "tag.size", default: "md" },
+    { name: "variant", themeKey: "tag.variant", default: "primary" },
+    {
+      name: "closable",
+      type: "Boolean",
+      description:
+        "If added, tag will show suffix after the tag's label, This will only show if closable is set to `true`",
+      default: "false",
+    },
+    {
+      name: "onClose",
+      type: "(id?: string) => void",
+      typeSimple: "Function",
+      description: "Callback to fire when close icon is clicked",
+    },
+    {
+      name: "prefix",
+      type: "React.ReactElement",
+      description:
+        "If added, tag will show prefix the content before the tag's label",
+    },
+    {
+      name: "suffix",
+      type: "React.ReactElement",
+      description:
+        "If added, tag will show suffix the content after the tag's label",
+      default: "<CloseIcon />",
+    },
+  ]}
+/>
+
+### TagGroup Props
+
+<PropsTable
+  data={[
+    { name: "size", themeKey: "tag.size", default: "md" },
+    { name: "variant", themeKey: "tag.variant", default: "primary" },
+    {
+      name: "allowArrowNavigation",
+      type: "Boolean",
+      default: "true",
+      description:
+        "If set to `false`, it disables roving index for the tag close icons",
+    },
+  ]}
+/>

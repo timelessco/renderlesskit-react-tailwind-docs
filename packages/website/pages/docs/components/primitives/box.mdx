@@ -1,3 +1,4 @@
+import PropsTable from "@components/PropsTable";
 import ComponentLinks from "@components/ComponentLinks";
 
 # Box
@@ -52,3 +53,18 @@ You can either pass string elements or pass ReactNodes to the as prop.
   </Box>
 </Box>
 ```
+
+## API Reference
+
+<PropsTable
+  data={[
+    {
+      name: "as",
+      default: "div",
+      typeSimple: "string | React.ElementType",
+      type: "type As<Props = any> = React.ElementType<Props>",
+      description:
+        "Polymorphic as prop, change the component to a different HTML tag or custom component.",
+    },
+  ]}
+/>

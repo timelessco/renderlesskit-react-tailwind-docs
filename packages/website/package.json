@@ -5,7 +5,7 @@
     "build": "next build",
     "dev": "cross-env DEBUG=true next dev",
     "start": "next start",
-    "vercel-build": "yarn workspace nextra-theme-docs run build && STORK_PATH=$(pwd)/bin/stork.bin  yarn build"
+    "vercel-build": "yarn workspace nextra-theme-docs run build && yarn workspace codeblock run build && STORK_PATH=$(pwd)/bin/stork.bin  yarn build"
   },
   "dependencies": {
     "@renderlesskit/react-tailwind": "^0.0.1-alpha.8",

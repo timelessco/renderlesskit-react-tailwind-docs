@@ -31,7 +31,7 @@ const InteractiveCodeblock: React.FC<InteractiveCodeblockProps> = ({
   const [unionState, setUnionStates] = React.useState<{}>({});
 
   return (
-    <div>
+    <div className="mt-6">
       <CodeBlock
         live
         children={templateFn({

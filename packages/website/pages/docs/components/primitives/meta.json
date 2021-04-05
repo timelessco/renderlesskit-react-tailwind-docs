@@ -4,5 +4,6 @@
   "box": "> Box",
   "button": "> Button",
   "tag": "> Tag",
-  "icon": "> Icon"
+  "icon": "> Icon",
+  "list": "> List"
 }

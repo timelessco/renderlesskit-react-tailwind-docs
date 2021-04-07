@@ -5,7 +5,7 @@ import { Checkbox, useTheme } from "@renderlesskit/react-tailwind";
 
 type TemplateFunction = (props: {
   booleanProps: string[];
-  unionProps: string[];
+  themeProps: string[];
   choiceProps: string[];
   spreadProps: string;
   props: Record<string, any>;
@@ -13,62 +13,62 @@ type TemplateFunction = (props: {
 
 type InteractiveCodeblockProps = {
   booleanProps: string[];
-  unionProps: Record<string, string>;
-  choiceProps: Record<string, any[]>;
+  themeProps: Record<string, string>;
+  choiceProps: Record<string, string[]>;
   templateFn: TemplateFunction;
 };
 
-const mapUnionProps = (name: string, unions: Record<string, any>) =>
-  unions[name] && `${name}="${unions[name]}"`;
-const mapChoiceProps = (name: string, unions: Record<string, any>) =>
-  unions[name] && `${name}={${unions[name]}}`;
-
 const selectStyles =
   "mt-1 block pl-2 pr- py-2 text-sm bg-gray-200 border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md";
+const wrapperStyles = "mt-2 space-x-2 flex items-center";
 
-const InteractiveCodeblock: React.FC<InteractiveCodeblockProps> = ({
-  templateFn,
-  booleanProps = [],
-  unionProps = {},
-  choiceProps = {},
-}) => {
+const InteractiveCodeblock: React.FC<InteractiveCodeblockProps> = props => {
+  const {
+    templateFn,
+    themeProps = {},
+    choiceProps = {},
+    booleanProps = [],
+  } = props;
+
   const theme = useTheme();
-  const [booleanState, onBooleanStateChange] = React.useState<
+  const [booleanStates, onBooleanStateChange] = React.useState<
     Record<string, boolean>
   >({});
-  const [unionState, setUnionStates] = React.useState<Record<string, string>>(
+  const [themeStates, setThemeStates] = React.useState<Record<string, string>>(
     {},
   );
-  const [choiceState, setChoiceState] = React.useState<Record<string, any>>({});
-
-  const finalBooleanProps = Object.keys(booleanState).filter(
-    key => booleanState[key],
-  );
-  const finalUnionProps = Object.keys(unionState).map(key =>
-    mapUnionProps(key, unionState),
+  const [choiceStates, setChoiceState] = React.useState<Record<string, any>>(
+    {},
   );
 
-  const finalChoiceProps = Object.keys(choiceState)
-    .filter(Boolean)
-    .map(key => mapChoiceProps(key, choiceState));
+  const finalBooleanProps = Object.keys(booleanStates).filter(
+    key => booleanStates[key],
+  );
+  const finalThemeProps = Object.keys(themeStates).map(key =>
+    mapThemeProps(key, themeStates),
+  );
+  const finalChoiceProps = Object.keys(choiceStates).map(key =>
+    mapChoiceProps(key, choiceStates),
+  );
 
-  const printProps = (props: string[]) =>
-    props.length > 0 ? ` ${props.filter(Boolean).join(" ")}` : "";
+  const spreadProps = [finalBooleanProps, finalThemeProps, finalChoiceProps]
+    .map(printProps)
+    .join("")
+    .trimEnd()
+    .replace(/\s\s+/, " ");
 
   const code = templateFn({
-    booleanProps: finalBooleanProps,
-    unionProps: finalUnionProps,
-    spreadProps: `${printProps(finalBooleanProps)}${printProps(
-      finalUnionProps,
-    )}${printProps(finalChoiceProps)}`,
+    spreadProps,
+    themeProps: finalThemeProps,
     choiceProps: finalChoiceProps,
-    props: { ...unionState, ...booleanState, ...choiceState },
+    booleanProps: finalBooleanProps,
+    props: { ...themeStates, ...booleanStates, ...choiceStates },
   });
 
   return (
     <div className="mt-6">
       <CodeBlock live children={code} />
-      <div className="mt-2 space-x-2 flex items-center">
+      <div className={wrapperStyles}>
         {booleanProps.map(name => {
           return (
             <Checkbox
@@ -82,16 +82,16 @@ const InteractiveCodeblock: React.FC<InteractiveCodeblockProps> = ({
           );
         })}
       </div>
-      <div className="mt-2 space-x-2 flex items-center">
-        {Object.keys(unionProps).map(name => {
-          const themeKey = unionProps[name];
+      <div className={wrapperStyles}>
+        {Object.keys(themeProps).map(name => {
+          const themeKey = themeProps[name];
           return (
             <select
-              className={selectStyles}
               name={name}
-              value={unionState[name]}
+              className={selectStyles}
+              value={themeStates[name]}
               onChange={event =>
-                setUnionStates(prev => ({
+                setThemeStates(prev => ({
                   ...prev,
                   [name]: event.target.value,
                 }))
@@ -109,16 +109,14 @@ const InteractiveCodeblock: React.FC<InteractiveCodeblockProps> = ({
             </select>
           );
         })}
-      </div>
-      <div className="mt-2 space-x-2 flex items-center">
         {Object.keys(choiceProps).map(name => {
           const values = choiceProps[name];
 
           return (
             <select
-              className={selectStyles}
               name={name}
-              value={choiceState[name]}
+              className={selectStyles}
+              value={choiceStates[name]}
               onChange={event =>
                 setChoiceState(prev => ({
                   ...prev,
@@ -144,3 +142,14 @@ const InteractiveCodeblock: React.FC<InteractiveCodeblockProps> = ({
 };
 
 export default InteractiveCodeblock;
+
+const mapThemeProps = (name: string, unions: Record<string, any>) => {
+  return unions[name] && `${name}="${unions[name]}"`;
+};
+const mapChoiceProps = (name: string, unions: Record<string, any>) => {
+  return unions[name] && `${name}={${unions[name]}}`;
+};
+
+const printProps = (props: string[]) => {
+  return " " + props.filter(Boolean).join(" ");
+};

@@ -23,12 +23,12 @@ import { Tag, TagGroup } from "@renderlesskit/react-tailwind";
 
 <InteractiveCodeblock
   templateFn={({ spreadProps }) => `<Tag${spreadProps}>Hello world</Tag>`}
+  booleanProps={["closable"]}
+  themeProps={{ size: "tag.size", variant: "tag.variant" }}
   choiceProps={{
     prefix: ["<SearchIcon />", "<ClockIcon />"],
     suffix: ["<SearchIcon />", "<ClockIcon />"],
   }}
-  booleanProps={["closable"]}
-  unionProps={{ size: "tag.size", variant: "tag.variant" }}
 />
 
 ## Tag Variants

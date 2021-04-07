@@ -102,6 +102,28 @@ export const CopyButton = ({ code, top }) => {
 const useSafeLayoutEffect =
   typeof window !== "undefined" ? React.useLayoutEffect : React.useEffect;
 
+const transformer = (language, rawCode) => {
+  const code = rawCode;
+  // // remove imports
+  // .replace(/((^|)import[^;]+[; ]+)+/gi, "")
+  // // replace `export default => {*};` with `render(() => {*});`
+  // .replace(
+  //   /export default \(\) => {((.|\n)*)};/,
+  //   "render(() => {$1});"
+  // )
+  // // replace `export default => (*);` with `render(*);`
+  // .replace(/export default \(\) => \(((.|\n)*)\);/, "render($1);")
+  // // replace `export default => *;` with `render(*);`
+  // .replace(/export default \(\) => ((.|\n)*);/, "render($1);");
+
+  return language === "jsx" ? `<>${code}</>` : code;
+};
+
+const reactLivescope = {
+  React,
+  ...(typeof window !== "undefined" ? window.__COMPONENTS : {}),
+};
+
 export const CodeBlock = ({ children, className, live, render, ...props }) => {
   const language = className?.replace(/language-/, "");
   const source = children.trim();
@@ -123,26 +145,8 @@ export const CodeBlock = ({ children, className, live, render, ...props }) => {
           theme={prismTheme}
           language={language}
           code={source}
-          transformCode={rawCode => {
-            const code = rawCode;
-            // // remove imports
-            // .replace(/((^|)import[^;]+[; ]+)+/gi, "")
-            // // replace `export default => {*};` with `render(() => {*});`
-            // .replace(
-            //   /export default \(\) => {((.|\n)*)};/,
-            //   "render(() => {$1});"
-            // )
-            // // replace `export default => (*);` with `render(*);`
-            // .replace(/export default \(\) => \(((.|\n)*)\);/, "render($1);")
-            // // replace `export default => *;` with `render(*);`
-            // .replace(/export default \(\) => ((.|\n)*);/, "render($1);");
-
-            return language === "jsx" ? `<>${code}</>` : code;
-          }}
-          scope={{
-            React,
-            ...(typeof window !== "undefined" ? window.__COMPONENTS : {}),
-          }}
+          transformCode={rawCode => transformer(language, rawCode)}
+          scope={reactLivescope}
           {...props}
         >
           <LivePreview
@@ -163,8 +167,15 @@ export const CodeBlock = ({ children, className, live, render, ...props }) => {
   if (render) {
     return (
       <div>
-        <LiveProvider {...props} code={source}>
-          <LivePreview />
+        <LiveProvider
+          theme={prismTheme}
+          language={language}
+          code={source}
+          transformCode={rawCode => transformer(language, rawCode)}
+          scope={reactLivescope}
+          {...props}
+        >
+          <LivePreview style={{ fontFamily: "'Inter', sans-serif" }} />
         </LiveProvider>
       </div>
     );

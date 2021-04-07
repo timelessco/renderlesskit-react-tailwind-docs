@@ -19,7 +19,10 @@ import { Badge } from "@renderlesskit/react-tailwind";
 ## Usage
 
 <InteractiveCodeblock
-  templateFn={({ spreadProps, props }) => {
+  booleanProps={["floating"]}
+  themeProps={{ size: "badge.size", variant: "badge.variant" }}
+>
+  {({ spreadProps, props }) => {
     const floating = outdent`
       <Button variant="outline">
         Hello world
@@ -28,9 +31,7 @@ import { Badge } from "@renderlesskit/react-tailwind";
     `;
     return props.floating ? floating : `<Badge${spreadProps}>Primary</Badge>`;
   }}
-  booleanProps={["floating"]}
-  themeProps={{ size: "badge.size", variant: "badge.variant" }}
-/>
+</InteractiveCodeblock>
 
 ## Badge Variants
 

@@ -22,7 +22,7 @@ import { Tag, TagGroup } from "@renderlesskit/react-tailwind";
 ## Usage
 
 <InteractiveCodeblock
-  templateFn={({ spreadProps }) => `<Tag${spreadProps}>Hello world</Tag>`}
+  children={({ spreadProps }) => `<Tag${spreadProps}>Hello world</Tag>`}
   booleanProps={["closable"]}
   themeProps={{ size: "tag.size", variant: "tag.variant" }}
   choiceProps={{

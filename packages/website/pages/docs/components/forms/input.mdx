@@ -31,12 +31,9 @@ import {
 
 Basic usage
 
-<InteractiveCodeblock
-  templateFn={({ booleanProps, unionProps }) =>
-    `<Input placeholder="Enter email" ${booleanProps.join(" ")} />`
-  }
-  booleanProps={["isDisabled", "isReadOnly", "isInvalid"]}
-/>
+<InteractiveCodeblock booleanProps={["isDisabled", "isReadOnly", "isInvalid"]}>
+  {({ spreadProps }) => `<Input placeholder="Enter email"${spreadProps} />`}
+</InteractiveCodeblock>
 
 ## Input Prefix/Suffix
 

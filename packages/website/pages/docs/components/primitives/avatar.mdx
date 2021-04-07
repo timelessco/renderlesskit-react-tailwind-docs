@@ -22,12 +22,13 @@ import {
 ## Usage
 
 <InteractiveCodeblock
-  templateFn={({ spreadProps }) =>
-    `<Avatar${spreadProps} src="https://bit.ly/dan-abramov" name="Dan Abramov" />`
-  }
   booleanProps={["showBorder"]}
   themeProps={{ size: "avatar.size", status: "avatar.badge.statuses" }}
-/>
+>
+  {({ spreadProps }) =>
+    `<Avatar${spreadProps} src="https://bit.ly/dan-abramov" name="Dan Abramov" />`
+  }
+</InteractiveCodeblock>
 
 ## Avatar sizes
 

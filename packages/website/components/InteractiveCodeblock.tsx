@@ -1,30 +1,31 @@
 import React from "react";
 import get from "lodash.get";
 import { CodeBlock } from "codeblock";
-import { Checkbox, useTheme } from "@renderlesskit/react-tailwind";
+import { Checkbox, runIfFn, useTheme } from "@renderlesskit/react-tailwind";
 
-type TemplateFunction = (props: {
+type TemplateFunctionProps = {
   booleanProps: string[];
   themeProps: string[];
   choiceProps: string[];
   spreadProps: string;
   props: Record<string, any>;
-}) => string;
+};
+type TemplateFunction = (props: TemplateFunctionProps) => string;
 
 type InteractiveCodeblockProps = {
   booleanProps: string[];
   themeProps: Record<string, string>;
   choiceProps: Record<string, string[]>;
-  templateFn: TemplateFunction;
+  children?: TemplateFunction;
 };
 
 const selectStyles =
   "mt-1 block pl-2 pr- py-2 text-sm bg-gray-200 border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md";
 const wrapperStyles = "mt-2 space-x-2 flex items-center";
 
-const InteractiveCodeblock: React.FC<InteractiveCodeblockProps> = props => {
+const InteractiveCodeblock = (props: InteractiveCodeblockProps) => {
   const {
-    templateFn,
+    children = "",
     themeProps = {},
     choiceProps = {},
     booleanProps = [],
@@ -57,7 +58,7 @@ const InteractiveCodeblock: React.FC<InteractiveCodeblockProps> = props => {
     .trimEnd()
     .replace(/\s\s+/, " ");
 
-  const code = templateFn({
+  const code = runIfFn(children, {
     spreadProps,
     themeProps: finalThemeProps,
     choiceProps: finalChoiceProps,

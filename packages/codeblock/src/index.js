@@ -102,7 +102,7 @@ export const CopyButton = ({ code, top }) => {
 const useSafeLayoutEffect =
   typeof window !== "undefined" ? React.useLayoutEffect : React.useEffect;
 
-const transformer = (language, rawCode) => {
+const transformer = (rawCode, language, noInline) => {
   const code = rawCode;
   // // remove imports
   // .replace(/((^|)import[^;]+[; ]+)+/gi, "")
@@ -116,7 +116,7 @@ const transformer = (language, rawCode) => {
   // // replace `export default => *;` with `render(*);`
   // .replace(/export default \(\) => ((.|\n)*);/, "render($1);");
 
-  return language === "jsx" ? `<>${code}</>` : code;
+  return language === "jsx" && !noInline ? `<>${code}</>` : code;
 };
 
 const reactLivescope = {
@@ -145,7 +145,9 @@ export const CodeBlock = ({ children, className, live, render, ...props }) => {
           theme={prismTheme}
           language={language}
           code={source}
-          transformCode={rawCode => transformer(language, rawCode)}
+          transformCode={rawCode =>
+            transformer(rawCode, language, props.noInline)
+          }
           scope={reactLivescope}
           {...props}
         >
@@ -171,7 +173,9 @@ export const CodeBlock = ({ children, className, live, render, ...props }) => {
           theme={prismTheme}
           language={language}
           code={source}
-          transformCode={rawCode => transformer(language, rawCode)}
+          transformCode={rawCode =>
+            transformer(rawCode, language, props.noInline)
+          }
           scope={reactLivescope}
           {...props}
         >

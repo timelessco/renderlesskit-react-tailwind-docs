@@ -40,6 +40,8 @@ Basic usage
 You can append or prepend any element inside input. By default we don't give
 spacing to the elements so you have to add spacing as needed.
 
+`InputPrefix` is positioned absolutely within the input.
+
 ```jsx live
 <Input>
   <InputPrefix className="pl-2">https://</InputPrefix>
@@ -70,3 +72,134 @@ this:
   `as` prop instead of directly passing the whole select inside the
   InputPrefix's children.
 </Callout>
+
+## InputGroup
+
+`InputGroup` is used to add addons before or after the `Input` component.
+
+And by using `InputGroupPrefix` we can specify the prefix or suffix.
+
+The main difference between InputGroupPrefix & InputPrefix is that:
+
+- `InputPrefix` is positioned absolutely within the input.
+- `InputGroupPrefix` is positioned adjacent to the input.
+
+```jsx live
+<InputGroup>
+  <InputGroupPrefix className="px-2" children="https://" />
+  <Input />
+  <InputGroupSuffix className="px-2" children=".com" />
+</InputGroup>
+```
+
+Unlike `InputPrefix` where you had to add `allowPointerEvents` to make the
+`InputGroupPrefix` interactive, in InputGroupPrefix you can directly pass any
+interactive components (eg: Button).
+
+Here's a password input example using InputGroupSuffix to attach a toggle
+button.
+
+```jsx noInline live
+const PasswordExample = () => {
+  const [show, { toggle }] = useBoolean(false);
+
+  return (
+    <InputGroup>
+      <Input type={show ? "text" : "password"} placeholder="Enter password" />
+      <InputGroupSuffix>
+        <Button
+          size="sm"
+          variant="ghost"
+          className="focus:outline-none hover:bg-transparent"
+          onClick={toggle}
+        >
+          {show ? <EyeClose /> : <EyeOpen />}
+        </Button>
+      </InputGroupSuffix>
+    </InputGroup>
+  );
+};
+
+render(PasswordExample);
+```
+
+Here's an example with all the components combined:
+
+```jsx noInline live
+const InputButton = props => {
+  return (
+    <Button
+      size="sm"
+      variant="ghost"
+      className="transition-none focus:outline-none hover:bg-transparent"
+      {...props}
+    />
+  );
+};
+
+render(
+  <InputGroup>
+    <InputGroupPrefix>
+      <InputButton>Group Prefix</InputButton>
+    </InputGroupPrefix>
+    <Input placeholder="Enter some stuff">
+      <InputPrefix allowPointerEvents>
+        <InputButton>Prefix</InputButton>
+      </InputPrefix>
+      <InputSuffix allowPointerEvents>
+        <InputButton>Suffix</InputButton>
+      </InputSuffix>
+    </Input>
+    <InputGroupSuffix>
+      <InputButton>Group Suffix</InputButton>
+    </InputGroupSuffix>
+  </InputGroup>,
+);
+```
+
+<Callout>
+  If you want to see more demos checkout our [storybook
+  examples](https://renderlesskit-react-tailwind.vercel.app/?path=/story/forms-input--input-kitchen-sink)
+</Callout>
+
+## Integrations
+
+// TBD
+
+## API Reference
+
+### Input
+
+Input takes all the native `HTMLInputElement` props plus:
+
+<PropsTable
+  data={[
+    {
+      name: "isDisabled",
+      type: "Boolean",
+      description: "if `true` Input will be disabled",
+    },
+    {
+      name: "isReadOnly",
+      type: "Boolean",
+      description: "if `true` Input will be readonly",
+    },
+    {
+      name: "isInvalid",
+      type: "Boolean",
+      description: "if `true` Input will be invalid",
+    },
+  ]}
+/>
+
+## InputPrefix & InputSuffix
+
+<PropsTable
+  data={[
+    {
+      name: "allowPointerEvents",
+      type: "Boolean",
+      description: "if `true` InputPrefix/Suffix will respond to user events",
+    },
+  ]}
+/>

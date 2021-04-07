@@ -22,9 +22,11 @@ import { Tag, TagGroup } from "@renderlesskit/react-tailwind";
 ## Usage
 
 <InteractiveCodeblock
-  templateFn={({ booleanProps, unionProps }) =>
-    `<Tag ${unionProps.join(" ")} ${booleanProps.join(" ")}>Hello world</Tag>`
-  }
+  templateFn={({ spreadProps }) => `<Tag${spreadProps}>Hello world</Tag>`}
+  choiceProps={{
+    prefix: ["<SearchIcon />", "<ClockIcon />"],
+    suffix: ["<SearchIcon />", "<ClockIcon />"],
+  }}
   booleanProps={["closable"]}
   unionProps={{ size: "tag.size", variant: "tag.variant" }}
 />

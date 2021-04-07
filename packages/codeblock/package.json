@@ -1,8 +1,10 @@
 {
   "name": "codeblock",
   "version": "0.1.0",
+  "main": "index.js",
   "files": [
-    "dist"
+    "dist/*",
+    "index.js"
   ],
   "scripts": {
     "build": "cross-env NODE_ENV=production microbundle src/index.js -f cjs -o dist --no-sourcemap --jsx React.createElement --target node",

@@ -9,11 +9,13 @@
   "scripts": {
     "build:site": "yarn website run build",
     "build:theme": "yarn theme run build",
+    "build:codeblock": "yarn workspace codeblock run build",
     "commit": "gacp",
     "contributors:add": "all-contributors add",
     "contributors:generate": "all-contributors generate",
     "dev:site": "yarn website run dev",
     "dev:theme": "yarn theme run dev",
+    "dev:codeblock": "yarn codeblock run dev",
     "format": "prettier --write \"./**/*.{js,ts,css,less,json,md,mdx,html,yml,yaml,pcss,jsx,tsx}\"",
     "format:package": "sort-package-json",
     "postinstall": "concurrently \"husky install\" \"patch-package\"",

@@ -1,5 +1,5 @@
 import React from "react";
-import CodeBlock from "codeblock";
+import { CodeBlock } from "codeblock";
 import {
   Checkbox,
   CheckboxStatus,

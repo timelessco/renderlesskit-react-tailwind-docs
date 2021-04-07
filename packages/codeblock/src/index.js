@@ -45,7 +45,7 @@ const THEME = {
   ],
 };
 
-const StaticCode = ({ children, className, highlight, ...props }) => {
+export const StaticCode = ({ children, className, highlight, ...props }) => {
   if (!className) return <code {...props}>{children}</code>;
 
   const highlightedLines = highlight ? highlight.split(",").map(Number) : [];
@@ -86,7 +86,7 @@ const StaticCode = ({ children, className, highlight, ...props }) => {
   );
 };
 
-const CopyButton = ({ code, top }) => {
+export const CopyButton = ({ code, top }) => {
   const [isCopied, setCopied] = useClipboard(code);
   return (
     <button
@@ -102,7 +102,7 @@ const CopyButton = ({ code, top }) => {
 const useSafeLayoutEffect =
   typeof window !== "undefined" ? React.useLayoutEffect : React.useEffect;
 
-const CodeBlock = ({ children, className, live, render, ...props }) => {
+export const CodeBlock = ({ children, className, live, render, ...props }) => {
   const language = className?.replace(/language-/, "");
   const source = children.trim();
   const divWrapper = React.useRef();
@@ -172,5 +172,3 @@ const CodeBlock = ({ children, className, live, render, ...props }) => {
 
   return <StaticCode children={source} className={className} {...props} />;
 };
-
-export default CodeBlock;

@@ -101,7 +101,8 @@ button.
 
 ```jsx noInline live
 const PasswordExample = () => {
-  const [show, { toggle }] = useBoolean(false);
+  const [show, setShow] = React.useState(false);
+  const toggle = () => setShow(!show);
 
   return (
     <InputGroup>
@@ -164,7 +165,17 @@ render(
 
 ## Integrations
 
-// TBD
+### React Hook Form
+
+This example shows how to integrate renderlesskit Input with react-hook-form
+
+[Explore on CodeSandbox](https://codesandbox.io/s/renderlesskit-react-hook-form-rw5c5?file=/src/App.js)
+
+### Formik
+
+This example shows how to integrate renderlesskit Input with react-hook-form
+
+[Explore on CodeSandbox](https://codesandbox.io/s/renderlesskit-formik-k1k9w)
 
 ## API Reference
 

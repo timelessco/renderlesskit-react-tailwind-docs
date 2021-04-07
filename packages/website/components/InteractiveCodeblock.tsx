@@ -21,8 +21,8 @@ type InteractiveCodeblockProps = {
 
 const InteractiveCodeblock: React.FC<InteractiveCodeblockProps> = ({
   templateFn,
-  booleanProps,
-  unionProps,
+  booleanProps = [],
+  unionProps = {},
 }) => {
   const theme = useTheme();
   const [booleanState, onBooleanStateChange] = React.useState<CheckboxStatus>(

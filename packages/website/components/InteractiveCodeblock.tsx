@@ -1,23 +1,23 @@
 import React from "react";
-import { CodeBlock } from "codeblock";
-import {
-  Checkbox,
-  CheckboxStatus,
-  useTheme,
-} from "@renderlesskit/react-tailwind";
 import get from "lodash.get";
+import { CodeBlock } from "codeblock";
+import { Checkbox, useTheme } from "@renderlesskit/react-tailwind";
+
+type TemplateFunction = (props: {
+  booleanProps: string[];
+  unionProps: string[];
+  spreadProps: string;
+  props: Record<string, any>;
+}) => string;
 
 type InteractiveCodeblockProps = {
   booleanProps: string[];
-  unionProps: any[];
-  templateFn: ({
-    booleanProps,
-    unionProps,
-  }: {
-    booleanProps: boolean[];
-    unionProps: any[];
-  }) => string;
+  unionProps: Record<string, string>;
+  templateFn: TemplateFunction;
 };
+
+const mapUnionProps = (name: string, unions: Record<string, any>) =>
+  `${name}="${unions[name]}"`;
 
 const InteractiveCodeblock: React.FC<InteractiveCodeblockProps> = ({
   templateFn,
@@ -25,31 +25,45 @@ const InteractiveCodeblock: React.FC<InteractiveCodeblockProps> = ({
   unionProps = {},
 }) => {
   const theme = useTheme();
-  const [booleanState, onBooleanStateChange] = React.useState<CheckboxStatus>(
-    [],
+  const [booleanState, onBooleanStateChange] = React.useState<
+    Record<string, boolean>
+  >({});
+  const [unionState, setUnionStates] = React.useState<Record<string, string>>(
+    {},
   );
-  const [unionState, setUnionStates] = React.useState<{}>({});
+
+  const finalBooleanProps = Object.keys(booleanState).filter(
+    key => booleanState[key],
+  );
+  const finalUnionProps = Object.keys(unionState).map(key =>
+    mapUnionProps(key, unionState),
+  );
+
+  const printProps = (props: string[]) =>
+    props.length > 0 ? ` ${props.join(" ")}` : "";
+
+  const code = templateFn({
+    booleanProps: finalBooleanProps,
+    unionProps: finalUnionProps,
+    spreadProps: `${printProps(finalBooleanProps)}${printProps(
+      finalUnionProps,
+    )}`,
+    props: { ...unionState, ...booleanState },
+  });
 
   return (
     <div className="mt-6">
-      <CodeBlock
-        live
-        children={templateFn({
-          booleanProps: booleanState as any,
-          unionProps: Object.keys(unionState).map(
-            name => `${name}="${unionState[name]}"`,
-          ) as any,
-        })}
-      />
+      <CodeBlock live children={code} />
       <div className="mt-2 space-x-2 flex items-center">
-        {booleanProps.map(value => {
+        {booleanProps.map(name => {
           return (
             <Checkbox
-              state={booleanState}
-              onStateChange={onBooleanStateChange}
-              value={value}
+              key={name}
+              onStateChange={value => {
+                onBooleanStateChange(prev => ({ ...prev, [name]: !!value }));
+              }}
             >
-              {value}
+              {name}
             </Checkbox>
           );
         })}
@@ -70,7 +84,9 @@ const InteractiveCodeblock: React.FC<InteractiveCodeblockProps> = ({
               }
             >
               {Object.keys(get(theme, themeKey)).map(size => (
-                <option value={size}>{size}</option>
+                <option key={size} value={size}>
+                  {size}
+                </option>
               ))}
             </select>
           );

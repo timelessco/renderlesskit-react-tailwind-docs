@@ -1,6 +1,8 @@
+import outdent from "outdent";
 import Callout from "@components/Callout";
 import PropsTable from "@components/PropsTable";
 import ComponentLinks from "@components/ComponentLinks";
+import InteractiveCodeblock from "@components/InteractiveCodeblock";
 
 # Badge
 
@@ -16,9 +18,19 @@ import { Badge } from "@renderlesskit/react-tailwind";
 
 ## Usage
 
-```jsx live
-<Badge>primary</Badge>
-```
+<InteractiveCodeblock
+  templateFn={({ spreadProps, props }) => {
+    const floating = outdent`
+      <Button variant="outline">
+        Hello world
+        <Badge${spreadProps}>25</Badge>
+      </Button>
+    `;
+    return props.floating ? floating : `<Badge${spreadProps}>Primary</Badge>`;
+  }}
+  booleanProps={["floating"]}
+  unionProps={{ size: "badge.size", variant: "badge.variant" }}
+/>
 
 ## Badge Variants
 

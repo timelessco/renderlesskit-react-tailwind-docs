@@ -22,10 +22,8 @@ import {
 ## Usage
 
 <InteractiveCodeblock
-  templateFn={({ booleanProps, unionProps }) =>
-    `<Avatar ${unionProps.join(" ")} ${booleanProps.join(
-      " ",
-    )} src="https://bit.ly/dan-abramov" name="Dan Abramov" />`
+  templateFn={({ spreadProps }) =>
+    `<Avatar${spreadProps} src="https://bit.ly/dan-abramov" name="Dan Abramov" />`
   }
   booleanProps={["showBorder"]}
   unionProps={{ size: "avatar.size", status: "avatar.badge.statuses" }}

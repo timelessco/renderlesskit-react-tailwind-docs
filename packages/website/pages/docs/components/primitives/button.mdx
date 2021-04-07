@@ -1,6 +1,7 @@
 import Callout from "@components/Callout";
 import PropsTable from "@components/PropsTable";
 import ComponentLinks from "@components/ComponentLinks";
+import InteractiveCodeblock from "@components/InteractiveCodeblock";
 
 # Button
 
@@ -25,9 +26,11 @@ import { Button, ButtonGroup, IconButton } from "@renderlesskit/react-tailwind";
 
 Default Button
 
-```jsx live
-<Button>Click Me</Button>
-```
+<InteractiveCodeblock
+  templateFn={({ spreadProps }) => `<Button${spreadProps}>Click me</Button>`}
+  booleanProps={["loading"]}
+  unionProps={{ size: "button.size", variant: "button.variant" }}
+/>
 
 ## Button sizes
 

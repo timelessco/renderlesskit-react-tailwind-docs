@@ -119,17 +119,16 @@ const transformer = (rawCode, language, noInline) => {
   return language === "jsx" && !noInline ? `<>${code}</>` : code;
 };
 
-const reactLivescope = {
-  React,
-  ...(typeof window !== "undefined" ? window.__COMPONENTS : {}),
-};
-
 export const CodeBlock = ({ children, className, live, render, ...props }) => {
   const language = className?.replace(/language-/, "");
   const source = children.trim();
   const divWrapper = React.useRef();
   const [top, setTop] = React.useState(0);
 
+  const reactLivescope = {
+    React,
+    ...(typeof window !== "undefined" ? window.__COMPONENTS : {}),
+  };
   useSafeLayoutEffect(() => {
     if (divWrapper?.current) {
       const live = divWrapper.current.children[0];

@@ -45,6 +45,21 @@ const THEME = {
   ],
 };
 
+const useCopyButtonOffset = () => {
+  const wrapper = React.useRef();
+  const [top, setTop] = React.useState(0);
+
+  useSafeLayoutEffect(() => {
+    if (wrapper?.current) {
+      const live = wrapper.current.children[0];
+      const liveBB = live.getBoundingClientRect();
+      setTop(liveBB.height <= 90 ? liveBB.height - 10 : liveBB.height);
+    }
+  }, [wrapper]);
+
+  return { top, wrapper };
+};
+
 export const StaticCode = ({
   children,
   className,
@@ -52,6 +67,7 @@ export const StaticCode = ({
   noCopy,
   ...props
 }) => {
+  const { wrapper, top } = useCopyButtonOffset();
   if (!className) return <code {...props}>{children}</code>;
 
   const highlightedLines = highlight ? highlight.split(",").map(Number) : [];
@@ -59,7 +75,7 @@ export const StaticCode = ({
   // https://mdxjs.com/guides/syntax-highlighting#all-together
   const language = className.replace(/language-/, "");
   return (
-    <div className="relative">
+    <div className="relative" ref={wrapper}>
       <Highlight
         {...defaultProps}
         code={children.trim()}
@@ -90,7 +106,7 @@ export const StaticCode = ({
           </code>
         )}
       </Highlight>
-      {!noCopy && <CopyButton code={children.trim()} top={-15} />}
+      {!noCopy && <CopyButton code={children.trim()} top={top} />}
     </div>
   );
 };
@@ -138,16 +154,6 @@ export const CodeBlock = ({
 }) => {
   const language = className?.replace(/language-/, "");
   const source = children.trim();
-  const divWrapper = React.useRef();
-  const [top, setTop] = React.useState(0);
-
-  useSafeLayoutEffect(() => {
-    if (divWrapper?.current) {
-      const live = divWrapper.current.children[0];
-      const liveBB = live.getBoundingClientRect();
-      setTop(liveBB.height <= 90 ? liveBB.height - 10 : liveBB.height);
-    }
-  }, [divWrapper]);
 
   if (typeof window === "undefined") return null;
 
@@ -158,7 +164,7 @@ export const CodeBlock = ({
 
   if (live) {
     return (
-      <div className="relative" ref={divWrapper}>
+      <div className="relative">
         <LiveProvider
           theme={prismTheme}
           language={language}
@@ -178,7 +184,7 @@ export const CodeBlock = ({
             className="rounded-md rounded-t-none text-sm"
           />
           <LiveError className="rounded-md rounded-t-none mt-0 text-xs bg-red-100 text-red-500" />
-          <CopyButton code={source} top={top} />
+          <CopyButton code={source} top={-15} />
         </LiveProvider>
       </div>
     );

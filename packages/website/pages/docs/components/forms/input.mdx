@@ -99,64 +99,7 @@ interactive components (eg: Button).
 Here's a password input example using InputGroupSuffix to attach a toggle
 button.
 
-```jsx noInline live
-const PasswordExample = () => {
-  const [show, setShow] = React.useState(false);
-  const toggle = () => setShow(!show);
-
-  return (
-    <InputGroup>
-      <Input type={show ? "text" : "password"} placeholder="Enter password" />
-      <InputGroupSuffix>
-        <Button
-          size="sm"
-          variant="ghost"
-          className="focus:outline-none hover:bg-transparent"
-          onClick={toggle}
-        >
-          {show ? <EyeClose /> : <EyeOpen />}
-        </Button>
-      </InputGroupSuffix>
-    </InputGroup>
-  );
-};
-
-render(PasswordExample);
-```
-
 Here's an example with all the components combined:
-
-```jsx noInline live
-const InputButton = props => {
-  return (
-    <Button
-      size="sm"
-      variant="ghost"
-      className="transition-none focus:outline-none hover:bg-transparent"
-      {...props}
-    />
-  );
-};
-
-render(
-  <InputGroup>
-    <InputGroupPrefix>
-      <InputButton>Group Prefix</InputButton>
-    </InputGroupPrefix>
-    <Input placeholder="Enter some stuff">
-      <InputPrefix allowPointerEvents>
-        <InputButton>Prefix</InputButton>
-      </InputPrefix>
-      <InputSuffix allowPointerEvents>
-        <InputButton>Suffix</InputButton>
-      </InputSuffix>
-    </Input>
-    <InputGroupSuffix>
-      <InputButton>Group Suffix</InputButton>
-    </InputGroupSuffix>
-  </InputGroup>,
-);
-```
 
 <Callout>
   If you want to see more demos checkout our [storybook

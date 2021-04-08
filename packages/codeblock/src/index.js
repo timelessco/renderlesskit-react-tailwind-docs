@@ -67,7 +67,6 @@ export const StaticCode = ({
   noCopy,
   ...props
 }) => {
-  const { wrapper, top } = useCopyButtonOffset();
   if (!className) return <code {...props}>{children}</code>;
 
   const highlightedLines = highlight ? highlight.split(",").map(Number) : [];
@@ -75,7 +74,7 @@ export const StaticCode = ({
   // https://mdxjs.com/guides/syntax-highlighting#all-together
   const language = className.replace(/language-/, "");
   return (
-    <div className="relative" ref={wrapper}>
+    <div className="relative">
       <Highlight
         {...defaultProps}
         code={children.trim()}
@@ -106,7 +105,7 @@ export const StaticCode = ({
           </code>
         )}
       </Highlight>
-      {!noCopy && <CopyButton code={children.trim()} top={top} />}
+      {!noCopy && <CopyButton code={children.trim()} top={-15} />}
     </div>
   );
 };
@@ -152,6 +151,7 @@ export const CodeBlock = ({
   noCopy,
   ...props
 }) => {
+  const { wrapper, top } = useCopyButtonOffset();
   const language = className?.replace(/language-/, "");
   const source = children.trim();
 
@@ -164,7 +164,7 @@ export const CodeBlock = ({
 
   if (live) {
     return (
-      <div className="relative">
+      <div className="relative" ref={wrapper}>
         <LiveProvider
           theme={prismTheme}
           language={language}
@@ -184,7 +184,7 @@ export const CodeBlock = ({
             className="rounded-md rounded-t-none text-sm"
           />
           <LiveError className="rounded-md rounded-t-none mt-0 text-xs bg-red-100 text-red-500" />
-          <CopyButton code={source} top={-15} />
+          <CopyButton code={source} top={top} />
         </LiveProvider>
       </div>
     );

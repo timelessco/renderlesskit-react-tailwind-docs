@@ -60,18 +60,14 @@ this:
 ```jsx live
 <Input>
   <InputPrefix className="pl-2">https://</InputPrefix>
-  <InputSuffix as="select" allowPointerEvents className="pr-2">
-    <option value=".com">.com</option>
-    <option value=".org">.org</option>
+  <InputSuffix allowPointerEvents className="pr-2">
+    <select className="focus:outline-none">
+      <option value=".com">.com</option>
+      <option value=".org">.org</option>
+    </select>
   </InputSuffix>
 </Input>
 ```
-
-<Callout>
-  Note that we are using as="select" on `InputSuffix`, It is recomended to use
-  `as` prop instead of directly passing the whole select inside the
-  InputPrefix's children.
-</Callout>
 
 ## InputGroup
 

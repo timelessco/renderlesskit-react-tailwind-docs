@@ -34,7 +34,13 @@ const Popover: React.FC<PopoverTypes> = ({ children, content, label }) => {
   const popover = usePopoverState({ placement: "top" });
   return (
     <>
-      <PopoverDisclosure className="text-sm mx-2" {...popover}>
+      <PopoverDisclosure
+        as={IconButton}
+        size="sm"
+        variant="secondary"
+        className="text-sm mx-2"
+        {...popover}
+      >
         {children}
       </PopoverDisclosure>
       <ReakitPopover
@@ -108,13 +114,7 @@ const PropsTable: React.FC<PropsTableProps> = ({
                 </code>
                 {description && (
                   <Popover content={description}>
-                    <IconButton
-                      aria-label="Prop description"
-                      size="sm"
-                      variant="secondary"
-                    >
-                      <InfoCircleIcon />
-                    </IconButton>
+                    <InfoCircleIcon aria-label="Prop description" />
                   </Popover>
                 )}
               </Box>
@@ -132,13 +132,7 @@ const PropsTable: React.FC<PropsTableProps> = ({
                       </code>
                     }
                   >
-                    <IconButton
-                      size="sm"
-                      variant="secondary"
-                      aria-label="See full type"
-                    >
-                      <InfoCircleIcon />
-                    </IconButton>
+                    <InfoCircleIcon aria-label="See full type" />
                   </Popover>
                 )}
               </Box>

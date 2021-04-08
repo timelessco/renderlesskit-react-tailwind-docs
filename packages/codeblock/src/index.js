@@ -125,10 +125,6 @@ export const CodeBlock = ({ children, className, live, render, ...props }) => {
   const divWrapper = React.useRef();
   const [top, setTop] = React.useState(0);
 
-  const reactLivescope = {
-    React,
-    ...(typeof window !== "undefined" ? window.__COMPONENTS : {}),
-  };
   useSafeLayoutEffect(() => {
     if (divWrapper?.current) {
       const live = divWrapper.current.children[0];
@@ -136,6 +132,13 @@ export const CodeBlock = ({ children, className, live, render, ...props }) => {
       setTop(liveBB.height <= 90 ? liveBB.height - 10 : liveBB.height);
     }
   }, [divWrapper]);
+
+  if (typeof window === "undefined") return null;
+
+  const reactLivescope = {
+    React,
+    ...(typeof window !== "undefined" ? window.__COMPONENTS : {}),
+  };
 
   if (live) {
     return (

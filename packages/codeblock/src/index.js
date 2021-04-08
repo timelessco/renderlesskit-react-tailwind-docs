@@ -45,7 +45,13 @@ const THEME = {
   ],
 };
 
-export const StaticCode = ({ children, className, highlight, ...props }) => {
+export const StaticCode = ({
+  children,
+  className,
+  highlight,
+  noCopy,
+  ...props
+}) => {
   if (!className) return <code {...props}>{children}</code>;
 
   const highlightedLines = highlight ? highlight.split(",").map(Number) : [];
@@ -53,36 +59,39 @@ export const StaticCode = ({ children, className, highlight, ...props }) => {
   // https://mdxjs.com/guides/syntax-highlighting#all-together
   const language = className.replace(/language-/, "");
   return (
-    <Highlight
-      {...defaultProps}
-      code={children.trim()}
-      language={language}
-      theme={THEME}
-    >
-      {({ className, style, tokens, getLineProps, getTokenProps }) => (
-        <code className={className} style={{ ...style }}>
-          {tokens.map((line, i) => (
-            <div
-              key={i}
-              {...getLineProps({ line, key: i })}
-              style={
-                highlightedLines.includes(i + 1)
-                  ? {
-                      background: "var(--c-highlight)",
-                      margin: "0 -1rem",
-                      padding: "0 1rem",
-                    }
-                  : null
-              }
-            >
-              {line.map((token, key) => (
-                <span key={key} {...getTokenProps({ token, key })} />
-              ))}
-            </div>
-          ))}
-        </code>
-      )}
-    </Highlight>
+    <div className="relative">
+      <Highlight
+        {...defaultProps}
+        code={children.trim()}
+        language={language}
+        theme={THEME}
+      >
+        {({ className, style, tokens, getLineProps, getTokenProps }) => (
+          <code className={className} style={{ ...style }}>
+            {tokens.map((line, i) => (
+              <div
+                key={i}
+                {...getLineProps({ line, key: i })}
+                style={
+                  highlightedLines.includes(i + 1)
+                    ? {
+                        background: "var(--c-highlight)",
+                        margin: "0 -1rem",
+                        padding: "0 1rem",
+                      }
+                    : null
+                }
+              >
+                {line.map((token, key) => (
+                  <span key={key} {...getTokenProps({ token, key })} />
+                ))}
+              </div>
+            ))}
+          </code>
+        )}
+      </Highlight>
+      {!noCopy && <CopyButton code={children.trim()} top={-15} />}
+    </div>
   );
 };
 
@@ -119,7 +128,14 @@ const transformer = (rawCode, language, noInline) => {
   return language === "jsx" && !noInline ? `<>${code}</>` : code;
 };
 
-export const CodeBlock = ({ children, className, live, render, ...props }) => {
+export const CodeBlock = ({
+  children,
+  className,
+  live,
+  render,
+  noCopy,
+  ...props
+}) => {
   const language = className?.replace(/language-/, "");
   const source = children.trim();
   const divWrapper = React.useRef();
@@ -187,5 +203,12 @@ export const CodeBlock = ({ children, className, live, render, ...props }) => {
     );
   }
 
-  return <StaticCode children={source} className={className} {...props} />;
+  return (
+    <StaticCode
+      children={source}
+      noCopy={noCopy}
+      className={className}
+      {...props}
+    />
+  );
 };

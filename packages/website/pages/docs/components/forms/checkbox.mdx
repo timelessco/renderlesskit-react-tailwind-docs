@@ -1,0 +1,45 @@
+import Callout from "@components/Callout";
+import PropsTable from "@components/PropsTable";
+import ComponentLinks from "@components/ComponentLinks";
+import InteractiveCodeblock from "@components/InteractiveCodeblock";
+
+# Checkbox
+
+The Checkbox is used in forms when a user needs to select multiple values from
+several options.
+
+<ComponentLinks github="checkbox" theme="checkbox" story="forms-checkbox" />
+
+## Imports
+
+```js
+import {
+  Checkbox,
+  CheckboxInput,
+  CheckboxLabel,
+  CheckboxIcon,
+  CheckboxText,
+} from "@renderlesskit/react-tailwind";
+```
+
+- **Checkbox** - main checkbox component
+- **CheckboxInput** - [internal] checkbox's input component
+- **CheckboxLabel** - [internal] label for checkbox
+  - **CheckboxIcon** - [internal] renders checkbox's icon
+  - **FormHelperText** - [internal] text for the checkbox label
+
+## Usage
+
+All the form elements of renderlesskit are compatible with `FormField`, thus you
+can directly use any of the elements inside of FormField and it will
+automatically handle all the accessibility & props.
+
+Basic usage.
+
+<InteractiveCodeblock
+  children={({ spreadProps }) =>
+    `<Checkbox${spreadProps}>Label text</Checkbox>`
+  }
+  themeProps={{ size: "checkbox.label.size" }}
+  choiceProps={{ defaultState: ["true", "false", "'indeterminate'"] }}
+/>

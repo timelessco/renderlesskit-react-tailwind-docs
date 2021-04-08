@@ -1,0 +1,278 @@
+import PropsTable from "@components/PropsTable";
+import ComponentLinks from "@components/ComponentLinks";
+import Callout from "@components/Callout";
+import outdent from "outdent";
+import InteractiveCodeblock from "@components/InteractiveCodeblock";
+
+# FormField
+
+FormField provides a cohesive way render form element's states such as
+isInvalid, isDisabled, and isRequired.
+
+<ComponentLinks
+  github="form-field"
+  theme="form-field"
+  story="forms-formfield"
+/>
+
+## Imports
+
+```js
+import {
+  FormField,
+  FormLabel,
+  FormErrorText,
+  FormHelperText,
+  FormLabelValue,
+  FormRequiredText,
+  useFormControl,
+} from "@renderlesskit/react-tailwind";
+```
+
+- **FormField** - main wrapper context
+- **FormLabel** - field's label
+- **FormLabelValue** - renders form element's value
+- **FormHelperText** - renders helper text
+- **FormErrorText** - renders error text when FormField has `isInvalid` set to
+  true
+- **FormRequiredText** - renders when FormField has `isRequired` set to true
+- **useFormControl** - context hook to glue external form elements with
+  FormField's context.
+
+## Usage
+
+All the form elements of renderlesskit are compatible with `FormField`, thus you
+can directly use any of the elements inside of FormField and it will
+automatically handle all the accessibility & props.
+
+Basic usage.
+
+```jsx live
+<FormField id="email">
+  <FormLabel>Enter email address</FormLabel>
+  <Input type="email" />
+  <FormHelperText>Hint text</FormHelperText>
+  <FormErrorText>Email is invalid</FormErrorText>
+</FormField>
+```
+
+## Required form fields
+
+By passing the `isRequired` prop, the Input field will have `aria-required` set
+to true, and the `FormRequiredText` will be shown.
+
+```jsx live
+<FormField id="email-1" isRequired>
+  <FormLabel>
+    Enter email address
+    <FormRequiredText>Required</FormRequiredText>
+  </FormLabel>
+  <Input type="email" />
+  <FormHelperText>Hint text</FormHelperText>
+</FormField>
+```
+
+## Usage with Radios
+
+```jsx live
+<FormField as="fieldset" id="radios">
+  <FormLabel as="legend">Favorite Browser</FormLabel>
+  <RadioGroup defaultState="chrome" className="flex space-x-4">
+    <Radio value="chrome">Chrome</Radio>
+    <Radio value="fireFox">FireFox</Radio>
+    <Radio value="safari">Safari</Radio>
+  </RadioGroup>
+  <FormHelperText>Select which browser you use.</FormHelperText>
+</FormField>
+```
+
+## Usage with Switch
+
+```jsx live
+<FormField id="darkmode">
+  <FormLabel>Enable darkmode?</FormLabel>
+  <Switch />
+  <FormHelperText>
+    <InfoCircleIcon />
+    <span>Switch darkmode</span>
+  </FormHelperText>
+</FormField>
+```
+
+## Usage with slider
+
+Let's take a look at how we can use the `Slider` component with FormField:
+
+First thing you might notice is that we can access the internal state of the
+`FormField` via render props.  
+And we are also utilizing the `FormLabelValue` to render the current value of
+the Slider.
+
+```jsx noInline live
+const SliderExample = () => {
+  const [value, setValue] = React.useState(0);
+
+  return (
+    <FormField id="slider" isInvalid={value > 60}>
+      {({ isInvalid }) => (
+        <>
+          <FormLabel>
+            Slider value
+            <FormLabelValue>{value}</FormLabelValue>
+          </FormLabel>
+          <Slider size="sm" values={[value]} onChange={v => setValue(v[0])} />
+          {!isInvalid && <FormHelperText id="hint">Hint text</FormHelperText>}
+          <FormErrorText>Value is above 60</FormErrorText>
+        </>
+      )}
+    </FormField>
+  );
+};
+
+render(SliderExample);
+```
+
+## Using custom inputs
+
+All the form elements of renderlesskit are compatible with `FromField` but you
+might want to use your own input element or any other external input elements.  
+For these situations we provide two ways to bind your custom input elements to
+FormField.
+
+### Method #1 (render props)
+
+Via the render props API, we expose the a variable called `inputProps` which
+holds all the aria related props which can be directly spread into the input.
+
+```jsx live
+<FormField
+  id="custom-input"
+  isReadOnly={false}
+  isDisabled={false}
+  isInvalid={false}
+>
+  {({ inputProps }) => (
+    <>
+      <FormLabel>Custom input example</FormLabel>
+      <input {...inputProps} className="border border-gray-800" />
+      <FormHelperText>Hint text</FormHelperText>
+    </>
+  )}
+</FormField>
+```
+
+### Method #2 (useFormControl hook)
+
+`useFormControl` provides a much cleaner way to bind a custom input to
+FormField, all the renderlesskit form elements internally uses this hook too.
+
+```jsx noInline live
+const MyInput = ({ disabled, readOnly, isInvalid, ...props }) => {
+  const fieldInputProps = useFormControl({
+    ...props,
+    isDisabled: disabled,
+    isReadOnly: readOnly,
+    isInvalid: isInvalid,
+  });
+
+  return <input {...fieldInputProps} />;
+};
+
+render(
+  <FormField
+    id="custom-input-2"
+    isReadOnly={false}
+    isDisabled={false}
+    isInvalid={false}
+  >
+    <FormLabel>Custom input with hook</FormLabel>
+    <MyInput className="border border-gray-800" />
+    <FormHelperText>Hint text</FormHelperText>
+  </FormField>,
+);
+```
+
+## Integrations
+
+### React Hook Form
+
+This example shows how to integrate renderlesskit Input with react-hook-form
+
+[Explore on CodeSandbox](https://codesandbox.io/s/renderlesskit-react-hook-form-rw5c5?file=/src/App.js)
+
+### Formik
+
+This example shows how to integrate renderlesskit Input with react-hook-form
+
+[Explore on CodeSandbox](https://codesandbox.io/s/renderlesskit-formik-k1k9w)
+
+## API Reference
+
+### FormField
+
+FormField composes [Box](/docs/components/primitives/box)
+
+<PropsTable
+  data={[
+    {
+      name: "id",
+      type: "string",
+      description:
+        "Base id for the FormField which will be cascaded throughout the child component with concatenated unique ids",
+    },
+    {
+      name: "isDisabled",
+      type: "Boolean",
+      description: "if `true` Input will be disabled",
+    },
+    {
+      name: "isRequired",
+      type: "Boolean",
+      description: "if `true` Input will have required & aria-required",
+    },
+    {
+      name: "isReadOnly",
+      type: "Boolean",
+      description: "if `true` Input will have readonly & aria-readonly",
+    },
+    {
+      name: "isInvalid",
+      type: "Boolean",
+      description: "if `true` Input will have invalid & aria-invalid",
+    },
+    
+    {
+      name: "children",
+      typeSimple: "RenderProp",
+      type: `RenderProp<FormFieldContextProps & { inputProps: ReturnType<typeof useFormControl> }>`,
+      description: "if `true` Input will be invalid",
+    },
+
+]} />
+
+### useFormControl
+
+<PropsTable
+  data={[
+    {
+      name: "isDisabled | disabled",
+      type: "Boolean",
+      description: "if `true` Input will be disabled",
+    },
+    {
+      name: "isRequired | required",
+      type: "Boolean",
+      description: "if `true` Input will have required & aria-required",
+    },
+    {
+      name: "isReadOnly | readOnly",
+      type: "Boolean",
+      description: "if `true` Input will have readonly & aria-readonly",
+    },
+    {
+      name: "isInvalid | invalid",
+      type: "Boolean",
+      description: "if `true` Input will have invalid & aria-invalid",
+    },
+  ]}
+/>

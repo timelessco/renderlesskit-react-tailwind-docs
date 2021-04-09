@@ -127,18 +127,16 @@ const useSafeLayoutEffect =
   typeof window !== "undefined" ? React.useLayoutEffect : React.useEffect;
 
 const transformer = (rawCode, language, noInline) => {
-  const code = rawCode;
-  // // remove imports
-  // .replace(/((^|)import[^;]+[; ]+)+/gi, "")
-  // // replace `export default => {*};` with `render(() => {*});`
-  // .replace(
-  //   /export default \(\) => {((.|\n)*)};/,
-  //   "render(() => {$1});"
-  // )
-  // // replace `export default => (*);` with `render(*);`
-  // .replace(/export default \(\) => \(((.|\n)*)\);/, "render($1);")
-  // // replace `export default => *;` with `render(*);`
-  // .replace(/export default \(\) => ((.|\n)*);/, "render($1);");
+  const code = rawCode
+    // remove imports
+    .replace(/((^|)import[^;]+[; ]+)+/gi, "")
+    // replace `export default => {*};` with `render(() => {*});`
+    .replace(/export default \(\) => {((.|\n)*)};/, "render(() => {$1});")
+    // replace `export default => (*);` with `render(*);`
+    .replace(/export default \(\) => \(((.|\n)*)\);/, "render($1);")
+    // replace `export default => *;` with `render(*);`
+    .replace(/export default \(\) => ((.|\n)*);/, "render($1);")
+    .replace(/export default ((.|\n)*);/, "render($1);");
 
   return language === "jsx" && !noInline ? `<>${code}</>` : code;
 };

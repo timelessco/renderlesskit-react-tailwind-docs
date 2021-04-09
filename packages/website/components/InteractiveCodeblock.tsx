@@ -20,8 +20,8 @@ type InteractiveCodeblockProps = {
 };
 
 const selectStyles =
-  "mt-1 block pl-2 pr- py-2 text-sm bg-gray-200 border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md";
-const wrapperStyles = "mt-2 space-x-2 flex items-center";
+  "mt-1 mr-2 block pl-2 pr- py-2 text-sm bg-gray-200 border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md";
+const wrapperStyles = "mt-2 flex items-center flex-wrap";
 
 const InteractiveCodeblock = (props: InteractiveCodeblockProps) => {
   const {

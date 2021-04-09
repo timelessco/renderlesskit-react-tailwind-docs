@@ -13,7 +13,7 @@ export function RegionTable({
       aria-label={ariaLabel}
       aria-labelledby={ariaLabelledBy}
       tabIndex={0}
-      className="relative bg-white mt-8"
+      className="region-table relative mt-8"
     >
       <Box as="table" className="border-0 outline-none" {...props} />
     </Box>

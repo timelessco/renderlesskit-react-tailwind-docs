@@ -1,5 +1,5 @@
 import React from "react";
-import ArrowRight from "./arrow-right";
+import ArrowRight from "./icons/arrow-right";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import cn from "classnames";

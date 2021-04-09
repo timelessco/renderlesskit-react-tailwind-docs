@@ -34,7 +34,7 @@ import {
 Basic usage.
 
 ```jsx live
-<RadioGroup aria-label="fruits" className="flex flex-col space-y-2">
+<RadioGroup ariaLabel="fruits" className="flex flex-col space-y-2">
   <Radio value="apple">apple</Radio>
   <Radio value="orange">Orange</Radio>
   <Radio value="mango">Mango</Radio>
@@ -48,7 +48,7 @@ Radio comes with 3 sizes `sm` `md` `lg`
 <InteractiveCodeblock themeProps={{ size: "radio.label.size" }}>
   {({ spreadProps }) => {
     return outdent`
-      <RadioGroup${spreadProps} aria-label="fruits" className="flex space-x-2">
+      <RadioGroup${spreadProps} ariaLabel="fruits" className="flex space-x-2">
         <Radio value="apple">apple</Radio>
         <Radio value="orange">Orange</Radio>
         <Radio value="mango">Mango</Radio>
@@ -60,7 +60,7 @@ Radio comes with 3 sizes `sm` `md` `lg`
 ## Disabled radios
 
 ```jsx live
-<RadioGroup aria-label="fruits" className="flex space-x-2">
+<RadioGroup ariaLabel="fruits" className="flex space-x-2">
   <Radio value="apple">apple</Radio>
   <Radio value="orange">Orange</Radio>
   <Radio disabled value="mango">
@@ -75,11 +75,7 @@ You can pass `defaultState` to initialize the radio group with a default
 selected value.
 
 ```jsx live
-<RadioGroup
-  defaultState="orange"
-  aria-label="fruits"
-  className="flex space-x-2"
->
+<RadioGroup defaultState="orange" ariaLabel="fruits" className="flex space-x-2">
   <Radio value="apple">apple</Radio>
   <Radio value="orange">Orange</Radio>
   <Radio value="mango">Mango</Radio>
@@ -96,7 +92,7 @@ const Controlled = () => {
       <RadioGroup
         state={state}
         onStateChange={value => setState(value)}
-        aria-label="fruits"
+        ariaLabel="fruits"
         className="flex space-x-2"
       >
         <Radio value="apple">apple</Radio>
@@ -136,7 +132,7 @@ const CustomRadio = props => {
 };
 
 export default () => (
-  <RadioGroup aria-label="fruits" className="flex flex-col space-y-2 w-36">
+  <RadioGroup ariaLabel="fruits" className="flex flex-col space-y-2 w-36">
     <CustomRadio value="apple">apple</CustomRadio>
     <CustomRadio value="orange">Orange</CustomRadio>
     <CustomRadio value="watermelon">Watermelon</CustomRadio>
@@ -153,22 +149,99 @@ export default () => (
 
 ## API Reference
 
-### Checkbox
+### Radio
 
-Checkbox composes reakit's checkbox component
+Radio composes reakit's radio component
 
 <PropsTable
   data={[
-    { name: "size", themeKey: "checkbox.label.size" },
+    { name: "id", type: "string", description: "Base id for the radio group" },
+    {
+      name: "value",
+      type: "string",
+      description:
+        "The value to be used in the radio button. This is the value that will be returned on form submission.	",
+    },
+    { name: "size", themeKey: "radio.label.size", default: "md" },
+    {
+      name: "disabled",
+      type: "boolean",
+      description: "If `true` radio will be disabled",
+    },
+    {
+      name: "focusable",
+      type: "boolean",
+      description: "If `true` radio can be focused",
+    },
+    {
+      name: "checkedIcon",
+      type: "React.ReactNode",
+      description:
+        "React element to render inside `RadioIcon` when radio is checked",
+    },
+    {
+      name: "uncheckedIcon",
+      type: "React.ReactNode",
+      description:
+        "React element to render inside `RadioIcon` when radio is unchecked",
+    },
+    {
+      name: "disabledIcon",
+      type: "React.ReactNode",
+      description:
+        "React element to render inside `RadioIcon` when radio is disabled",
+    },
+  ]}
+/>
+
+### RadioGroup
+
+<PropsTable
+  data={[
+    {
+      name: "state",
+      type: "string",
+      description: "Sets the state of the selected radio",
+    },
     {
       name: "defaultState",
-      typeSimple: "ReakitCheckboxOptions",
-      type: 'boolean | "indeterminate" | (string | number)[] | undefined',
+      type: "string",
+      description: "Sets default state of the selected radio",
     },
     {
       name: "onStateChange",
       typeSimple: "Function",
       type: "(value: CheckboxStatus) => void",
+    },
+    {
+      name: "ariaLabel",
+      type: "string",
+      description: "Sets aria-label in radio group",
+    },
+  ]}
+/>
+
+### RadioIcon
+
+<PropsTable
+  data={[
+    {
+      name: "checkedIcon",
+      type: "React.ReactNode",
+      description:
+        "React element to render inside `RadioIcon` when radio is checked",
+    },
+    {
+      name: "uncheckedIcon",
+      type: "React.ReactNode",
+      description:
+        "React element to render inside `RadioIcon` when radio is unchecked",
+    },
+    {
+      name: "disabledIcon",
+      type: "React.ReactNode",
+      description:
+        "React element to render inside `RadioIcon` when radio is disabled",
     },
   ]}
 />

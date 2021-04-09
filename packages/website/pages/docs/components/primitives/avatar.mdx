@@ -1,5 +1,6 @@
 import PropsTable from "@components/PropsTable";
 import ComponentLinks from "@components/ComponentLinks";
+import InteractiveCodeblock from "@components/InteractiveCodeblock";
 
 # Avatar
 
@@ -20,13 +21,14 @@ import {
 
 ## Usage
 
-```jsx live
-<div className="flex space-x-2">
-  <Avatar size="xl" src="https://bit.ly/dan-abramov" name="Dan Abramov" />
-  <Avatar size="xl" src="https://bit.ly/kent-c-dodds" name="Kent Dodds" />
-  <Avatar size="xl" src="https://bit.ly/code-beast" name="Code Beast" />
-</div>
-```
+<InteractiveCodeblock
+  booleanProps={["showBorder"]}
+  themeProps={{ size: "avatar.size", status: "avatar.badge.statuses" }}
+>
+  {({ spreadProps }) =>
+    `<Avatar${spreadProps} src="https://bit.ly/dan-abramov" name="Dan Abramov" />`
+  }
+</InteractiveCodeblock>
 
 ## Avatar sizes
 

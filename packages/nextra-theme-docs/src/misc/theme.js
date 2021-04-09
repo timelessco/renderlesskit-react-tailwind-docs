@@ -6,7 +6,7 @@ import innerText from "react-innertext";
 import "intersection-observer";
 import Observer from "@researchgate/react-intersection-observer";
 
-import CodeBlock from "./code";
+import { CodeBlock } from "codeblock";
 import { useActiveAnchorSet } from "./active-anchor";
 
 // Anchor links

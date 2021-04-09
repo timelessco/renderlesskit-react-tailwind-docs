@@ -1,0 +1,212 @@
+import PropsTable from "@components/PropsTable";
+import ComponentLinks from "@components/ComponentLinks";
+import Callout from "@components/Callout";
+import InteractiveCodeblock from "@components/InteractiveCodeblock";
+
+# Input
+
+<ComponentLinks github="input" theme="input" story="forms-input" />
+
+## Imports
+
+```js
+import {
+  Input,
+  InputGroup,
+  InputPrefix,
+  InputSuffix,
+  InputGroupSuffix,
+  InputGroupPrefix,
+} from "@renderlesskit/react-tailwind";
+```
+
+- **Input** - main input component
+- **InputGroup** - input group is a wrapper to hold InputGroupPrefix/Suffix
+- **InputPrefix** - prefix of the input element
+- **InputSuffix** - suffix of the input element
+- **InputGroupSuffix** - prefix of the input group
+- **InputGroupPrefix** - suffix of the input group
+
+## Usage
+
+Basic usage
+
+<InteractiveCodeblock booleanProps={["isDisabled", "isReadOnly", "isInvalid"]}>
+  {({ spreadProps }) => `<Input placeholder="Enter email"${spreadProps} />`}
+</InteractiveCodeblock>
+
+## Input Prefix/Suffix
+
+You can append or prepend any element inside input. By default we don't give
+spacing to the elements so you have to add spacing as needed.
+
+`InputPrefix` is positioned absolutely within the input.
+
+```jsx live
+<Input>
+  <InputPrefix className="pl-2">https://</InputPrefix>
+  <InputSuffix className="pr-2">.com</InputSuffix>
+</Input>
+```
+
+As you can see clicking on the input's prefix/suffix will focus the input, but
+that might not what you want in all scenarios if you want to render a button or
+something interactive. To disable this behaviour you can use
+`allowPointerEvents`
+
+For example if you want to add a select inside the suffix you can do so like
+this:
+
+```jsx live
+<Input>
+  <InputPrefix className="pl-2">https://</InputPrefix>
+  <InputSuffix allowPointerEvents className="pr-2">
+    <select className="focus:outline-none">
+      <option value=".com">.com</option>
+      <option value=".org">.org</option>
+    </select>
+  </InputSuffix>
+</Input>
+```
+
+## InputGroup
+
+`InputGroup` is used to add addons before or after the `Input` component.
+
+And by using `InputGroupPrefix` we can specify the prefix or suffix.
+
+The main difference between InputGroupPrefix & InputPrefix is that:
+
+- `InputPrefix` is positioned absolutely within the input.
+- `InputGroupPrefix` is positioned adjacent to the input.
+
+```jsx live
+<InputGroup>
+  <InputGroupPrefix className="px-2" children="https://" />
+  <Input />
+  <InputGroupSuffix className="px-2" children=".com" />
+</InputGroup>
+```
+
+Unlike `InputPrefix` where you had to add `allowPointerEvents` to make the
+`InputGroupPrefix` interactive, in InputGroupPrefix you can directly pass any
+interactive components (eg: Button).
+
+Here's a password input example using InputGroupSuffix to attach a toggle
+button.
+
+```jsx noInline live
+const PasswordExample = () => {
+  const [show, setShow] = React.useState(false);
+  const toggle = () => setShow(!show);
+
+  return (
+    <InputGroup>
+      <Input type={show ? "text" : "password"} placeholder="Enter password" />
+      <InputGroupSuffix>
+        <Button
+          size="sm"
+          variant="ghost"
+          className="focus:outline-none hover:bg-transparent"
+          onClick={toggle}
+        >
+          {show ? <EyeClose /> : <EyeOpen />}
+        </Button>
+      </InputGroupSuffix>
+    </InputGroup>
+  );
+};
+
+render(PasswordExample);
+```
+
+Here's an example with all the components combined:
+
+```jsx noInline live
+const InputButton = props => {
+  return (
+    <Button
+      size="sm"
+      variant="ghost"
+      className="transition-none focus:outline-none hover:bg-transparent"
+      {...props}
+    />
+  );
+};
+
+render(
+  <InputGroup>
+    <InputGroupPrefix>
+      <InputButton>Group Prefix</InputButton>
+    </InputGroupPrefix>
+    <Input placeholder="Enter some stuff">
+      <InputPrefix allowPointerEvents>
+        <InputButton>Prefix</InputButton>
+      </InputPrefix>
+      <InputSuffix allowPointerEvents>
+        <InputButton>Suffix</InputButton>
+      </InputSuffix>
+    </Input>
+    <InputGroupSuffix>
+      <InputButton>Group Suffix</InputButton>
+    </InputGroupSuffix>
+  </InputGroup>,
+);
+```
+
+<Callout>
+  If you want to see more demos checkout our [storybook
+  examples](https://renderlesskit-react-tailwind.vercel.app/?path=/story/forms-input--input-kitchen-sink)
+</Callout>
+
+## Integrations
+
+### React Hook Form
+
+This example shows how to integrate renderlesskit Input with react-hook-form
+
+[Explore on CodeSandbox](https://codesandbox.io/s/renderlesskit-react-hook-form-rw5c5?file=/src/App.js)
+
+### Formik
+
+This example shows how to integrate renderlesskit Input with Formik
+
+[Explore on CodeSandbox](https://codesandbox.io/s/renderlesskit-formik-k1k9w)
+
+## API Reference
+
+### Input
+
+Input takes all the native `HTMLInputElement` props plus:
+
+<PropsTable
+  data={[
+    {
+      name: "isDisabled",
+      type: "Boolean",
+      description: "if `true` Input will be disabled",
+    },
+    {
+      name: "isReadOnly",
+      type: "Boolean",
+      description: "if `true` Input will be readonly",
+    },
+    {
+      name: "isInvalid",
+      type: "Boolean",
+      description: "if `true` Input will be invalid",
+    },
+  ]}
+/>
+
+## InputPrefix & InputSuffix
+
+<PropsTable
+  data={[
+    {
+      name: "allowPointerEvents",
+      type: "Boolean",
+      description: "if `true` InputPrefix/Suffix will respond to user events",
+    },
+  ]}
+/>

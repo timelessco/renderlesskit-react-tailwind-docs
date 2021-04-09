@@ -1,0 +1,199 @@
+import Callout from "@components/Callout";
+import PropsTable from "@components/PropsTable";
+import ComponentLinks from "@components/ComponentLinks";
+import InteractiveCodeblock from "@components/InteractiveCodeblock";
+
+# Checkbox
+
+The Checkbox is used in forms when a user needs to select multiple values from
+several options.  
+Checkbox composes [reakit's checkbox](https://reakit.io/docs/checkbox/)
+component.
+
+<ComponentLinks github="checkbox" theme="checkbox" story="forms-checkbox" />
+
+## Imports
+
+```js
+import {
+  Checkbox,
+  CheckboxInput,
+  CheckboxLabel,
+  CheckboxIcon,
+  CheckboxText,
+} from "@renderlesskit/react-tailwind";
+```
+
+- **Checkbox** - main checkbox component
+- **CheckboxInput** - checkbox's input component
+- **CheckboxLabel** - label for checkbox
+  - **CheckboxIcon** - renders checkbox's icon
+  - **FormHelperText** - text for the checkbox label
+
+## Usage
+
+All the form elements of renderlesskit are compatible with `FormField`, thus you
+can directly use any of the elements inside of FormField and it will
+automatically handle all the accessibility & props.
+
+Basic usage.
+
+<InteractiveCodeblock
+  children={({ spreadProps }) =>
+    `<Checkbox${spreadProps}>Label text</Checkbox>`
+  }
+  booleanProps={["disabled"]}
+  themeProps={{ size: "checkbox.label.size" }}
+  choiceProps={{ defaultState: ["true", "false", "'indeterminate'"] }}
+/>
+
+## Checkbox sizes
+
+Checkbox comes with 3 sizes `sm` `md` `lg`
+
+```jsx live
+<Checkbox size="sm">Label text</Checkbox>
+```
+
+## Controlled Checkbox
+
+```jsx noInline live
+const ControlledCheckbox = () => {
+  const [state, onStateChange] = React.useState(false);
+
+  return (
+    <>
+      <Checkbox state={state} onStateChange={onStateChange}>
+        Checkbox
+      </Checkbox>
+      <div>{`Checked: ${state}`}</div>
+    </>
+  );
+};
+
+render(ControlledCheckbox);
+```
+
+## Checkbox Groups
+
+We can keep track of multiple checkbox states and use them as a group.
+
+```jsx noInline live
+const GroupedCheckbox = () => {
+  const [state, onStateChange] = React.useState([]);
+
+  return (
+    <>
+      <div className="mb-4">Choices: {state.join(", ")}</div>
+      <div className="space-x-2">
+        <Checkbox state={state} onStateChange={onStateChange} value="apple">
+          Apple
+        </Checkbox>
+        <Checkbox state={state} onStateChange={onStateChange} value="orange">
+          Orange
+        </Checkbox>
+        <Checkbox state={state} onStateChange={onStateChange} value="mango">
+          Mango
+        </Checkbox>
+      </div>
+    </>
+  );
+};
+
+render(GroupedCheckbox);
+```
+
+## Indeterminate checkboxes
+
+```jsx noInline live
+const IndeterminateExample = () => {
+  const [checkedItems, setCheckedItems] = React.useState([false, false]);
+
+  const allChecked = checkedItems.every(Boolean);
+  const isIndeterminate = checkedItems.some(Boolean) && !allChecked;
+
+  return (
+    <>
+      <Checkbox
+        state={isIndeterminate ? "indeterminate" : allChecked}
+        onStateChange={value => setCheckedItems([value, value])}
+      >
+        Parent Checkbox
+      </Checkbox>
+      <div className="flex flex-col pl-6 mt-1">
+        <Checkbox
+          state={checkedItems[0]}
+          onStateChange={value => setCheckedItems([value, checkedItems[1]])}
+        >
+          Child Checkbox 1
+        </Checkbox>
+        <Checkbox
+          state={checkedItems[1]}
+          onStateChange={value => setCheckedItems([checkedItems[0], value])}
+        >
+          Child Checkbox 2
+        </Checkbox>
+      </div>
+    </>
+  );
+};
+
+render(IndeterminateExample);
+```
+
+<Callout>
+  Checkout our storybook source code to [see more
+  examples](https://github.com/timelessco/renderlesskit-react-tailwind/blob/main/src/checkbox/stories/Checkbox.stories.tsx#L136)
+</Callout>
+
+## Customizing Checkboxes
+
+To customize the checkbox we can use render props api to access the internal
+state of the checkbox & change it's appearance as we like with composing
+`CheckboxInput`, `CheckboxLabel` etc etc components like so:
+
+```jsx noInline live
+const CustomCheckbox = () => {
+  return (
+    <Checkbox size="lg">
+      {({ state }) => (
+        <CheckboxLabel>
+          <CheckboxInput />
+          <CheckboxIcon className="bg-transparent border-none">
+            {state ? "😃" : "😢"}
+          </CheckboxIcon>
+          <CheckboxText>Checkbox</CheckboxText>
+        </CheckboxLabel>
+      )}
+    </Checkbox>
+  );
+};
+
+render(CustomCheckbox);
+```
+
+## Integrations
+
+// TBD
+
+## API Reference
+
+### Checkbox
+
+Checkbox composes reakit's checkbox component
+
+<PropsTable
+  data={[
+    { name: "size", themeKey: "checkbox.label.size" },
+    {
+      name: "defaultState",
+      typeSimple: "ReakitCheckboxOptions",
+      type: 'boolean | "indeterminate" | (string | number)[] | undefined',
+    },
+    {
+      name: "onStateChange",
+      typeSimple: "Function",
+      type: "(value: CheckboxStatus) => void",
+    },
+  ]}
+/>

@@ -5,7 +5,7 @@
     "build": "next build",
     "dev": "cross-env DEBUG=true next dev",
     "start": "next start",
-    "vercel-build": "yarn workspace nextra-theme-docs run build && STORK_PATH=$(pwd)/bin/stork.bin  yarn build"
+    "vercel-build": "yarn workspace codeblock run build && yarn workspace nextra-theme-docs run build && STORK_PATH=$(pwd)/bin/stork.bin  yarn build"
   },
   "dependencies": {
     "@renderlesskit/react-tailwind": "^0.0.1-alpha.8",
@@ -13,6 +13,7 @@
     "lodash.get": "^4.4.2",
     "next": "10.1.2",
     "nextra": "^0.4.4",
+    "outdent": "^0.8.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-icons": "^4.2.0"

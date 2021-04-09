@@ -1,6 +1,7 @@
 import Callout from "@components/Callout";
 import PropsTable from "@components/PropsTable";
 import ComponentLinks from "@components/ComponentLinks";
+import InteractiveCodeblock from "@components/InteractiveCodeblock";
 
 # Tag
 
@@ -20,9 +21,15 @@ import { Tag, TagGroup } from "@renderlesskit/react-tailwind";
 
 ## Usage
 
-```jsx live
-<Tag>javascript</Tag>
-```
+<InteractiveCodeblock
+  children={({ spreadProps }) => `<Tag${spreadProps}>Hello world</Tag>`}
+  booleanProps={["closable"]}
+  themeProps={{ size: "tag.size", variant: "tag.variant" }}
+  choiceProps={{
+    prefix: ["<SearchIcon />", "<ClockIcon />"],
+    suffix: ["<SearchIcon />", "<ClockIcon />"],
+  }}
+/>
 
 ## Tag Variants
 

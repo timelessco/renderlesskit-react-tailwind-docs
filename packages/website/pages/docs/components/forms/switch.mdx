@@ -1,0 +1,133 @@
+import PropsTable from "@components/PropsTable";
+import ComponentLinks from "@components/ComponentLinks";
+import Callout from "@components/Callout";
+import InteractiveCodeblock from "@components/InteractiveCodeblock";
+
+# Switch
+
+<ComponentLinks github="switch" theme="switch" story="forms-switch" />
+
+## Imports
+
+```js
+import {
+  Switch,
+  SwitchLabel,
+  SwitchInput,
+} from "@renderlesskit/react-tailwind";
+```
+
+- **Switch** - main switch component
+- **SwitchLabel** - label for switch
+- **SwitchInput** - native input element for switch
+
+## Usage
+
+Basic usage
+
+<InteractiveCodeblock
+  booleanProps={["defaultState", "isDisabled", "isReadOnly", "isInvalid"]}
+  themeProps={{ size: "switch.icon.wrapper.size" }}
+>
+  {({ spreadProps }) => `<Switch${spreadProps} />`}
+</InteractiveCodeblock>
+
+## Switch sizes
+
+Switch comes with 4 sizes `sm` `md` `lg` `xl`
+
+```jsx live
+<Switch size="sm" />
+```
+
+## Switch with label
+
+If we pass a string children in switch it will automatically render it inside
+the SwitchLabel.
+
+```jsx live
+<Switch>Label text</Switch>
+```
+
+## Usage with FormField
+
+```jsx live
+<FormField id="notif-alerts">
+  <FormLabel>Enable notifications?</FormLabel>
+  <Switch />
+</FormField>
+```
+
+## Controlled switch
+
+```jsx noInline live
+const ControlledExample = () => {
+  const [state, setState] = React.useState(false);
+
+  return (
+    <Switch state={state} onStateChange={() => setState(!state)}>
+      {state ? "On" : "Off"}
+    </Switch>
+  );
+};
+
+export default ControlledExample;
+```
+
+## Customizing
+
+To customize the switch we can use render props api to access the internal state
+of the checkbox & change it's appearance as we like by composing `SwitchInput`,
+`SwitchLabel`.
+
+If you don't need to access the internal state of the switch, it's also possible
+to directly pass all the jsx inside of the children without the render function.
+
+```jsx live
+<Switch>
+  {({ state }) => (
+    <SwitchLabel className="inline-flex items-center p-2 bg-gray-100 rounded-lg">
+      <SwitchInput />
+      <SwitchIcon />
+      <span className="ml-2 text-sm text-gray-800 select-none">
+        {state ? "Dark Mode" : "Light Mode"}
+      </span>
+    </SwitchLabel>
+  )}
+</Switch>
+```
+
+## Integrations
+
+// TBD
+
+## API Reference
+
+### Switch
+
+Input takes all the native `HTMLInputElement` props plus:
+
+<PropsTable
+  data={[
+    {
+      name: "isDisabled",
+      type: "Boolean",
+      description: "if `true` switch will be disabled",
+    },
+    {
+      name: "isReadOnly",
+      type: "Boolean",
+      description: "if `true` switch will be readOnly",
+    },
+    {
+      name: "isInvalid",
+      type: "Boolean",
+      description: "if `true` switch will have aria-invalid set",
+    },
+    {
+      name: "isRequired",
+      type: "Boolean",
+      description: "if `true` switch will be required",
+    },
+  ]}
+/>

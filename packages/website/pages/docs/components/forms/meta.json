@@ -2,5 +2,6 @@
   "input": "> Input",
   "form-field": "> FormField",
   "checkbox": "> Checkbox",
-  "radio": "> Radio"
+  "radio": "> Radio",
+  "switch": "> Switch"
 }

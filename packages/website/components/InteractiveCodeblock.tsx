@@ -88,6 +88,7 @@ const InteractiveCodeblock = (props: InteractiveCodeblockProps) => {
           const themeKey = themeProps[name];
           return (
             <select
+              key={name}
               name={name}
               className={selectStyles}
               value={themeStates[name]}
@@ -115,6 +116,7 @@ const InteractiveCodeblock = (props: InteractiveCodeblockProps) => {
 
           return (
             <select
+              key={name}
               name={name}
               className={selectStyles}
               value={choiceStates[name]}

@@ -1,10 +1,7 @@
-import outdent from "outdent";
-import Callout from "@components/Callout";
 import PropsTable from "@components/PropsTable";
 import ComponentLinks from "@components/ComponentLinks";
-import InteractiveCodeblock from "@components/InteractiveCodeblock";
 
-# Badge
+# Progress
 
 Progress is used to display the progress status for a task that takes a long
 time or consists of several steps.
@@ -14,8 +11,16 @@ time or consists of several steps.
 ## Imports
 
 ```js
-import { Progress } from "@renderlesskit/react-tailwind";
+import {
+  Progress,
+  ProgressBar,
+  ProgressTrack,
+} from "@renderlesskit/react-tailwind";
 ```
+
+- **Progress** - main progress component
+- **ProgressBar** - progress bar component
+- **ProgressTrack** - progress track component
 
 ## Usage
 
@@ -31,8 +36,7 @@ import { Progress } from "@renderlesskit/react-tailwind";
 
 ## Indeterminate progress
 
-By setting the progress value prop to null, progress' state sets to
-indeterminate
+By setting the value prop to null, progress' state becomes indeterminate
 
 ```jsx live
 <Progress value={null} />

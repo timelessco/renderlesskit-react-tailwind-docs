@@ -1,3 +1,4 @@
 {
-  "progress": "> Progress"
+  "progress": "> Progress",
+  "circular-progress": "> CircularProgress"
 }

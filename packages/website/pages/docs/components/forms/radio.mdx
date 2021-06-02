@@ -1,0 +1,247 @@
+import Callout from "@components/Callout";
+import PropsTable from "@components/PropsTable";
+import ComponentLinks from "@components/ComponentLinks";
+import outdent from "outdent";
+import InteractiveCodeblock from "@components/InteractiveCodeblock";
+
+# Radio
+
+Radios are used when only one choice may be selected in a series of options.  
+Radio composes [reakit's checkbox](https://reakit.io/docs/radio/) component.
+
+<ComponentLinks github="radio" theme="radio" story="forms-radio" />
+
+## Imports
+
+```js
+import {
+  Radio,
+  RadioIcon,
+  RadioInput,
+  RadioGroup,
+  RadioLabel,
+} from "@renderlesskit/react-tailwind";
+```
+
+- **Radio** - main radio component
+- **RadioInput** - radio's internal input component
+- **RadioLabel** - label for radio
+  - **RadioIcon** - renders radio's icon
+- **RadioGroup** - groups multiple radios together
+
+## Usage
+
+Basic usage.
+
+```jsx live
+<RadioGroup ariaLabel="fruits" className="flex flex-col space-y-2">
+  <Radio value="apple">apple</Radio>
+  <Radio value="orange">Orange</Radio>
+  <Radio value="mango">Mango</Radio>
+</RadioGroup>
+```
+
+## Radio sizes
+
+Radio comes with 3 sizes `sm` `md` `lg`
+
+<InteractiveCodeblock themeProps={{ size: "radio.label.size" }}>
+  {({ spreadProps }) => {
+    return outdent`
+      <RadioGroup${spreadProps} ariaLabel="fruits" className="flex space-x-2">
+        <Radio value="apple">apple</Radio>
+        <Radio value="orange">Orange</Radio>
+        <Radio value="mango">Mango</Radio>
+      </RadioGroup>
+  `;
+  }}
+</InteractiveCodeblock>
+
+## Disabled radios
+
+```jsx live
+<RadioGroup ariaLabel="fruits" className="flex space-x-2">
+  <Radio value="apple">apple</Radio>
+  <Radio value="orange">Orange</Radio>
+  <Radio disabled value="mango">
+    Mango
+  </Radio>
+</RadioGroup>
+```
+
+## Default selected
+
+You can pass `defaultState` to initialize the radio group with a default
+selected value.
+
+```jsx live
+<RadioGroup defaultState="orange" ariaLabel="fruits" className="flex space-x-2">
+  <Radio value="apple">apple</Radio>
+  <Radio value="orange">Orange</Radio>
+  <Radio value="mango">Mango</Radio>
+</RadioGroup>
+```
+
+## Controlled radio
+
+```jsx noInline live
+const Controlled = () => {
+  const [state, setState] = React.useState("mango");
+  return (
+    <Box>
+      <RadioGroup
+        state={state}
+        onStateChange={value => setState(value)}
+        ariaLabel="fruits"
+        className="flex space-x-2"
+      >
+        <Radio value="apple">apple</Radio>
+        <Radio value="orange">Orange</Radio>
+        <Radio value="mango">Mango</Radio>
+      </RadioGroup>
+      <Button
+        size="sm"
+        className="bg-orange-500 mt-2"
+        onClick={() => setState("orange")}
+      >
+        Change to Orange
+      </Button>
+    </Box>
+  );
+};
+
+export default Controlled;
+```
+
+## Customizing radio
+
+To customize the appearance of the `Radio` component we can simply pass down
+children components (RadioLabel, RadioInput, RadioIcon) for more control.
+
+```jsx noInline live
+const CustomRadio = props => {
+  return (
+    <Radio {...props}>
+      <RadioLabel className="px-2 py-1 rounded hover:bg-gray-100 focus-within:outline-none focus-within:ring-2 focus-within:ring-gray-600">
+        <RadioInput />
+        <RadioIcon checkedIcon={<CheckCircleIcon />} />
+        {props.children}
+      </RadioLabel>
+    </Radio>
+  );
+};
+
+export default () => (
+  <RadioGroup ariaLabel="fruits" className="flex flex-col space-y-2 w-36">
+    <CustomRadio value="apple">apple</CustomRadio>
+    <CustomRadio value="orange">Orange</CustomRadio>
+    <CustomRadio value="watermelon">Watermelon</CustomRadio>
+    <CustomRadio value="grapes" disabled>
+      Grapes
+    </CustomRadio>
+  </RadioGroup>
+);
+```
+
+## Integrations
+
+// TBD
+
+## API Reference
+
+### Radio
+
+Radio composes reakit's radio component
+
+<PropsTable
+  data={[
+    { name: "id", type: "string", description: "Base id for the radio group" },
+    {
+      name: "value",
+      type: "string",
+      description:
+        "The value to be used in the radio button. This is the value that will be returned on form submission.	",
+    },
+    { name: "size", themeKey: "radio.label.size", default: "md" },
+    {
+      name: "disabled",
+      type: "boolean",
+      description: "If `true` radio will be disabled",
+    },
+    {
+      name: "focusable",
+      type: "boolean",
+      description: "If `true` radio can be focused",
+    },
+    {
+      name: "checkedIcon",
+      type: "React.ReactNode",
+      description:
+        "React element to render inside `RadioIcon` when radio is checked",
+    },
+    {
+      name: "uncheckedIcon",
+      type: "React.ReactNode",
+      description:
+        "React element to render inside `RadioIcon` when radio is unchecked",
+    },
+    {
+      name: "disabledIcon",
+      type: "React.ReactNode",
+      description:
+        "React element to render inside `RadioIcon` when radio is disabled",
+    },
+  ]}
+/>
+
+### RadioGroup
+
+<PropsTable
+  data={[
+    {
+      name: "state",
+      type: "string",
+      description: "Sets the state of the selected radio",
+    },
+    {
+      name: "defaultState",
+      type: "string",
+      description: "Sets default state of the selected radio",
+    },
+    {
+      name: "onStateChange",
+      typeSimple: "Function",
+      type: "(value: CheckboxStatus) => void",
+    },
+    {
+      name: "ariaLabel",
+      type: "string",
+      description: "Sets aria-label in radio group",
+    },
+  ]}
+/>
+
+### RadioIcon
+
+<PropsTable
+  data={[
+    {
+      name: "checkedIcon",
+      type: "React.ReactNode",
+      description:
+        "React element to render inside `RadioIcon` when radio is checked",
+    },
+    {
+      name: "uncheckedIcon",
+      type: "React.ReactNode",
+      description:
+        "React element to render inside `RadioIcon` when radio is unchecked",
+    },
+    {
+      name: "disabledIcon",
+      type: "React.ReactNode",
+      description:
+        "React element to render inside `RadioIcon` when radio is disabled",
+    },
+  ]}
+/>

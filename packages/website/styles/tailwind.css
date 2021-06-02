@@ -5,3 +5,23 @@
 ul {
   margin-top: 0 !important;
 }
+
+.callout p {
+  line-height: 1.3;
+}
+
+.dark .region-table {
+  @apply bg-transparent text-white;
+}
+.dark .component-links > a {
+  @apply text-white;
+}
+.dark select {
+  @apply text-white bg-gray-800;
+}
+.dark tr {
+  @apply bg-transparent;
+}
+.dark th {
+  @apply text-white;
+}

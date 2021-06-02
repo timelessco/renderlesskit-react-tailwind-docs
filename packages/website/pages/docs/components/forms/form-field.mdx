@@ -129,7 +129,7 @@ const SliderExample = () => {
   );
 };
 
-render(SliderExample);
+export default SliderExample;
 ```
 
 ## Using custom inputs
@@ -178,7 +178,7 @@ const MyInput = ({ disabled, readOnly, isInvalid, ...props }) => {
   return <input {...fieldInputProps} />;
 };
 
-render(
+export default () => (
   <FormField
     id="custom-input-2"
     isReadOnly={false}

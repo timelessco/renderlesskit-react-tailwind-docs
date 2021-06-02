@@ -21,7 +21,11 @@ After setting up tailwind in your project, all you need to do inside your
 const { preset } = require("@renderlesskit/react-tailwind/preset");
 
 module.exports = preset({
-  /* your normal tailwind config */
+  // your normal tailwind config
+  purge: [
+    // Make sure to add this purge
+    "./node_modules/\\@renderlesskit/react-tailwind/dist/esm/theme/defaultTheme/*.js",
+  ],
 });
 ```
 

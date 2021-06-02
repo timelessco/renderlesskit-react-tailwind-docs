@@ -42,7 +42,7 @@ Basic usage.
   children={({ spreadProps }) =>
     `<Checkbox${spreadProps}>Label text</Checkbox>`
   }
-  booleanProps={["disabled"]}
+  booleanProps={["isDisabled"]}
   themeProps={{ size: "checkbox.label.size" }}
   choiceProps={{ defaultState: ["true", "false", "'indeterminate'"] }}
 />
@@ -71,7 +71,7 @@ const ControlledCheckbox = () => {
   );
 };
 
-render(ControlledCheckbox);
+export default ControlledCheckbox;
 ```
 
 ## Checkbox Groups
@@ -100,7 +100,7 @@ const GroupedCheckbox = () => {
   );
 };
 
-render(GroupedCheckbox);
+export default GroupedCheckbox;
 ```
 
 ## Indeterminate checkboxes
@@ -138,7 +138,7 @@ const IndeterminateExample = () => {
   );
 };
 
-render(IndeterminateExample);
+export default IndeterminateExample;
 ```
 
 <Callout>
@@ -169,7 +169,7 @@ const CustomCheckbox = () => {
   );
 };
 
-render(CustomCheckbox);
+export default CustomCheckbox;
 ```
 
 ## Integrations

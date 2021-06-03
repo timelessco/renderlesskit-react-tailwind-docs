@@ -1,0 +1,132 @@
+import PropsTable from "@components/PropsTable";
+import ComponentLinks from "@components/ComponentLinks";
+
+# CircularProgress
+
+The CircularProgress component is used to indicate the progress for determinate
+and indeterminate processes.
+
+<ComponentLinks
+  github="circular-progress"
+  theme="circularProgress"
+  story="feedback-circularprogress"
+/>
+
+## Imports
+
+```js
+import {
+  CircularProgress,
+  CircularProgressBar,
+  CircularProgressWrapper,
+} from "@renderlesskit/react-tailwind";
+```
+
+- **CircularProgress** - main progress component
+- **CircularProgressBar** - progress bar component
+- **CircularProgressWrapper** - progress track component
+
+## Usage
+
+```jsx live
+<CircularProgress value={40} />
+```
+
+## Min max values
+
+```jsx live
+<CircularProgress min={10} max={40} value={35} />
+```
+
+## Indeterminate progress
+
+By setting the value prop to null, progress' state becomes indeterminate
+
+```jsx live
+<CircularProgress value={null} />
+```
+
+## CircularProgress sizes
+
+CircularProgress comes with 3 sizes `sm` `md` & `lg`
+
+```jsx live
+<div className="flex items-center space-x-2">
+  <CircularProgress size="sm" value={20} />
+  <CircularProgress size="md" value={30} />
+  <CircularProgress size="lg" value={40} />
+</div>
+```
+
+## Customizing CircularProgress
+
+To customize the appearance of the CircularProgress component we can simply pass
+down children components (CircularProgressWrapper, CircularProgressBar) for more
+control.
+
+```jsx live noInline
+const CustomProgress = () => {
+  const [value, setValue] = React.useState(10);
+
+  return (
+    <>
+      <CircularProgress value={value} size="lg">
+        <CircularProgressWrapper>
+          <CircularProgressBar
+            trackStyle="text-red-300"
+            innerTrackStyle="text-red-800"
+          />
+        </CircularProgressWrapper>
+      </CircularProgress>
+
+      <br />
+      <ButtonGroup size="sm">
+        <Button onClick={() => setValue(prev => prev + 10)}>+</Button>
+        <Button onClick={() => setValue(prev => prev - 10)}>-</Button>
+      </ButtonGroup>
+    </>
+  );
+};
+
+export default CustomProgress;
+```
+
+## API Reference
+
+<PropsTable
+  data={[
+    { name: "size", themeKey: "progress.track.size", default: "md" },
+    {
+      name: "value",
+      type: "number",
+      description: "Sets current progress value",
+    },
+    {
+      name: "min",
+      type: "number",
+      description: "Minium value of progress",
+    },
+    {
+      name: "max",
+      type: "number",
+      description: "Maximum value of progress",
+    },
+  ]}
+/>
+
+### CircularProgressBar
+
+<PropsTable
+  data={[
+    {
+      name: "trackStyle",
+      type: "string",
+      description: "Sets track styles",
+    },
+    {
+      name: "innerTrackStyle",
+      type: "string",
+      description: "Sets Inner track styles",
+    },
+  ]}
+/>

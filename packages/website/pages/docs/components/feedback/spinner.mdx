@@ -1,0 +1,65 @@
+import PropsTable from "@components/PropsTable";
+import ComponentLinks from "@components/ComponentLinks";
+
+# Spinner
+
+Spinners provide a visual cue that an action is either processing, awaiting a
+course of change or a result.
+
+<ComponentLinks github="spinner" theme="spinner" story="feedback-spinner" />
+
+## Imports
+
+```js
+import { Spinner } from "@renderlesskit/react-tailwind";
+```
+
+## Usage
+
+```jsx live
+<Spinner />
+```
+
+## Spinner sizes
+
+Spinner comes with 5 sizes `xs` `sm` `md` `lg` & `xl`
+
+```jsx live
+<div className="flex items-center space-x-2">
+  <Spinner size="xs" />
+  <Spinner size="sm" />
+  <Spinner size="md" />
+  <Spinner size="lg" />
+  <Spinner size="xl" />
+</div>
+```
+
+## Show stroke
+
+To show the subtle stroke around the spinner we can use the `stroke` which
+accepts `visible` or `transparent` values
+
+```jsx live
+<Spinner size="lg" stroke="visible" />
+```
+
+## API Reference
+
+<PropsTable
+  data={[
+    { name: "size", themeKey: "spinner.size", default: "md" },
+    {
+      name: "stroke",
+      type: "visible | transparent",
+      default: "transparent",
+      description: "Sets the visibility of the stroke",
+    },
+    {
+      name: "label",
+      type: "string",
+      default: "Loading...",
+      description:
+        "For accessibility, it is important to add a fallback loading text. This text will be visible to screen readers.",
+    },
+  ]}
+/>

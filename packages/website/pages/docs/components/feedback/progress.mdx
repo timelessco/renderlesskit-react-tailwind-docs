@@ -1,0 +1,107 @@
+import PropsTable from "@components/PropsTable";
+import ComponentLinks from "@components/ComponentLinks";
+
+# Progress
+
+Progress is used to display the progress status for a task that takes a long
+time or consists of several steps.
+
+<ComponentLinks github="progress" theme="progress" story="feedback-progress" />
+
+## Imports
+
+```js
+import {
+  Progress,
+  ProgressBar,
+  ProgressTrack,
+} from "@renderlesskit/react-tailwind";
+```
+
+- **Progress** - main progress component
+- **ProgressBar** - progress bar component
+- **ProgressTrack** - progress track component
+
+## Usage
+
+```jsx live
+<Progress value={40} />
+```
+
+## Min max values
+
+```jsx live
+<Progress min={10} max={40} value={35} />
+```
+
+## Indeterminate progress
+
+By setting the value prop to null, progress' state becomes indeterminate
+
+```jsx live
+<Progress value={null} />
+```
+
+## Progress sizes
+
+Progress comes with 4 sizes `sm` `md` `lg` & `xl`
+
+```jsx live
+<div className="flex flex-col space-y-2">
+  <Progress size="sm" value={20} />
+  <Progress size="md" value={30} />
+  <Progress size="lg" value={40} />
+  <Progress size="xl" value={50} />
+</div>
+```
+
+## Customizing Progress
+
+To customize the appearance of the Progress component we can simply pass down
+children components (ProgressTrack, ProgressBar) for more control.
+
+```jsx live noInline
+const CustomProgress = () => {
+  const [value, setValue] = React.useState(10);
+
+  return (
+    <>
+      <Progress value={value} size="md">
+        <ProgressTrack style={{ background: "orange" }}>
+          <ProgressBar />
+        </ProgressTrack>
+      </Progress>
+
+      <ButtonGroup size="sm">
+        <Button onClick={() => setValue(prev => prev + 10)}>+</Button>
+        <Button onClick={() => setValue(prev => prev - 10)}>-</Button>
+      </ButtonGroup>
+    </>
+  );
+};
+
+export default CustomProgress;
+```
+
+## API Reference
+
+<PropsTable
+  data={[
+    { name: "size", themeKey: "progress.track.size", default: "md" },
+    {
+      name: "value",
+      type: "number",
+      description: "Sets current progress value",
+    },
+    {
+      name: "min",
+      type: "number",
+      description: "Minium value of progress",
+    },
+    {
+      name: "max",
+      type: "number",
+      description: "Maximum value of progress",
+    },
+  ]}
+/>

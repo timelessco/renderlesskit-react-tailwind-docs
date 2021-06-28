@@ -1,0 +1,127 @@
+import PropsTable from "@components/PropsTable";
+import ComponentLinks from "@components/ComponentLinks";
+import Callout from "@components/Callout";
+import InteractiveCodeblock from "@components/InteractiveCodeblock";
+
+# Textarea
+
+The Textarea component allows you to easily create multi-line text inputs.
+
+<ComponentLinks github="textarea" theme="textarea" story="forms-textarea" />
+
+## Imports
+
+```js
+import { Textarea } from "@renderlesskit/react-tailwind";
+```
+
+- **Textarea** - main textarea component
+
+## Usage
+
+Basic usage
+
+<InteractiveCodeblock booleanProps={["isDisabled", "isReadOnly", "isInvalid"]}>
+  {({ spreadProps }) =>
+    `<Textarea placeholder="Give us your feedback"${spreadProps} />`
+  }
+</InteractiveCodeblock>
+
+## Auto Resize
+
+By setting autoSize prop the textarea will increase it's size according to the
+content.
+
+```jsx live
+<Textarea autoSize />
+```
+
+## Resize direction
+
+`resize` prop contarints the resize direction of the textarea, It can accept 3
+values `both | vertical | horizontal | none`
+
+```jsx live
+<Textarea resize="none" defaultValue="Not Resizable" />
+<Textarea resize="both" defaultValue="Resizable on both axis" />
+<Textarea resize="vertical" defaultValue="Resizable only on Y axis" />
+<Textarea resize="horizontal" defaultValue="Resizable only on X axis" />
+```
+
+## Cols and Rows
+
+The following example show a textarea, with a set numbers of rows and columns
+and some default content. Notice that even when autoSize is enabled the textarea
+won't expand more than 5 rows.
+
+```jsx live
+<Textarea
+  autoSize
+  rowsMax="5"
+  rowsMin="2"
+  cols="50"
+  defaultValue="Set numbers of rows and cols"
+/>
+```
+
+## Integrations
+
+### React Hook Form
+
+This example shows how to integrate renderlesskit Input with react-hook-form
+
+[Explore on CodeSandbox](https://codesandbox.io/s/renderlesskit-react-hook-form-textarea-9b39v?file=/src/App.js)
+
+### Formik
+
+This example shows how to integrate renderlesskit Input with Formik
+
+[Explore on CodeSandbox](https://codesandbox.io/s/renderlesskit-formik-textarea-oqif8)
+
+## API Reference
+
+### Input
+
+Input takes all the native `HTMLTextareaElement` props plus:
+
+<PropsTable
+  data={[
+    {
+      name: "isDisabled",
+      type: "Boolean",
+      description: "if `true` Input will be disabled",
+    },
+    {
+      name: "isReadOnly",
+      type: "Boolean",
+      description: "if `true` Input will be readonly",
+    },
+    {
+      name: "isInvalid",
+      type: "Boolean",
+      description: "if `true` Input will be invalid",
+    },
+    {
+      name: "autoSize",
+      type: "Boolean",
+      defaultValue: "false",
+      description:
+        "if `true` textarea will automatically resize based on content",
+    },
+    {
+      name: "rowsMax",
+      type: "number",
+      description: "Sets max numbers of rows in textarea",
+    },
+    {
+      name: "rowsMin",
+      type: "number",
+      description: "Sets min numbers of rows in textarea",
+    },
+    {
+      name: "cols",
+      type: "number",
+      description: "Sets numbers of cols in textarea",
+    },
+  ]}
+/>

@@ -3,5 +3,6 @@
   "form-field": "> FormField",
   "checkbox": "> Checkbox",
   "radio": "> Radio",
-  "switch": "> Switch"
+  "switch": "> Switch",
+  "slider": "> Slider"
 }

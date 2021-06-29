@@ -2,8 +2,8 @@ import Image from "next/image";
 
 # TypeScript Support
 
-Renderlesskit provides a full typesafe theming system which can be help you get
-better intellisense and DX overall.
+Renderlesskit provides a full typesafe theming system which can help you get
+better intellisense while working with the components.
 
 In this guide we are going to see how to setup TypeScript, and see how we can
 add extra typesafe variants to component themes.
@@ -13,10 +13,15 @@ we can infer it's types.
 
 ## Creating theme file
 
+`extendTheme` is an
+[identity function](https://www.typescriptlang.org/docs/handbook/2/generics.html#hello-world-of-generics)
+which helps us infer the type of the customTheme, and provide intellisense.
+
 ```ts
 // my-theme.ts
+import { extendTheme } from "@renderlesski/react-tailwind";
 
-const customTheme = {
+export const customTheme = extendTheme({
   extend: {
     buttton: {
       variants: {
@@ -24,9 +29,7 @@ const customTheme = {
       },
     },
   },
-};
-
-export default customTheme;
+});
 ```
 
 ## Creating declaration file
@@ -39,9 +42,9 @@ for example.
 ```ts
 // global.d.ts
 import { DefaultTheme } from "@renderlesskit/react-tailwind";
-import theme from "./my-theme";
+import { customTheme } from "./my-theme";
 
-type UserTheme = typeof theme.extend;
+type UserTheme = typeof customTheme.extend;
 
 declare global {
   namespace Renderlesskit {

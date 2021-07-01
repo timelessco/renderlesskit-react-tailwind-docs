@@ -225,7 +225,11 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
     <React.Fragment>
       <Head>
         {config.font ? (
-          <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Inter"
+            rel="stylesheet"
+            crossOrigin="anonymous"
+          />
         ) : null}
         <title>
           {title}

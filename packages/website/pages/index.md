@@ -1,3 +1,5 @@
 # Renderlesskit React Tailwind
 
-React UI built with @renderleskit/react & tailwind
+A React UI library built using low level headless
+[Renderleskit](https://github.com/timelessco/renderlesskit-react) components &
+[Tailwind](https://tailwindcss.com/).

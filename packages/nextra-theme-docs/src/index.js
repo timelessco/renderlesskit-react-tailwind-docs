@@ -253,7 +253,7 @@ const Layout = ({ filename, config: _config, pageMap, meta, children }) => {
         <nav className="fixed top-0 left-0 right-0 z-20 flex items-center h-16 px-6 bg-white border-b border-gray-200 dark:bg-dark dark:border-gray-900">
           <div className="flex items-center hidden w-full md:block">
             <Link href="/">
-              <a className="inline-block text-current no-underline hover:opacity-75">
+              <a className="inline-block text-xl text-current no-underline hover:opacity-75">
                 {renderComponent(config.logo, { locale })}
               </a>
             </Link>

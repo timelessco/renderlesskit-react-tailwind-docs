@@ -1,6 +1,6 @@
 import React from "react";
 
-export default ({ height = 24, ...props }) => {
+export default ({ height = 20, ...props }) => {
   return (
     <svg
       height={height}

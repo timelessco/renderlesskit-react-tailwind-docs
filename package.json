@@ -12,9 +12,10 @@
     "dev:codeblock": "yarn codeblock run dev",
     "dev:site": "yarn website run dev",
     "start:site": "yarn website run start",
-    "build:site": "yarn website run build",
     "build:theme": "yarn theme run build",
     "build:codeblock": "yarn workspace codeblock run build",
+    "build:site": "yarn website run build",
+    "lint:site": "yarn website run lint",
     "lint": "eslint . --ext .tsx,.ts,.jsx,.js",
     "lint:fix": "eslint . --ext .tsx,.ts,.jsx,.js --fix",
     "format": "prettier --write \"./**/*.{js,ts,css,less,json,md,mdx,html,yml,yaml,pcss,jsx,tsx}\"",
@@ -91,6 +92,7 @@
     "typescript": "^4.3.5"
   },
   "devDependencies": {
+    "eslint-config-next": "^11.0.1",
     "sort-package-json": "^1.50.0"
   },
   "gacp": {

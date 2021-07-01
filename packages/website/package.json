@@ -2,8 +2,9 @@
   "name": "website",
   "version": "0.1.0",
   "scripts": {
-    "build": "next build",
     "dev": "next dev",
+    "lint": "next lint",
+    "build": "next build",
     "start": "next start",
     "vercel-build": "yarn workspace codeblock run build && yarn workspace nextra-theme-docs run build && STORK_PATH=$(pwd)/bin/stork.bin  yarn build"
   },

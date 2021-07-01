@@ -1,6 +1,7 @@
 const { preset } = require("@renderlesskit/react-tailwind/preset");
 
 module.exports = preset({
+  mode: "jit",
   purge: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",

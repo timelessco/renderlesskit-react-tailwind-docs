@@ -5,8 +5,4 @@ const withNextra = require("nextra")({
   stork: true,
 });
 
-module.exports = withNextra({
-  future: {
-    webpack5: true,
-  },
-});
+module.exports = withNextra({});

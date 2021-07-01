@@ -4,5 +4,6 @@
   "checkbox": "> Checkbox",
   "radio": "> Radio",
   "switch": "> Switch",
-  "slider": "> Slider"
+  "slider": "> Slider",
+  "textarea": "> Textarea"
 }

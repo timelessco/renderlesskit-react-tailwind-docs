@@ -9,4 +9,4 @@ package-lock.json
 yarn.lock
 storybook-static
 
-packages/nextra-theme-docs/style.css
+packages/nextra-theme/style.css

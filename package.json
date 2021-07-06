@@ -3,18 +3,19 @@
   "private": true,
   "workspaces": [
     "packages/website",
-    "packages/nextra-theme-docs",
+    "packages/nextra-theme",
     "packages/codeblock"
   ],
   "scripts": {
     "postinstall": "concurrently \"husky install\" \"patch-package\"",
+    "dev": "concurrently yarn:dev:*",
     "dev:theme": "yarn theme run dev",
     "dev:codeblock": "yarn codeblock run dev",
     "dev:site": "yarn website run dev",
-    "start:site": "yarn website run start",
     "build:theme": "yarn theme run build",
     "build:codeblock": "yarn workspace codeblock run build",
     "build:site": "yarn website run build",
+    "start:site": "yarn website run start",
     "lint:site": "yarn website run lint",
     "lint": "eslint . --ext .tsx,.ts,.jsx,.js",
     "lint:fix": "eslint . --ext .tsx,.ts,.jsx,.js --fix",
@@ -26,7 +27,7 @@
     "prepublishOnly": "pinst --disable",
     "postpublish": "pinst --enable",
     "codeblock": "yarn workspace codeblock",
-    "theme": "yarn workspace nextra-theme-docs",
+    "theme": "yarn workspace nextra-theme",
     "website": "yarn workspace website"
   },
   "commitlint": {
@@ -59,17 +60,24 @@
     ]
   },
   "dependencies": {
+    "@babel/cli": "7.14.5",
+    "@babel/core": "^7.14.6",
+    "@babel/plugin-proposal-class-properties": "7.14.5",
+    "@babel/preset-env": "7.14.7",
+    "@babel/preset-react": "7.14.5",
+    "@babel/preset-typescript": "7.14.5",
     "@commitlint/cli": "^12.1.4",
     "@commitlint/config-conventional": "^12.1.4",
-    "@typescript-eslint/eslint-plugin": "^4.28.1",
-    "@typescript-eslint/parser": "^4.28.1",
+    "@typescript-eslint/eslint-plugin": "^4.28.2",
+    "@typescript-eslint/parser": "^4.28.2",
     "all-contributors-cli": "^6.20.0",
     "autoprefixer": "^10.2.6",
     "babel-eslint": "^10.1.0",
     "concurrently": "^6.2.0",
     "cross-env": "^7.0.3",
     "deepmerge": "^4.2.2",
-    "eslint": "^7.29.0",
+    "eslint": "^7.30.0",
+    "eslint-config-next": "^11.0.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-config-react-app": "^6.0.0",
     "eslint-plugin-flowtype": "^5.8.0",
@@ -86,12 +94,9 @@
     "postcss": "^8.3.5",
     "prettier": "^2.2.1",
     "rimraf": "^3.0.2",
+    "sort-package-json": "^1.50.0",
     "tailwindcss": "2.2.4",
     "typescript": "^4.3.5"
-  },
-  "devDependencies": {
-    "eslint-config-next": "^11.0.1",
-    "sort-package-json": "^1.50.0"
   },
   "gacp": {
     "add": false,

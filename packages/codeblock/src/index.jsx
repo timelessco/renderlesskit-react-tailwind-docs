@@ -5,7 +5,6 @@ import Highlight, { defaultProps } from "prism-react-renderer";
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from "react-live";
 import * as Renderlesskit from "@renderlesskit/react-tailwind";
 
-console.log("%c Renderlesskit", "color: #735656", Renderlesskit);
 const THEME = {
   plain: {
     backgroundColor: "transparent",
@@ -126,7 +125,6 @@ const transformer = (rawCode, language, noInline) => {
 };
 
 export const CodeBlock = props => {
-  console.log("%c props", "color: #bfffc8", props);
   const { children, className, live, render, noCopy, noInline, ...rest } =
     props;
   const language = className?.replace(/language-/, "");

@@ -1,5 +1,3 @@
-const BABEL_ENV = process.env.BABEL_ENV;
-
 module.exports = function (api) {
   api.cache(true);
 
@@ -22,10 +20,5 @@ module.exports = function (api) {
   return {
     presets,
     plugins,
-    env: {
-      test: {
-        presets: [["@babel/env", { targets: { node: "current" } }]],
-      },
-    },
   };
 };

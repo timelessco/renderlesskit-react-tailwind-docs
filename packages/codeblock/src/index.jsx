@@ -133,7 +133,6 @@ export const CodeBlock = props => {
   const scope = {
     React,
     ...Renderlesskit,
-    // ...window.__COMPONENTS,
   };
   const liveProviderProps = {
     theme,

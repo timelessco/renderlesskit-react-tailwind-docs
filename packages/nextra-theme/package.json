@@ -5,7 +5,7 @@
   "repository": "https://github.com/timelessco/renderlesskit-react-tailwind-docs.git",
   "license": "MIT",
   "author": "Timeless",
-  "main": "dist/esm/index.js",
+  "main": "dist/index.js",
   "files": [
     "dist/*",
     "index.js",
@@ -14,12 +14,12 @@
     "style.css"
   ],
   "scripts": {
-    "build": "yarn run build:clean && yarn run build:tailwind && yarn run build:layout",
+    "build": "yarn run build:tailwind && yarn run build:layout",
     "build:clean": "rimraf dist",
-    "build:layout": "babel src --extensions .js,.jsx -d dist/esm --source-maps",
+    "build:layout": "babel src --extensions .js,.jsx -d dist --source-maps",
     "build:tailwind": "yarn tailwindcss -i src/styles.css -o style.css --jit --minify",
     "dev": "yarn dev:layout & yarn dev:tailwind",
-    "dev:layout": "microbundle watch src/*.js -f cjs -o dist --no-sourcemap --jsx React.createElement --target node",
+    "dev:layout": "babel --watch src --extensions .js,.jsx -d dist --source-maps",
     "dev:tailwind": "yarn tailwindcss -i src/styles.css -o style.css --watch --jit"
   },
   "dependencies": {

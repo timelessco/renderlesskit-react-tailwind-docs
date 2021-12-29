@@ -52,45 +52,55 @@ const HeaderLink = ({
   );
 };
 
-const H2 = ({ slugger }) => ({ children, ...props }) => {
-  return (
-    <HeaderLink tag="h2" slugger={slugger} withObserver {...props}>
-      {children}
-    </HeaderLink>
-  );
-};
+const H2 =
+  ({ slugger }) =>
+  ({ children, ...props }) => {
+    return (
+      <HeaderLink tag="h2" slugger={slugger} withObserver {...props}>
+        {children}
+      </HeaderLink>
+    );
+  };
 
-const H3 = ({ slugger }) => ({ children, ...props }) => {
-  return (
-    <HeaderLink tag="h3" slugger={slugger} {...props}>
-      {children}
-    </HeaderLink>
-  );
-};
+const H3 =
+  ({ slugger }) =>
+  ({ children, ...props }) => {
+    return (
+      <HeaderLink tag="h3" slugger={slugger} {...props}>
+        {children}
+      </HeaderLink>
+    );
+  };
 
-const H4 = ({ slugger }) => ({ children, ...props }) => {
-  return (
-    <HeaderLink tag="h4" slugger={slugger} {...props}>
-      {children}
-    </HeaderLink>
-  );
-};
+const H4 =
+  ({ slugger }) =>
+  ({ children, ...props }) => {
+    return (
+      <HeaderLink tag="h4" slugger={slugger} {...props}>
+        {children}
+      </HeaderLink>
+    );
+  };
 
-const H5 = ({ slugger }) => ({ children, ...props }) => {
-  return (
-    <HeaderLink tag="h5" slugger={slugger} {...props}>
-      {children}
-    </HeaderLink>
-  );
-};
+const H5 =
+  ({ slugger }) =>
+  ({ children, ...props }) => {
+    return (
+      <HeaderLink tag="h5" slugger={slugger} {...props}>
+        {children}
+      </HeaderLink>
+    );
+  };
 
-const H6 = ({ slugger }) => ({ children, ...props }) => {
-  return (
-    <HeaderLink tag="h6" slugger={slugger} {...props}>
-      {children}
-    </HeaderLink>
-  );
-};
+const H6 =
+  ({ slugger }) =>
+  ({ children, ...props }) => {
+    return (
+      <HeaderLink tag="h6" slugger={slugger} {...props}>
+        {children}
+      </HeaderLink>
+    );
+  };
 
 const A = ({ children, ...props }) => {
   const isExternal = props.href && props.href.startsWith("https://");

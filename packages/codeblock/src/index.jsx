@@ -1,8 +1,9 @@
 import React from "react";
-import useClipboard from "react-use-clipboard";
-import prismTheme from "prism-react-renderer/themes/palenight";
+import { useClipboard } from "@chakra-ui/hooks";
+import theme from "prism-react-renderer/themes/palenight";
 import Highlight, { defaultProps } from "prism-react-renderer";
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from "react-live";
+import * as Renderlesskit from "@renderlesskit/react-tailwind";
 
 const THEME = {
   plain: {
@@ -43,21 +44,6 @@ const THEME = {
       },
     },
   ],
-};
-
-const useCopyButtonOffset = () => {
-  const wrapper = React.useRef();
-  const [top, setTop] = React.useState(0);
-
-  useSafeLayoutEffect(() => {
-    if (wrapper?.current) {
-      const live = wrapper.current.children[0];
-      const liveBB = live.getBoundingClientRect();
-      setTop(liveBB.height <= 90 ? liveBB.height - 10 : liveBB.height);
-    }
-  }, [wrapper]);
-
-  return { top, wrapper };
 };
 
 export const StaticCode = ({
@@ -110,21 +96,18 @@ export const StaticCode = ({
   );
 };
 
-export const CopyButton = ({ code, top }) => {
-  const [isCopied, setCopied] = useClipboard(code);
+export const CopyButton = ({ code }) => {
+  const { hasCopied, onCopy } = useClipboard(code);
+
   return (
     <button
-      className="absolute right-2 transform translate-y-4 -translate-x-2 bg-white text-gray-800 rounded-md px-4 py-1 text-xs"
-      onClick={setCopied}
-      style={{ top: `${top}px` }}
+      className="absolute right-0 px-4 py-1 text-xs text-gray-800 transform -translate-x-2 translate-y-4 bg-white rounded-md -top-2"
+      onClick={onCopy}
     >
-      {isCopied ? "COPIED!" : "COPY"}
+      {hasCopied ? "COPIED!" : "COPY"}
     </button>
   );
 };
-
-const useSafeLayoutEffect =
-  typeof window !== "undefined" ? React.useLayoutEffect : React.useEffect;
 
 const transformer = (rawCode, language, noInline) => {
   const code = rawCode
@@ -141,50 +124,45 @@ const transformer = (rawCode, language, noInline) => {
   return language === "jsx" && !noInline ? `<>${code}</>` : code;
 };
 
-export const CodeBlock = ({
-  children,
-  className,
-  live,
-  render,
-  noCopy,
-  ...props
-}) => {
-  const { wrapper, top } = useCopyButtonOffset();
+export const CodeBlock = props => {
+  const { children, className, live, render, noCopy, noInline, ...rest } =
+    props;
   const language = className?.replace(/language-/, "");
-  const source = children.trim();
+  const [editorCode, setEditorCode] = React.useState(children.trim());
+  const onChange = newCode => setEditorCode(newCode.trim());
+  const scope = {
+    React,
+    ...Renderlesskit,
+  };
+  const liveProviderProps = {
+    theme,
+    language,
+    code: editorCode,
+    scope,
+    noInline,
+    ...rest,
+  };
 
   if (typeof window === "undefined") return null;
 
-  const reactLivescope = {
-    React,
-    ...(typeof window !== "undefined" ? window.__COMPONENTS : {}),
-  };
-
   if (live) {
     return (
-      <div className="relative" ref={wrapper}>
-        <LiveProvider
-          theme={prismTheme}
-          language={language}
-          code={source}
-          transformCode={rawCode =>
-            transformer(rawCode, language, props.noInline)
-          }
-          scope={reactLivescope}
-          {...props}
-        >
-          <LivePreview
-            className="p-6 rounded-md bg-white rounded-b-none border border-gray-600"
-            style={{ fontFamily: "'Inter', sans-serif" }}
-          />
+      <LiveProvider
+        transformCode={rawCode =>
+          transformer(rawCode, language, props.noInline)
+        }
+        {...liveProviderProps}
+      >
+        <LivePreview className="p-6 bg-white border border-gray-600 rounded-md rounded-b-none" />
+        <div className="relative">
           <LiveEditor
-            style={{ fontFamily: "SF Mono, Menlo, monospace" }}
-            className="rounded-md rounded-t-none text-sm"
+            onChange={onChange}
+            className="font-mono text-sm rounded-md rounded-t-none"
           />
-          <LiveError className="rounded-md rounded-t-none mt-0 text-xs bg-red-100 text-red-500" />
-          <CopyButton code={source} top={top} />
-        </LiveProvider>
-      </div>
+          <CopyButton code={editorCode} />
+        </div>
+        <LiveError className="mt-0 text-xs text-red-500 bg-red-100 rounded-md rounded-t-none" />
+      </LiveProvider>
     );
   }
 
@@ -192,14 +170,10 @@ export const CodeBlock = ({
     return (
       <div>
         <LiveProvider
-          theme={prismTheme}
-          language={language}
-          code={source}
           transformCode={rawCode =>
             transformer(rawCode, language, props.noInline)
           }
-          scope={reactLivescope}
-          {...props}
+          {...liveProviderProps}
         >
           <LivePreview style={{ fontFamily: "'Inter', sans-serif" }} />
         </LiveProvider>
@@ -208,11 +182,8 @@ export const CodeBlock = ({
   }
 
   return (
-    <StaticCode
-      children={source}
-      noCopy={noCopy}
-      className={className}
-      {...props}
-    />
+    <StaticCode noCopy={noCopy} className={className} {...props}>
+      {editorCode}
+    </StaticCode>
   );
 };

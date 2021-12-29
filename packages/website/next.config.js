@@ -1,12 +1,8 @@
 // next.config.js
 const withNextra = require("nextra")({
-  theme: "nextra-theme-docs",
+  theme: "nextra-theme",
   themeConfig: "./theme.config.js",
   stork: true,
 });
 
-module.exports = withNextra({
-  future: {
-    webpack5: true,
-  },
-});
+module.exports = withNextra({});

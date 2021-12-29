@@ -68,7 +68,7 @@ const InteractiveCodeblock = (props: InteractiveCodeblockProps) => {
 
   return (
     <div className="mt-6">
-      <CodeBlock live children={code} />
+      <CodeBlock live>{code}</CodeBlock>
       <div className={wrapperStyles}>
         {booleanProps.map(name => {
           return (

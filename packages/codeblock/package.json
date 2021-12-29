@@ -1,21 +1,21 @@
 {
   "name": "codeblock",
   "version": "0.1.0",
-  "main": "index.js",
+  "main": "dist/index.js",
   "files": [
-    "dist/*",
-    "index.js"
+    "dist/*"
   ],
   "scripts": {
-    "build": "cross-env NODE_ENV=production microbundle src/index.js -f cjs -o dist --no-sourcemap --jsx React.createElement --target node",
-    "dev": "microbundle watch src/index.js -f cjs -o dist --no-sourcemap --jsx React.createElement --target node"
+    "build": "babel src --extensions .js,.jsx -d dist --source-maps",
+    "dev": "babel --watch src --extensions .js,.jsx -d dist --source-maps"
   },
   "dependencies": {
+    "@chakra-ui/hooks": "^1.5.3",
+    "@renderlesskit/react-tailwind": "0.0.1-alpha.8",
     "lodash.get": "^4.4.2",
-    "prism-react-renderer": "^1.2.0",
+    "prism-react-renderer": "^1.2.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "react-live": "^2.2.3",
-    "react-use-clipboard": "^1.0.7"
+    "react-live": "^2.2.3"
   }
 }

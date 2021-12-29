@@ -1,5 +1,5 @@
 import React from "react";
-import useClipboard from "react-use-clipboard";
+import useClipboard from "@chakra-ui/hooks";
 import prismTheme from "prism-react-renderer/themes/palenight";
 import Highlight, { defaultProps } from "prism-react-renderer";
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from "react-live";
@@ -87,14 +87,14 @@ const StaticCode = ({ children, className, highlight, ...props }) => {
 };
 
 const CopyButton = ({ code, top }) => {
-  const [isCopied, setCopied] = useClipboard(code);
+  const { hasCopied, onCopy } = useClipboard(code);
   return (
     <button
-      className="absolute right-2 transform translate-y-4 -translate-x-2 bg-white text-gray-800 rounded-md px-4 py-1 text-xs"
-      onClick={setCopied}
+      className="absolute right-0 px-4 py-1 text-xs text-gray-800 transform -translate-x-2 translate-y-4 bg-white rounded-md -top-2"
+      onClick={onCopy}
       style={{ top: `${top}px` }}
     >
-      {isCopied ? "COPIED!" : "COPY"}
+      {hasCopied ? "COPIED!" : "COPY"}
     </button>
   );
 };
@@ -146,14 +146,14 @@ const CodeBlock = ({ children, className, live, render, ...props }) => {
           {...props}
         >
           <LivePreview
-            className="p-6 rounded-md bg-white rounded-b-none border border-gray-600"
+            className="p-6 bg-white border border-gray-600 rounded-md rounded-b-none"
             style={{ fontFamily: "'Inter', sans-serif" }}
           />
           <LiveEditor
             style={{ fontFamily: "SF Mono, Menlo, monospace" }}
-            className="rounded-md rounded-t-none text-sm"
+            className="text-sm rounded-md rounded-t-none"
           />
-          <LiveError className="rounded-md rounded-t-none mt-0 text-xs bg-red-100 text-red-500" />
+          <LiveError className="mt-0 text-xs text-red-500 bg-red-100 rounded-md rounded-t-none" />
           <CopyButton code={source} top={top} />
         </LiveProvider>
       </div>

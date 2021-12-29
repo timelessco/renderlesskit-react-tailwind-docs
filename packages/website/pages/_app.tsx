@@ -2,11 +2,7 @@ import React from "react";
 import * as RenderlesskitComponents from "@renderlesskit/react-tailwind";
 
 import "../styles/tailwind.css";
-import "nextra-theme-docs/style.css";
-
-((typeof window !== "undefined" ? window : {}) as any).__COMPONENTS = {
-  ...RenderlesskitComponents,
-};
+import "nextra-theme/style.css";
 
 export default function Nextra({ Component, pageProps }) {
   return (
